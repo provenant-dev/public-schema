@@ -1,0 +1,11 @@
+{
+  "d": "Ez6QKIKLzrGqpq4v9Bj908pQanoRKwOgBXjPW-w-P_8Q",
+  "v": "1.0",
+  "s": "EEPCMp4TmapUMUA8tQr_5TmujjvFDkzdZuQEMf2AfGIq",
+  "i": "Ez6QKIKLzrGqpq4v9Bj908pQanoRKwOgBXjPW-w-P_8Q",
+  "ri": "EiySMSMLRrpt9AD_b34VEtUD6tDO0yaGoWCwB1iyJOgY",
+  "a": {
+    "pubkey": "LNwXhZMqd76ZYHlh5q5cebA0qeYz76ZYHlh5qnl_wTA0qeYzfxf0qeYz76ZYHlh5qnl_wTA0qeY",
+    "uses": ["spf", "dkim", "dmarc"]
+  }
+}

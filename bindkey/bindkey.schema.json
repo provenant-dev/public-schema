@@ -1,0 +1,77 @@
+{
+  "$id": "EEPCMp4TmapUMUA8tQr_5TmujjvFDkzdZuQEMf2AfGIq",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Bind Key",
+  "description": "Declare that issuer uses a cryptographic key that's not directly managed by the KEL (e.g., to conform to an external standard). Issuing this ACDC makes key binding provable and revokable.",
+  "$comment": "These credentials are intentionally public and untargeted. Hence they lack an issuee and don't support compaction.",
+  "type": "object",
+  "credentialType": "BindKeyCredential",
+  "version": "1.0.0",
+  "required": [
+    "d",
+    "i",
+    "ri",
+    "s",
+    "a"
+  ],
+  "properties": {
+    "v": {
+      "description": "version string using ACDC conventions",
+      "type": "string"
+    },
+    "d": {
+      "description": "SAID of the credential",
+      "type": "string"
+    },
+    "i": {
+      "description": "AID of the issuer",
+      "type": "string"
+    },
+    "ri": {
+      "description": "registry for issuer's credential status",
+      "type": "string"
+    },
+    "s": {
+      "description": "SAID of this schema",
+      "type": "string"
+    },
+    "a": {
+      "$id": "",
+      "description": "Attributes block",
+      "type": "object",
+      "required": [
+        "pubkey"
+      ],
+      "properties": {
+        "pubkey": {
+          "description": "public key that issuer will use",
+          "format": "cesr",
+          "type": "string"
+        },
+        "startDate": {
+          "description": "time issuer intends key binding to start; if missing, starts on issuance",
+          "format": "date-time",
+          "type": "string"
+        },
+        "stopDate": {
+          "description": "time issuer intends key binding to stop; if missing, stops only on revocation",
+          "format": "date-time",
+          "type": "string"
+        },
+        "uses": {
+          "description": "short strings that describe ways that the key will be used",
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "$comment": "Enum omitted to stay flexible, but use examples if they apply.",
+            "examples": ["ssh", "x509", "gpg", "spf", "dkim", "dmarc"],
+            "type": "string",
+            "pattern": "^([a-z]([a-z0-9]*[-._/]?))+[a-z0-9]+$"
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

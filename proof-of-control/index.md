@@ -5,7 +5,7 @@
 These credentials assert that the issuee has demonstrated to the issuer the ability to control a social media handle, a web site, DNS records, an email account, a phone number, or a similar digital resource. They are NOT used to assert *possession of a physical object* such as a key or a driver's license. 
 
 ![suggested proof-of-control visual](proof-of-control-256.png)<br>
-Suggested visual: [svg](proof-of-control.svg) | [512 px](proof-of-control-512.png) | [128 px](proof-of-control-128.png) | [64 px](proof-of-control-64.png) | [48 px](proof-of-control-48.png) | [32 px](proof-of-control-32.png)
+Suggested visual: [svg](proof-of-control.svg) | [512 px](proof-of-control-512.png) | [256 px](proof-of-control-256.png) | [128 px](proof-of-control-128.png) | [64 px](proof-of-control-64.png) | [48 px](proof-of-control-48.png) | [32 px](proof-of-control-32.png)
 
 ### Parties are only identifiers
 

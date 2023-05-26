@@ -4,8 +4,8 @@
 
 These credentials document an assertion by one human being, that they have interacted with another human being, face-to-face, in "real" (non-digital, non-remote) life. An individual face-to-face credential provides moderate assurance (with a documented, specific basis) that the issuee is not an AI, an org, or an IoT device. See [this slidedeck](https://docs.google.com/presentation/d/17_QEAt5SIBOrKbZdkPW0K8XYNGyA4Fn8Tg-h0kvJTCE/edit?usp=sharing) for background.
 
-![suggested face-to-face visual](face-to-face-512.png)<br>
-Suggested visual: [svg](face-to-face.svg) | [128 px](face-to-face-128.png) | [64 px](face-to-face-64.png) | [32 px](face-to-face-32.png)
+![suggested face-to-face visual](face-to-face-256.png)<br>
+Suggested visual: [svg](face-to-face.svg) | [512 px](face-to-face-512.png) | [256 px](face-to-face-256.png) | [128 px](face-to-face-128.png) | [64 px](face-to-face-64.png) | [32 px](face-to-face-32.png)
 
 Face-to-face credentials prove a party's humanness, NOT their identity. They do NOT replace high-assurance credentials such as passports, drivers licenses, or KYC, because they don't make strong claims about most of the legally definitive attributes of the issuees.
 

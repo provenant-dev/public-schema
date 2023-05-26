@@ -1,6 +1,6 @@
-## BindKeys
+## BindKey Credentials
 
-This type of credential lets the controller of an AID make a formal, public declaration that they using another cryptographic key (besides the one bound to their AID) for a particular purpose.
+These credentials let the controller of an AID make a formal, public declaration that they use another cryptographic key (besides the one bound to their AID) for a particular purpose.
 
 ![suggested bindkey visual](bindkey-256.png)<br>
 Suggested visual: [svg](bindkey.svg) | [128 px](bindkey-128.png) | [64 px](bindkey-64.png) | [32 px](bindkey-32.png)

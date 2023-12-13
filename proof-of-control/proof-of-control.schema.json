@@ -1,0 +1,90 @@
+{
+  "$id": "",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "proof-of-control",
+  "description": "Assert the issuee has demonstrated to the issuer the ability to control a digital resource like a web site, social media handle, or email address.",
+  "type": "object",
+  "credentialType": "proofOfControlCredential",
+  "version": "1.0.0",
+  "required": [
+    "d",
+    "i",
+    "ri",
+    "s",
+    "a",
+    "r"
+  ],
+  "properties": {
+    "v": {
+      "description": "Version string using ACDC conventions",
+      "type": "string"
+    },
+    "d": {
+      "description": "SAID of the credential",
+      "type": "string"
+    },
+    "i": {
+      "description": "Identifier of the issuer",
+      "type": "string"
+    },
+    "ri": {
+      "description": "Registry for issuer's credential status",
+      "type": "string"
+    },
+    "s": {
+      "description": "SAID of this schema",
+      "type": "string"
+    },
+    "a": {
+      "oneOf": [
+        {
+          "description": "SAID of attributes block",
+          "type": "string"
+        },
+        {
+          "$id": "EDv4wiOMHE125CXu-EuOd0YRXz-AgpLilJfjoODFqtHD",
+          "description": "Attributes block",
+          "type": "object",
+          "required": ["d", "u", "i", "res", "dt", "minutes"],
+          "properties": {
+            "d": {
+              "description": "SAID of attributes block",
+              "type": "string"
+            },
+            "u": {
+              "description": "A salty nonce",
+              "type": "string"
+            },
+            "i": {
+              "description": "Identifier of issuee",
+              "type": "string"
+            },
+            "res": {
+              "description": "Resource that issuee controls",
+              "type": "string",
+              "$comment": "No regex-based enforcement. However, follow conventions for interop: raw domain for DNS, URL for website, mailto:address for email, service:handle for social media and similar, blockchain:address for cryptcurrency and similar.",
+              "examples": ["foo.org", "https://foo.org/", "github:abc123.xyz", "twitter:tweetsasx", "mailto:fred@acme.com", "linkedin:foobargeek", "btc:bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq"]
+            },
+            "be": {
+              "description": "How much entropy was used in the challenge and response? A 6-digit numeric code = 1M possibilities = ~20 bits.",
+              "type": "integer",
+              "exclusiveMin": 0
+            },
+            "dt": {
+              "description": "Time as of which the issuer asserts the control of the resource to be fresh. This may be before the time of issuance.",
+              "format": "date-time",
+              "type": "string"
+            },
+          }
+        }
+      ]
+    },
+    "r": {
+      "description": "SAID of rules block",
+      "type": "string",
+      "const": "EDzA-H5YR2oc0sEUKzy_one8-jY2dxdOfjtT8PJJQds8",
+      "format": "cesr"
+    }
+  },
+  "additionalProperties": false
+}

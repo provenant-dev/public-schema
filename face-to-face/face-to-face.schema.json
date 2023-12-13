@@ -1,5 +1,5 @@
 {
-  "$id": "EBVrnt_umyfpplerm_2-Sopy2LYMv0ov80KyBhCtEU2K",
+  "$id": "ENn47vEfPvYbF2cwKJVMrwNsLPqCsueIDWjxmqpIgDRv",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "face-to-face",
   "description": "Assert that an issuer knows the issuee to be a human being, based one or more face-to-face interactions.",
@@ -43,7 +43,7 @@
           "type": "string"
         },
         {
-          "$id": "EDv4wiOMHE125CXu-EuOd0YRXz-AgpLilJfjoODFqtHD",
+          "$id": "EPssq4EDt6X7R2-LNCWO3UEKQUl5krq_zoLJV5n750E2",
           "description": "Attributes block",
           "type": "object",
           "required": ["d", "u", "i", "dt", "minutes"],
@@ -60,8 +60,9 @@
               "description": "Identifier that issuee controls, according to issuer",
               "type": "string"
             },
-            "knownAs": {
-              "description": "Name by which issuer knows issuee (may be a nickname, a first or last name only, or a full name)",
+            "dt": {
+              "description": "Time as of which the issuer asserts the face-to-face interaction (and any other information about the issuee) to be fresh. This may be before the time of issuance.",
+              "format": "date-time",
               "type": "string"
             },
             "minutes": {
@@ -69,31 +70,14 @@
               "type": "integer",
               "exclusiveMin": 0
             },
-            "dt": {
-              "description": "Time as of which the issuer asserts the face-to-face interaction (and any other information about the issuee) to be fresh. This may be before the time of issuance.",
-              "format": "date-time",
-              "type": "string"
-            },
             "biometricHashes": {
-              "description": "Hashes of photos, voiceprints, or biometric enrollments that the issuer attests represents the issuee accurately, in real life",
+              "description": "Hashes of photos, voiceprints, or biometric enrollments that the issuer attests characterized the issuee accurately, when they interacted face-to-face",
               "type": "array",
               "uniqueItems": true,
               "minItems": 1,
               "items": {
                 "format": "cesr",
                 "type": "string"
-              }
-            },
-            "confirmedHandles": {
-              "description": "Handles that the issuer has personally used to interact with the issuee",
-              "type": "array",
-              "uniqueItems": true,
-              "minItems": 1,
-              "items": {
-                "$comment": "First part of string identifies a scope; second part is handle in that scope",
-                "examples": ["github:abc123.xyz", "twitter:tweetsasx", "mailto:fred@acme.com", "linkedin:foobargeek", "btc:bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq"],
-                "type": "string",
-                "pattern": "^([a-z0-9-_.]+):([A-Za-z0-9@-_.]+)$"
               }
             },
             "basis": {

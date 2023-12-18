@@ -1,0 +1,173 @@
+{
+  "$id": "EDvCQPuollfb7kp8zOLgJ1N95aPN6enZsilU2uYE0QXU",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "generalized cooperative delegation",
+  "description": "Define the authorizations, duties, and constraints of a person who receives delegated authority.",
+  "$comment": "These credentials have no edges. They can be chained by showing that the issuer's identifier is also an identifier associated with another credential of whatever type, but they do not require chaining.",
+  "type": "object",
+  "credentialType": "gcdCredential",
+  "version": "1.0.0",
+  "required": [
+    "d",
+    "i",
+    "ri",
+    "s",
+    "a",
+    "r"
+  ],
+  "properties": {
+    "v": {
+      "description": "Version string using ACDC conventions",
+      "type": "string"
+    },
+    "d": {
+      "description": "SAID of the credential",
+      "type": "string"
+    },
+    "i": {
+      "description": "Identifier of the issuer (the delegator)",
+      "type": "string"
+    },
+    "ri": {
+      "description": "Registry for issuer's credential status",
+      "type": "string"
+    },
+    "s": {
+      "description": "SAID of this schema",
+      "type": "string"
+    },
+    "a": {
+      "oneOf": [
+        {
+          "description": "SAID of attributes block",
+          "type": "string"
+        },
+        {
+          "$id": "EPssq4EDt6X7R2-LNCWO3UEKQUl5krq_zoLJV5n750E2",
+          "description": "Attributes block",
+          "type": "object",
+          "required": ["d", "i", "dt"],
+          "properties": {
+            "d": {
+              "description": "SAID of attributes block",
+              "type": "string"
+            },
+            "i": {
+              "description": "AID of delegate, as it appears in delegator's interaction event",
+              "type": "string"
+            },
+            "gfw": {
+              "description": "A SAID that identifies a governance framework that adds richer semantics to the role field and any custom constraints present in this credential. The SAID identifies a JSON rules block that supplements the generic rules in the rules block (r field). The location of this additional rules block is assumed to be published somewhere that stakeholders know. When defined, a verifier MUST NOT impute a delegator's approval of delegated authority to a delegate without understanding and enforcing the rules of thse extra rules.",
+              "type": "string",
+              "examples": ["EK2r6EnDXre2pecTBO8s99j4OtNaaDIhVyr7uGugDhmp"]
+            },            
+            "role": {
+              "description": "A string that names a profile of duties and corresponding authorizations that the delegator intends to confer on the delegate. When gfw is defined, if it specifies formal semantics for this role, then the role may supplement or clarify constraints, or add new ones that a GCD credential is otherwise incapable of modeling. When gfw is NOT defined, this field becomes a simple descriptive label, and no party is justified in expecting it to convey any constraints.",
+              "type": "string",
+              "examples": ["realtor", "guardian", "coach"]
+            },            
+            "c_goal": {
+              "description": "Array of Hyperledger Aries goal codes (https://bit.ly/3ROeww6) that describe purpose-seeking behaviors that are valid for the delegate. Goal codes are matched as if they contained a trailing .* wildcard; that is, the \"sell\" goal code matches \"sell.consumer\" and \"sell.enterprise\". This field is case-insensitive.",
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 1,
+              "items": {
+                "examples": ["sell.consumer", "meetupcorp.personal.date", "employment.check-references", "cci.healthcare.arrange"],
+                "type": "string",
+                "pattern": "^([a-z]([a-z0-9]*[-._/]?))+[a-z0-9]+$"
+              }
+            },
+            "c_pgeo": {
+              "description": "Array of ISO 3166-1 alpha2 codes for countries (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) and possibly ISO 3166-2 codes for regions or provinces (https://en.wikipedia.org/wiki/ISO_3166-2). These codes identify where a physically present delegate MAY be located while excercising their delegated authority. Location MUST be determined by a strong test of physical presence (e.g., by a closed-circuit camera, by a human doing identity verification). A verifier MUST NOT impute the delegator's approval of delegated authority to the delegate unless they have solid proof of physical presence in a matching location. This field is case-sensitive.",
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 1,
+              "items": {
+                "examples": ["US-CA", "FR", "CA-BC", "CA-ON"],
+                "type": "string",
+                "pattern": "^([A-Z][A-Z]([-][a-z0-9]++$"
+              }
+            },
+            "c_rgeo": {
+              "description": "Array of ISO 3166-1 alpha2 codes for countries and possibly ISO 3166-2 codes for regions or provinces. These codes identify where a possibly remote delegate MAY be located while validly excercising their delegated authority. Location is loosely determined in ways familiar on the web today (e.g., by internet geolocation, by cell phone triangulation). Because such methods often lack strong assurance, this constraint may be weaker than c_pgeo. This field is case-sensitive.",
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 1,
+              "items": {
+                "examples": ["US-CA", "FR", "CA-BC", "CA-ON"],
+                "type": "string",
+                "pattern": "^([A-Z][A-Z]([-][a-z0-9]++$"
+              }
+            },
+            "c_jur": {
+              "description": "Array of ISO 3166-1 alpha2 codes for countries and possibly ISO 3166-2 codes for regions or provinces. These codes enumerate legal jurisdictions where the delegator MAY accept a delegate's actions as transferring legal obligations to the delegator. Note the use of the word \"MAY\". Even if all other constraints are met, a delegator is not committing to accept legal responsibility for arbitrary actions of a delegate by enumerating jurisdictions here. Acceptance of legal responsibility needs a custom governance framework. Rather, the delegator is communicating that, if a verifier requires legal recourse, the verifier MUST NOT impute the delegator's approval of delegated authority to the delegate in jurisdictions that do not match this list. Verifiers that do not require legal recourse MAY ignore this field. This field is case-sensitive.",
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 1,
+              "items": {
+                "examples": ["IN-TN", "IN-MH", "BD", "JP", "KR-11"],
+                "type": "string",
+                "pattern": "^([A-Z][A-Z]([-][a-z0-9]++$"
+              }
+            },
+            "c_ical": {
+              "description": "Array of iCalendar objects or object fragments, as defined in [RFC 5545](https://www.rfc-editor.org/rfc/rfc5545 and its subsequent updates. Each item characterizes (in full, or preferably, in part) an event profile in which the delegate MAY excercise their delegated authority, subject to other constraints. The iCal properties that establish GCD constraints are: DTSTART, DTEND, RRULE, RDATE, EXDATE, and LOCATION. All other properties, including BEGIN and END, SHOULD be suppressed for brevity and MUST be ignored by all parties when evaluating constraints. DTSTART and DTEND establish timing constraints; RRULE and RDATE and EXDATE establish recurrence rules and exceptions. LOCATION is a semicolon-delimited list of URLs that give context to the event -- for example, links to a web meeting or a chat room, and an event is considered to have a matching location if it takes place in one of these locations. When a verifier tests a candidate event against items in the c_ical array, all constraining properties of the item must match the candidate event to produce a match, except that the candidate event does not have to recur; it only has to occur at a time that the recurrence rule would allow. This field is case-insensitive.",
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 1,
+              "items": {
+                "examples": [
+                  "DTSTART:20240918T143000Z\nDTEND:19960920T220000Z",
+                  "DTSTART;TZID=America/New_York:20230825T094500\nDTEND;TZID=America/New_York:20230825T100000\nRRULE:FREQ=WEEKLY;WKST=SU;UNTIL=20251009T035959Z;BYDAY=MO,WE,FR\nURL:https://zoom.us/12345"
+                ],
+                "type": "string"
+              }
+            },
+            "c_proto": {
+              "description": "Array of strings that each name a protocol followed by one or more formally named roles in that protocol. The delegate is authorized to participate in the named protocols in any of the named roles, subject to other constraints. Protocols that are defined in a formal standard MUST be identified by the standard org and number, if possible (e.g., HTTP/2 is identified by \"rfc7540\", and a credit card protocol \"iso8353\"). In some cases, a semver-style number is used instead of a standard number (as with the EMV credit card protocol, which is represented with \"emv3.0\"). DIDComm protocols use PIURIs (https://bit.ly/474pyRZ). The protocol name is followed by a colon, and then a comma-separated list of role names. This field is case-insensitive. Comparisons of strings in this constraint field MUST ignore whitespace and punctuation except the punctuation in version numbers.",
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 1,
+              "items": {
+                "examples": ["rfc7540:client,server,gateway", "emv3.0: Acquirer, Merchant"],
+                "type": "string",
+                "pattern": "^[^:]+: *.+$"
+              }
+            },
+            "c_prove": {
+              "description": "Array of SAIDs that each identify an IPEX proof request. The delegate is allowed to exercise delegated authority only if at least one proof request in the array is satisfied.",
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 1,
+              "items": {
+                "examples": ["EGZ_DdmzryjQOtOdQauTm_YxggbVM7EWelk8IBxsnC-d"],
+                "type": "string"
+              }
+            },
+            "c_human": {
+              "description": "Instructions for constraints that must be evaluated by a human. Any GCD credential that has this field MUST NOT be verified without human judgment.",
+              "type": "string"
+            },
+            "c_after": {
+              "description": "Time after which delegated authority becomes active. Including this constraint allows a delegator to issue a GCD credential before -- possibly long before -- the authority becomes active. This field is somewhat like with c_ical DTSTART. However, c_ical SHOULD be used to list multiple valid time ranges; this field SHOULD be used to define a single absolute floor.",
+              "format": "date-time",
+              "type": "string"
+            },
+            "c_before": {
+              "description": "Time at which delegated authority expires. Including this constraint allows a delegator to issue a GCD credential that lapses naurally without having to be revoked. This field is somewhat like with c_ical DTEND. However, c_ical SHOULD be used to list multiple valid time ranges; this field SHOULD be used to define a single absolute ceiling.",
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "r": {
+      "description": "SAID of rules block",
+      "type": "string",
+      "const": "EDzA-H5YR2oc0sEUKzy_one8-jY2dxdOfjtT8PJJQds8",
+      "format": "cesr"
+    }
+  },
+  "additionalProperties": true
+}

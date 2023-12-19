@@ -1,5 +1,5 @@
 {
-  "$id": "",
+  "$id": "EBoOpP2EMSa07rrgKLLPrPIr1q0Nnr4GjDpoVcJvrj18",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "proof-of-control",
   "description": "Assert the issuee has demonstrated to the issuer the ability to control a digital resource like a web site, social media handle, or email address.",

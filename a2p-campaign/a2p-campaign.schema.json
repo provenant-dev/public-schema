@@ -15,10 +15,6 @@
         "description": "Credential SAID",
         "type": "string"
       },
-      "u": {
-        "description": "One time use nonce",
-        "type": "string"
-      },
       "i": {
         "description": "Issuer AID",
         "type": "string"
@@ -47,28 +43,21 @@
                 "type": "string"
               },
               "i": {
-                "description": "Recipient Brand AID",
-                "type": "string"
-              },
-              "dt": {
-                "description": "Issuance date time",
-                "format": "date-time",
+                "description": "AID of issuee (org that will send messages in this campaign)",
                 "type": "string"
               },
               "brandId": {
-                "description": "The brand identifier to use with the campaign (e.g., LEI of the Brand)",
+                "description": "A non-verifiable, non-cryptographic identifier for the org that will send messages in this campaign -- e.g., an LEI, ISIN code, S&P company ID, DUNS number, etc.",
                 "type": "string"
               },
               "campaignId": {
                 "description": "Unique campaign identifier",
-                "type": "string"
-              },
-              "campaignDescription": {
-                "description": "Description about the campaign",
+                "examples": ["CVN1LXI"],
                 "type": "string"
               },
               "campaignType": {
-                "description": "Campaign type",
+                "description": "Campaign type; see strings that identify standard use cases on page 7 of https://www.10dlc.org/tcr_quick_reference_guide.pdf",
+                "examples": ["2FA", "Public Service Announcement", "Low Volume Mixed"],
                 "type": "string"
               },
               "startDate": {
@@ -76,26 +65,19 @@
                 "format": "date-time",
                 "type": "string"
               },
-              "expirationDate": {
-                "description": "Campaign expiration date",
+              "endDate": {
+                "description": "Date when campaign expires",
                 "format": "date-time",
                 "type": "string"
               },
               "telephoneNumbers": {
                 "description": "Telephone Numbers for the campaign",
                 "type": "array",
+                "uniqueItems": true,
+                "minItems": 1,
                 "items": {
-                  "type": "object",
-                  "properties": {
-                    "tn": {
-                      "type": "string",
-                      "description": "Telephone number in E164 format"
-                    }
-                  },
-                  "additionalProperties": false,
-                  "required": [
-                    "tn"
-                  ]
+                  "type": "string",
+                  "description": "Telephone number in E164 format"
                 }
               },
               "authorizedServiceProvider": {
@@ -108,19 +90,19 @@
                 "properties": {
                   "subscriberOptIn": {
                     "description": "Indicate whether campaign collect and process customer opt-ins",
-                    "type": "string"
+                    "type": "boolean"
                   },
                   "subscriberOptOut": {
                     "description": "Indicate whether campaign collect and process customer opt-outs",
-                    "type": "string"
+                    "type": "boolean"
                   },
                   "subscriberHelp": {
                     "description": "Indicate whether subscribers can contact the message sender after sending the HELP keyword",
-                    "type": "string"
+                    "type": "boolean"
                   },
                   "embeddedLink": {
                     "description": "Indicate whether campaign messages will use an embedded link",
-                    "type": "string"
+                    "type": "boolean"
                   },
                   "affiliateMarketing": {
                     "description": "Indicate whether the campaign involves affiliate marketing",
@@ -197,51 +179,10 @@
         ]
       },
       "r": {
-        "oneOf": [
-          {
-            "description": "Rules block SAID",
-            "type": "string"
-          },
-          {
-            "$id": "ECllqarpkZrSIWCb97XlMpEZZH3q4kc--FQ9mbkFMb_5",
-            "description": "Rules block",
-            "type": "object",
-            "properties": {
-              "d": {
-                "description": "Rules block SAID",
-                "type": "string"
-              },
-              "usageDisclaimer": {
-                "description": "Usage Disclaimer",
-                "type": "object",
-                "properties": {
-                  "l": {
-                    "description": "Associated legal language",
-                    "type": "string",
-                    "const": "Usage of a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, does not assert that the Legal Entity is trustworthy, honest, reputable in its business dealings, safe to do business with, or compliant with any laws or that an implied or expressly intended purpose will be fulfilled."
-                  }
-                }
-              },
-              "issuanceDisclaimer": {
-                "description": "Issuance Disclaimer",
-                "type": "object",
-                "properties": {
-                  "l": {
-                    "description": "Associated legal language",
-                    "type": "string",
-                    "const": "All information in a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, is accurate as of the date the validation process was complete. The vLEI Credential has been issued to the legal entity or person named in the vLEI Credential as the subject; and the qualified vLEI Issuer exercised reasonable care to perform the validation process set forth in the vLEI Ecosystem Governance Framework."
-                  }
-                }
-              }
-            },
-            "additionalProperties": false,
-            "required": [
-              "d",
-              "usageDisclaimer",
-              "issuanceDisclaimer"
-            ]
-          }
-        ]
+        "description": "SAID of rules block",
+        "type": "string",
+        "const": "EMS9_VeDinkCdVlMVJKwbeBrsjnVj8VO1OS0walgg05X",
+        "format": "cesr"
       }
     },
     "additionalProperties": false,

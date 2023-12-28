@@ -1,0 +1,32 @@
+{
+    "d": "Ez6QKIKLzrGqpq4v9Bj908pQanoRKwOgBXjPW-w-P_8Q",
+    "v": "1.0",
+    "s": "EF-2niGwOfhDSb0qQBLhmHtY8z0cYVy4kCDHC9c8r0ME",
+    "i": "Ez6QKIKLzrGqpq4v9Bj908pQanoRKwOgBXjPW-w-P_8Q",
+    "ri": "EiySMSMLRrpt9AD_b34VEtUD6tDO0yaGoWCwB1iyJOgY",
+    "a": {
+      "d": "EAS6jFIgA_WqWEIX6bQTi6Hvdox3GuyRbDKY8JCEfyZG",
+      "i": "EK2r6EnDXre2pecTBO8s99j4OtNaaDIhVyr7uGugDhmp",
+      "campaignId": "CVN1LXI",
+      "campaignType": "Fraud Alert",
+      "startDate": "2024-11-13T20:20:39+00:00",
+      "endDate": "2024-12-13T20:20:39+00:00",
+      "telephoneNumbers": ["+18013612446"],
+      "authorizedServiceProvider": "Twilio",
+      "campaignAttributes": {
+        "subscriberOptIn": true,
+        "subscriberOptOut": false,
+        "subscriberHelp": true,
+        "embeddedLink": false,
+        "affiliateMarketing": false
+      }
+    },
+    "r": "EMS9_VeDinkCdVlMVJKwbeBrsjnVj8VO1OS0walgg05X",
+    "e": {
+      "d": "EOS9BUu6iHS6QaTADgHWcWG36tsKYY3g_z3nCkrnbBMr",
+      "le": {
+        "n": "EOy_g1RrcQW_uh63l9SH7TGflNefu3Pe2C3asw_H2CFv",
+        "s": "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY"
+      }
+    }
+  }

@@ -1,10 +1,10 @@
 {
     "$id": "ELoARGqkPoR6pkpHSYYXlppd522_N-C_P_XSVz23hyjW",
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "Campaign Telephone Number Credential",
-    "description": "Campaign Telephone Number Credential issued to a Brand for A2P 10DLC messaging campaigns",
+    "title": "Telephone Number Credential",
+    "description": "Telephone Number Credential issued to a Brand for A2P 10DLC messaging campaigns",
     "type": "object",
-    "credentialType": "CampaignTelephoneNumberCredential",
+    "credentialType": "TelephoneNumberCredential",
     "version": "1.0.0",
     "properties": {
       "v": {
@@ -56,36 +56,31 @@
                 "type": "string"
               },
               "numbers": {
-                "description": "Telephone Numbers for a campaign",
+                "description": "Telephone Numbers for the campaign",
                 "type": "array",
+                "uniqueItems": true,
+                "minItems": 1,
                 "items": {
-                  "type": "object",
-                  "properties": {
-                    "tn": {
-                      "type": "string",
-                      "description": "Telephone number in E164 format"
-                    }
-                  },
-                  "additionalProperties": false,
-                  "required": [
-                    "tn"
-                  ]
+                  "type": "string",
+                  "description": "Telephone number in E164 format",
+                  "pattern": "[+][0-9]{7,15}"
                 }
               },
               "channel": {
-                "description": "Communication channel for which number will be used (e.g., SMS, VOICE, etc.)",
-                "type": "string"
+                "description": "Communication channel for which number will be used (e.g., sms, voice, etc.)",
+                "type": "string",
+                "pattern": "sms|voice"
               },
               "doNotOriginate": {
                 "description": "True or False based on condition if telephone number is a 'do not originate' number (inbound only)",
-                "type": "string"
+                "type": "boolean"
               },
               "startDate": {
                 "description": "Start date",
                 "format": "date-time",
                 "type": "string"
               },
-              "expirationDate": {
+              "endDate": {
                 "description": "Expiration date",
                 "format": "date-time",
                 "type": "string"
@@ -99,7 +94,7 @@
               "channel",
               "doNotOriginate",
               "startDate",
-              "expirationDate"
+              "endDate"
             ]
           }
         ]
@@ -149,51 +144,10 @@
         ]
       },
       "r": {
-        "oneOf": [
-          {
-            "description": "Rules block SAID",
-            "type": "string"
-          },
-          {
-            "$id": "ECllqarpkZrSIWCb97XlMpEZZH3q4kc--FQ9mbkFMb_5",
-            "description": "Rules block",
-            "type": "object",
-            "properties": {
-              "d": {
-                "description": "Rules block SAID",
-                "type": "string"
-              },
-              "usageDisclaimer": {
-                "description": "Usage Disclaimer",
-                "type": "object",
-                "properties": {
-                  "l": {
-                    "description": "Associated legal language",
-                    "type": "string",
-                    "const": "Usage of a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, does not assert that the Legal Entity is trustworthy, honest, reputable in its business dealings, safe to do business with, or compliant with any laws or that an implied or expressly intended purpose will be fulfilled."
-                  }
-                }
-              },
-              "issuanceDisclaimer": {
-                "description": "Issuance Disclaimer",
-                "type": "object",
-                "properties": {
-                  "l": {
-                    "description": "Associated legal language",
-                    "type": "string",
-                    "const": "All information in a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, is accurate as of the date the validation process was complete. The vLEI Credential has been issued to the legal entity or person named in the vLEI Credential as the subject; and the qualified vLEI Issuer exercised reasonable care to perform the validation process set forth in the vLEI Ecosystem Governance Framework."
-                  }
-                }
-              }
-            },
-            "additionalProperties": false,
-            "required": [
-              "d",
-              "usageDisclaimer",
-              "issuanceDisclaimer"
-            ]
-          }
-        ]
+        "description": "SAID of rules block",
+        "type": "string",
+        "const": "EMS9_VeDinkCdVlMVJKwbeBrsjnVj8VO1OS0walgg05X",
+        "format": "cesr"
       }
     },
     "additionalProperties": false,

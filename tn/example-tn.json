@@ -1,0 +1,25 @@
+{
+  "d": "EHWEdU7GMOOQZlhjtGaV_5689WmfWIu4C5gc9Iy7Tw2H",
+  "v": "ACDC10JSON00011c_",
+  "s": "ELoARGqkPoR6pkpHSYYXlppd522_N-C_P_XSVz23hyjW",
+  "i": "Ez6QKIKLzrGqpq4v9Bj908pQanoRKwOgBXjPW-w-P_8Q",
+  "ri": "EiySMSMLRrpt9AD_b34VEtUD6tDO0yaGoWCwB1iyJOgY",
+  "a": {
+    "d": "EMICXupK5CUxj5QuItQ8GV-QNV7lWQZpaRqUxnNeU_0H",
+    "i": "EK2r6EnDXre2pecTBO8s99j4OtNaaDIhVyr7uGugDhmp",
+    "dt": "2024-11-01T14:23:16+00:00",
+    "numbers": ["+18013612446"],
+    "channel": "sms",
+    "doNotOriginate": false,
+    "startDate": "2024-11-13T20:20:39+00:00",
+    "endDate": "2024-12-13T20:20:39+00:00"
+  },
+  "r": "EMS9_VeDinkCdVlMVJKwbeBrsjnVj8VO1OS0walgg05X",
+  "e": {
+    "d": "EOS9BUu6iHS6QaTADgHWcWG36tsKYY3g_z3nCkrnbBMr",
+    "le": {
+      "n": "EOy_g1RrcQW_uh63l9SH7TGflNefu3Pe2C3asw_H2CFv",
+      "s": "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY"
+    }
+  }
+}

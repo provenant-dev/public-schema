@@ -1,197 +1,202 @@
 {
-    "$id": "EF-2niGwOfhDSb0qQBLhmHtY8z0cYVy4kCDHC9c8r0ME",
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "Campaign Credential",
-    "description": "A Campaign Credential issued to a Brand for A2P 10DLC messaging campaigns",
-    "type": "object",
-    "credentialType": "CampaignCredential",
-    "version": "1.0.0",
-    "properties": {
-      "v": {
-        "description": "Version",
-        "type": "string"
-      },
-      "d": {
-        "description": "Credential SAID",
-        "type": "string"
-      },
-      "i": {
-        "description": "Issuer AID",
-        "type": "string"
-      },
-      "ri": {
-        "description": "Credential status registry",
-        "type": "string"
-      },
-      "s": {
-        "description": "Schema SAID",
-        "type": "string"
-      },
-      "a": {
-        "oneOf": [
-          {
-            "description": "Attributes block SAID",
-            "type": "string"
-          },
-          {
-            "$id": "EPbSye1QF8JN-YRpCNFiYYJTMgJkWy7CJR-sQVAiGnQP",
-            "description": "Attributes block",
-            "type": "object",
-            "properties": {
-              "d": {
-                "description": "Attributes block SAID",
-                "type": "string"
-              },
-              "i": {
-                "description": "AID of issuee (org that will send messages in this campaign)",
-                "type": "string"
-              },
-              "brandId": {
-                "description": "A non-verifiable, non-cryptographic identifier for the org that will send messages in this campaign -- e.g., an LEI, ISIN code, S&P company ID, DUNS number, etc.",
-                "type": "string"
-              },
-              "campaignId": {
-                "description": "Unique campaign identifier",
-                "examples": ["CVN1LXI"],
-                "type": "string"
-              },
-              "campaignType": {
-                "description": "Campaign type; see strings that identify standard use cases on page 7 of https://www.10dlc.org/tcr_quick_reference_guide.pdf",
-                "examples": ["2FA", "Public Service Announcement", "Low Volume Mixed"],
-                "type": "string"
-              },
-              "startDate": {
-                "description": "Campaign start date",
-                "format": "date-time",
-                "type": "string"
-              },
-              "endDate": {
-                "description": "Date when campaign expires",
-                "format": "date-time",
-                "type": "string"
-              },
-              "telephoneNumbers": {
-                "description": "Telephone Numbers for the campaign",
-                "type": "array",
-                "uniqueItems": true,
-                "minItems": 1,
-                "items": {
-                  "type": "string",
-                  "description": "Telephone number in E164 format"
+  "$id": "EIzv7tm8iWYg23XHa_Kfy4hB8qfKfsoGGvpwXdsL6yzD",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Campaign Credential",
+  "description": "A Campaign Credential issued to a Brand for A2P 10DLC messaging campaigns",
+  "type": "object",
+  "credentialType": "CampaignCredential",
+  "version": "1.0.0",
+  "properties": {
+    "v": {
+      "description": "Version",
+      "type": "string"
+    },
+    "d": {
+      "description": "Credential SAID",
+      "type": "string"
+    },
+    "i": {
+      "description": "Issuer AID",
+      "type": "string"
+    },
+    "ri": {
+      "description": "Credential status registry",
+      "type": "string"
+    },
+    "s": {
+      "description": "Schema SAID",
+      "type": "string"
+    },
+    "a": {
+      "oneOf": [
+        {
+          "description": "Attributes block SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EHXVFHtukHVE9tWR_CdrtCuj0eDWzYwtXk_3Noo0AIiA",
+          "description": "Attributes block",
+          "type": "object",
+          "properties": {
+            "d": {
+              "description": "Attributes block SAID",
+              "type": "string"
+            },
+            "i": {
+              "description": "AID of issuee (org that will send messages in this campaign)",
+              "type": "string"
+            },
+            "brandId": {
+              "description": "A non-verifiable, non-cryptographic identifier for the org that will send messages in this campaign -- e.g., an LEI, ISIN code, S&P company ID, DUNS number, etc.",
+              "type": "string"
+            },
+            "campaignId": {
+              "description": "Unique campaign identifier",
+              "examples": [
+                "CVN1LXI"
+              ],
+              "type": "string"
+            },
+            "campaignType": {
+              "description": "Campaign type; see strings that identify standard use cases on page 7 of https://www.10dlc.org/tcr_quick_reference_guide.pdf",
+              "examples": [
+                "2FA",
+                "Public Service Announcement",
+                "Low Volume Mixed"
+              ],
+              "type": "string"
+            },
+            "startDate": {
+              "description": "Campaign start date",
+              "format": "date-time",
+              "type": "string"
+            },
+            "endDate": {
+              "description": "Date when campaign expires",
+              "format": "date-time",
+              "type": "string"
+            },
+            "telephoneNumbers": {
+              "description": "Telephone Numbers for the campaign",
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "description": "Telephone number in E164 format"
+              }
+            },
+            "authorizedServiceProvider": {
+              "description": "Authorized service provider",
+              "type": "string"
+            },
+            "campaignAttributes": {
+              "description": "The Campaign and content attributes object contains a series of Yes or No questions related to the particular features of the campaign",
+              "type": "object",
+              "properties": {
+                "subscriberOptIn": {
+                  "description": "Indicate whether campaign collect and process customer opt-ins",
+                  "type": "boolean"
+                },
+                "subscriberOptOut": {
+                  "description": "Indicate whether campaign collect and process customer opt-outs",
+                  "type": "boolean"
+                },
+                "subscriberHelp": {
+                  "description": "Indicate whether subscribers can contact the message sender after sending the HELP keyword",
+                  "type": "boolean"
+                },
+                "embeddedLink": {
+                  "description": "Indicate whether campaign messages will use an embedded link",
+                  "type": "boolean"
+                },
+                "affiliateMarketing": {
+                  "description": "Indicate whether the campaign involves affiliate marketing",
+                  "type": "string"
                 }
               },
-              "authorizedServiceProvider": {
-                "description": "Authorized service provider",
-                "type": "string"
-              },
-              "campaignAttributes": {
-                "description": "The Campaign and content attributes object contains a series of Yes or No questions related to the particular features of the campaign",
-                "type": "object",
-                "properties": {
-                  "subscriberOptIn": {
-                    "description": "Indicate whether campaign collect and process customer opt-ins",
-                    "type": "boolean"
-                  },
-                  "subscriberOptOut": {
-                    "description": "Indicate whether campaign collect and process customer opt-outs",
-                    "type": "boolean"
-                  },
-                  "subscriberHelp": {
-                    "description": "Indicate whether subscribers can contact the message sender after sending the HELP keyword",
-                    "type": "boolean"
-                  },
-                  "embeddedLink": {
-                    "description": "Indicate whether campaign messages will use an embedded link",
-                    "type": "boolean"
-                  },
-                  "affiliateMarketing": {
-                    "description": "Indicate whether the campaign involves affiliate marketing",
-                    "type": "string"
-                  }
-                },
-                "additionalProperties": true,
-                "required": [
-                  "subscriberOptIn",
-                  "subscriberOptOut",
-                  "subscriberHelp"
-                ]
-              }
-            },
-            "additionalProperties": false,
-            "required": [
-              "i",
-              "dt",
-              "brandId",
-              "campaignId",
-              "campaignDescription",
-              "campaignType",
-              "startDate",
-              "expirationDate",
-              "telephoneNumbers",
-              "authorizedServiceProvider",
-              "campaignAttributes"
-            ]
-          }
-        ]
-      },
-      "e": {
-        "oneOf": [
-          {
-            "description": "Edges block SAID",
-            "type": "string"
+              "additionalProperties": true,
+              "required": [
+                "subscriberOptIn",
+                "subscriberOptOut",
+                "subscriberHelp"
+              ]
+            }
           },
-          {
-            "$id": "EJrEovSBvm4odgfVI9zldtlju8_lD2m1gDiryDqvB8Lt",
-            "description": "Edges block",
-            "type": "object",
-            "properties": {
-              "d": {
-                "description": "Edges block SAID",
-                "type": "string"
-              },
-              "le": {
-                "description": "Chain to legal entity vLEI credential",
-                "type": "object",
-                "properties": {
-                  "n": {
-                    "description": "SAID of Legal Entity vLEI Credential issued by a Qualified vLEI issuer to a Legal Entity",
-                    "type": "string"
-                  },
-                  "s": {
-                    "description": "SAID of Legal Entity vLEI Credential schema",
-                    "type": "string",
-                    "const": "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY"
-                  }
-                },
-                "additionalProperties": false,
-                "required": [
-                  "n",
-                  "s"
-                ]
-              }
-            },
-            "additionalProperties": false,
-            "required": [
-              "d",
-              "le"
-            ]
-          }
-        ]
-      },
-      "r": {
-        "description": "SAID of rules block",
-        "type": "string",
-        "const": "EMS9_VeDinkCdVlMVJKwbeBrsjnVj8VO1OS0walgg05X",
-        "format": "cesr"
-      }
+          "additionalProperties": false,
+          "required": [
+            "i",
+            "dt",
+            "brandId",
+            "campaignId",
+            "campaignDescription",
+            "campaignType",
+            "startDate",
+            "expirationDate",
+            "telephoneNumbers",
+            "authorizedServiceProvider",
+            "campaignAttributes"
+          ]
+        }
+      ]
     },
-    "additionalProperties": false,
-    "required": [
-      "i",
-      "ri",
-      "s",
-      "d",
-      "e",
-      "r"
-    ]
-  }
+    "e": {
+      "oneOf": [
+        {
+          "description": "Edges block SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EJrEovSBvm4odgfVI9zldtlju8_lD2m1gDiryDqvB8Lt",
+          "description": "Edges block",
+          "type": "object",
+          "properties": {
+            "d": {
+              "description": "Edges block SAID",
+              "type": "string"
+            },
+            "le": {
+              "description": "Chain to legal entity vLEI credential",
+              "type": "object",
+              "properties": {
+                "n": {
+                  "description": "SAID of Legal Entity vLEI Credential issued by a Qualified vLEI issuer to a Legal Entity",
+                  "type": "string"
+                },
+                "s": {
+                  "description": "SAID of Legal Entity vLEI Credential schema",
+                  "type": "string",
+                  "const": "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "n",
+                "s"
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "d",
+            "le"
+          ]
+        }
+      ]
+    },
+    "r": {
+      "description": "SAID of rules block",
+      "type": "string",
+      "const": "EMS9_VeDinkCdVlMVJKwbeBrsjnVj8VO1OS0walgg05X",
+      "format": "cesr"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "i",
+    "ri",
+    "s",
+    "d",
+    "e"
+  ]
+}

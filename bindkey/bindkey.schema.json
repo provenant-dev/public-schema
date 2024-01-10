@@ -1,5 +1,5 @@
 {
-  "$id": "EEPCMp4TmapUMUA8tQr_5TmujjvFDkzdZuQEMf2AfGIq",
+  "$id": "EDRcdVpb8SXY2xuI7LVgcX33ilJwvUYKHX0oBfY-3uk2",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Bind Key",
   "description": "Declare that issuer uses a cryptographic key that's not directly managed by the KEL (e.g., to conform to an external standard). Issuing this ACDC makes key binding provable and revokable.",
@@ -36,7 +36,7 @@
       "type": "string"
     },
     "a": {
-      "$id": "",
+      "$id": "EMowr28ZIiRKdhf5HNnPuc1ecfijcwhIOwuS4NJf3kJZ",
       "description": "Attributes block",
       "type": "object",
       "required": [
@@ -65,7 +65,14 @@
           "minItems": 1,
           "items": {
             "$comment": "Enum omitted to stay flexible, but use examples if they apply.",
-            "examples": ["ssh", "x509", "gpg", "spf", "dkim", "dmarc"],
+            "examples": [
+              "ssh",
+              "x509",
+              "gpg",
+              "spf",
+              "dkim",
+              "dmarc"
+            ],
             "type": "string",
             "pattern": "^([a-z]([a-z0-9]*[-._/]?))+[a-z0-9]+$"
           }

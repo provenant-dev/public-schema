@@ -46,7 +46,13 @@
           "$id": "EPssq4EDt6X7R2-LNCWO3UEKQUl5krq_zoLJV5n750E2",
           "description": "Attributes block",
           "type": "object",
-          "required": ["d", "u", "i", "dt", "minutes"],
+          "required": [
+            "d",
+            "u",
+            "i",
+            "dt",
+            "minutes"
+          ],
           "properties": {
             "d": {
               "description": "SAID of attributes block",
@@ -84,7 +90,15 @@
               "description": "Strongest reason that issuer wants to cite as proof that they have accurate knowledge of the issuee as a human being",
               "type": "string",
               "$comment": "Enum omitted to allow flexibility. However, use example values if they apply. NIST IAL values are mostly about identification, not personhood, but may provide clarity about interaction type.",
-              "examples": ["family", "friend", "colleague", "acquaintance", "nist-ial1", "nist-ial2", "nist-ial3"],
+              "examples": [
+                "family",
+                "friend",
+                "colleague",
+                "acquaintance",
+                "nist-ial1",
+                "nist-ial2",
+                "nist-ial3"
+              ],
               "pattern": "^[-a-z0-0 ]+$"
             },
             "caveats": {

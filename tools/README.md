@@ -52,3 +52,26 @@
 
     saidify-schema -f a2p-campaign/a2p-campaign.schema.json
     ```
+
+### saidify-sad
+
+`saidify-sad` command computes self addressing identifier (SAID) of the provided self addressing data(SAD) JSON. It updates computed SAID as the value of SAID field label in the JSON as per the argument `field-label`. Possible field label options are `$id`, `@id`, `id`, `i`, `d`.
+
+
+#### Usage
+
+* Execute `saidify-sad` command from `tools` directory:    
+    ```bash
+    saidify-sad -f <full file path of file containing SAD JSON to saidify> -l <SAID field label>
+    ```
+
+* Examples:
+    ```bash
+
+    ## saidify tn/rules.json file
+    saidify-sad -f ~/Projects/public-schema/tn/rules.json -l 'd'
+
+    # OR
+
+    saidify-sad -f ~/Projects/public-schema/tn/rules.json -l '$id'
+    ```

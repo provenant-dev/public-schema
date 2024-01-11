@@ -19,7 +19,8 @@ setup(
     ],    
     entry_points={
         'console_scripts': [
-            'saidify-schema = cli.saidify:main'
+            'saidify-schema = cli.saidify_schema:main',
+            'saidify-sad = cli.saidify_sad:main'
         ]
     }
 )

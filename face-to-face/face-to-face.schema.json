@@ -1,5 +1,5 @@
 {
-  "$id": "ENn47vEfPvYbF2cwKJVMrwNsLPqCsueIDWjxmqpIgDRv",
+  "$id": "EJ724Yz1kobeOdqtMuK-UnS3eolL9yunDKxw72Fs04-k",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "face-to-face",
   "description": "Assert that an issuer knows the issuee to be a human being, based one or more face-to-face interactions.",
@@ -112,7 +112,7 @@
     "r": {
       "description": "SAID of rules block",
       "type": "string",
-      "const": "EDzA-H5YR2oc0sEUKzy_one8-jY2dxdOfjtT8PJJQds8",
+      "const": "EGhkNqT1LbfYlimCBMsorDt7PpeGKYdOdj6hKpUjrqtB",
       "format": "cesr"
     }
   },

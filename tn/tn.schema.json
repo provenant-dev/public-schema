@@ -1,5 +1,5 @@
 {
-  "$id": "EDuPIrK9cCGrhiruH_q1NJi-TKhSAfKnMb4S9gMTwJvM",
+  "$id": "EKUPqIZ1irc7FjYBMYMvELPfZ-4qSQyLjOrkP0RWB9Wh",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Telephone Number Credential",
   "description": "Telephone Number Credential issued to a Brand for A2P 10DLC messaging campaigns",
@@ -146,7 +146,7 @@
     "r": {
       "description": "SAID of rules block",
       "type": "string",
-      "const": "EMS9_VeDinkCdVlMVJKwbeBrsjnVj8VO1OS0walgg05X",
+      "const": "EJFhpp0uU7D7PKooYM5QIO1hhPKTjHE18sR4Dn0GFscR",
       "format": "cesr"
     }
   },

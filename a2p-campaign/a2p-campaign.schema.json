@@ -1,5 +1,5 @@
 {
-  "$id": "EIzv7tm8iWYg23XHa_Kfy4hB8qfKfsoGGvpwXdsL6yzD",
+  "$id": "ENUJUYc1Jtelb4vflYIRAQe2xED0I-nIlE_SuMGyKNdR",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Campaign Credential",
   "description": "A Campaign Credential issued to a Brand for A2P 10DLC messaging campaigns",
@@ -34,7 +34,7 @@
           "type": "string"
         },
         {
-          "$id": "EHXVFHtukHVE9tWR_CdrtCuj0eDWzYwtXk_3Noo0AIiA",
+          "$id": "EIGZvBlg6Hwwq43XuS3RMivHXnM9FNqTNi5qf_Kph_rn",
           "description": "Attributes block",
           "type": "object",
           "properties": {
@@ -45,6 +45,11 @@
             "i": {
               "description": "AID of issuee (org that will send messages in this campaign)",
               "type": "string"
+            },
+            "dt": {
+              "description": "Issuance date time",
+              "type": "string",
+              "format": "date-time"
             },
             "brandId": {
               "description": "A non-verifiable, non-cryptographic identifier for the org that will send messages in this campaign -- e.g., an LEI, ISIN code, S&P company ID, DUNS number, etc.",
@@ -129,10 +134,9 @@
             "dt",
             "brandId",
             "campaignId",
-            "campaignDescription",
             "campaignType",
             "startDate",
-            "expirationDate",
+            "endDate",
             "telephoneNumbers",
             "authorizedServiceProvider",
             "campaignAttributes"

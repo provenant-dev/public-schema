@@ -1,0 +1,172 @@
+{
+  "$id": "EBNaNu-M9P5cgrnfl2Fvymy4E_jvxxyjb70PRtiANlJy",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Award",
+  "description": "Confer an award on a staff member or other associated person or group.",
+  "type": "object",
+  "credentialType": "Award",
+  "version": "1.0.0",
+  "required": [
+    "i",
+    "ri",
+    "s",
+    "d",
+    "e",
+    "r"
+  ],
+  "properties": {
+    "v": {
+      "description": "Version string using ACDC conventions",
+      "type": "string"
+    },
+    "d": {
+      "description": "SAID of the credential",
+      "type": "string"
+    },
+    "i": {
+      "description": "Identifier of the issuer (the one giving the award)",
+      "type": "string"
+    },
+    "ri": {
+      "description": "Registry for issuer's credential status",
+      "type": "string"
+    },
+    "s": {
+      "description": "SAID of this schema",
+      "type": "string"
+    },
+    "a": {
+      "oneOf": [
+        {
+          "description": "SAID of attributes block",
+          "type": "string"
+        },
+        {
+          "$id": "ELDXjQ-FnKApK1DJhzmtKDcnfoJ9qusQr1Qz5g9MFt0o",
+          "description": "Attributes block",
+          "type": "object",
+          "required": [
+            "d",
+            "i",
+            "dt",
+            "LEI",
+            "personLegalName",
+            "officialRole"
+          ],
+          "properties": {
+            "d": {
+              "description": "Attributes block SAID",
+              "type": "string"
+            },
+            "u": {
+              "description": "A salty nonce",
+              "type": "string"
+            },
+            "i": {
+              "description": "AID of issuee (award recipient)",
+              "type": "string"
+            },
+            "dt": {
+              "description": "Time at which the award becomes public. This may be before or after the time of issuance.",
+              "type": "string",
+              "format": "date-time"
+            },
+            "issuer_name": {
+              "description": "Self-asserted name of the issuer. This field exists for convenience, and may be empty. It should only be trusted if it can be tied to some formal proof of the issuer's identity.",
+              "type": "string"
+            },
+            "category": {
+              "description": "A string that identifies a formal category for the award. For example, a Nobel prize could have a category of 'physics' or 'economics'. May be empty.",
+              "type": "string"
+            },
+            "timeframe": {
+              "description": "A string that defines a timeframe for the award. For example, an employee-of-the-month award could have a timeframe of 'July 2026'. May be empty.",
+              "type": "string"
+            },
+            "details": {
+              "oneOf": [
+                {
+                  "description": "SAID of details block",
+                  "type": "string"
+                },
+                {
+                  "$id": "ELDXjQ-FnKApK1DJhzmtKDcnfoJ9qusQr1Qz5g9MFt0o",
+                  "description": "details block",
+                  "type": "object",
+                  "required": [
+                    "d",
+                    "u"
+                  ],
+                  "properties": {
+                    "d": {
+                      "description": "details block SAID",
+                      "type": "string"
+                    },
+                    "u": {
+                      "description": "A salty nonce",
+                      "type": "string"
+                    },
+                    "issuee_name": {
+                      "description": "Name of the issuee, as asserted by issuer. This field exists for convenience, and may be empty. It should only be trusted if it can be tied to some formal proof of the issuee's identity.",
+                      "type": "string"
+                    },
+                    "citation": {
+                      "description": "Formal praise that's designed to be displayed and quoted. For example, an award documenting a world record might say, 'For running the 2024 Olympic Marathon in Paris in 2:01:03'. A lifetime achievement award might say, 'In recognition of many years of dedicated service doing X, Y, and Z'. May be empty.",
+                      "type": "string"
+                    },
+                    "image": {
+                      "description": "A data URL (RFC 2397), an ordinary URL, or the SAID/hash of an image that should accompany this award. Ordinary URLs represent a commitment by the issuee to a location where an image will be published, but not to a specific image content. This may or may not satisfy a verifier's need to trust an image.",
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              ]
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "e": {
+      "oneOf": [
+        {
+          "description": "Edges block SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EJrEovSBvm4odgfVI9zldtlju8_lD2m1gDiryDqvB8Lt",
+          "description": "Edges block",
+          "type": "object",
+          "required": [
+            "d",
+            "u",
+            "issuer"
+          ],
+          "properties": {
+            "d": {
+              "description": "Edges block SAID",
+              "type": "string"
+            },
+            "u": {
+              "description": "A salty nonce",
+              "type": "string"
+            },
+            "issuer": {
+              "description": "SAID of a credential that proves the identity of the issuer, if chaining is desired.",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "r": {
+      "description": "SAID of rules block",
+      "type": "string",
+      "const": "EMS9_VeDinkCdVlMVJKwbeBrsjnVj8VO1OS0walgg05X",
+      "format": "cesr"
+    }
+  },
+  "additionalProperties": false
+}

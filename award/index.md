@@ -14,6 +14,14 @@ However, each instance of an award supports inclusion of a unique image -- or su
 ### Schema
 Individual fields are described in [award.schema.json](award.schema.json). Some notable features:
 
+* Awards can have an optional category (e.g., it's a Nobel prize, specifically in the *literature* category).
+
+* Awards can have an optional timeframe (e.g., it's an employee=of-the-month award, specifically in the July 2026 timeframe).
+
+* Awards can have an optional citation (e.g., it's a certified world record for the marathon, specifically "For running the 2024 Olympic Marathon in Paris in 2:01:03").
+
+* Awards can have an optional image (e.g., it's a employee recognition that comes with a physical trophy, which is pictured in this image).
+
 * The edges section is optional, meaning that these credentials may or may not chain to anything else. If present, it contains a single field, "issuer", that links to another credential of any type. vLEI credentials are recommended, if available.
 
 * The rules section is also optional. If present, it is just the SAID of rules that are published elsewhere. Very formal awards like the Oscars, the Nobel prize, or an Olympic medal may have carefully defined rules; casual employee recognitions may have no strong rules about acceptance or usage.

@@ -1,5 +1,5 @@
 {
-  "$id": "EBNaNu-M9P5cgrnfl2Fvymy4E_jvxxyjb70PRtiANlJy",
+  "$id": "EG-DzAk65LJF3oA3BE4EIKd7K8Y49hceayitL74dJIZu",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Award",
   "description": "Confer an award on a staff member or other associated person or group.",
@@ -10,9 +10,7 @@
     "i",
     "ri",
     "s",
-    "d",
-    "e",
-    "r"
+    "d"
   ],
   "properties": {
     "v": {
@@ -42,7 +40,7 @@
           "type": "string"
         },
         {
-          "$id": "ELDXjQ-FnKApK1DJhzmtKDcnfoJ9qusQr1Qz5g9MFt0o",
+          "$id": "EO2rMkLedYA9w7-t-QUrRP5vQ8CjXGbBfEZHAXIHT0Kz",
           "description": "Attributes block",
           "type": "object",
           "required": [
@@ -135,7 +133,7 @@
           "type": "string"
         },
         {
-          "$id": "EJrEovSBvm4odgfVI9zldtlju8_lD2m1gDiryDqvB8Lt",
+          "$id": "ELSumn6IoIYKIvHRwsV4kVjfpcTW0XhOU0Z7iQ_WIeZs",
           "description": "Edges block",
           "type": "object",
           "required": [
@@ -162,10 +160,8 @@
       ]
     },
     "r": {
-      "description": "SAID of rules block",
-      "type": "string",
-      "const": "EMS9_VeDinkCdVlMVJKwbeBrsjnVj8VO1OS0walgg05X",
-      "format": "cesr"
+      "description": "SAID of rules",
+      "type": "string"
     }
   },
   "additionalProperties": false

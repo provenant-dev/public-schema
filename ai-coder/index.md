@@ -21,17 +21,3 @@ Individual fields are described in [ai-coder.schema.json](ai-coder.schema.json).
 * Awards can have an optional image (e.g., it's a employee recognition that comes with a physical trophy, which is pictured in this image).
 
 * The edges section is optional, meaning that these credentials may or may not chain to anything else. If present, it contains a single field, "issuer", that links to another credential of any type. vLEI credentials are recommended, if available.
-
-### Graduated disclosure
-Generally, recipients of an award want to share the award broadly, because it enhances their public reputation. However, awards may contain a recipient's name, and the recipient may want to prove they've received the award before they prove their name: "I will comment on this policy question as a recipient of a Nobel prize in economics, but I don't want to be quoted by name on the record." Also, an award may contain a formal citation that is identifying (or embarrassing, or irrelevant) in some contexts, and it may contain a data URL for an image, which could make the expanded form of the credential large.
-
-Therefore, awards support the following layers of disclosure:
-
-* compact
-* partial (adds issuer_name, category, timeframe, SAID of details)
-* full (adds details: issuee_name, citation, image)
-
-### Governance Framework
-
-The rules section is optional. If present, it is just the SAID of rules that are published elsewhere. Very formal awards like the Oscars, the Nobel prize, or an Olympic medal may have carefully defined rules; casual employee recognitions may have no strong rules about acceptance or usage.
-

@@ -1,5 +1,5 @@
 {
-  "$id": "ELM3_-KOgRfRKTDnDLOEIdT-hy2aHzCM6amG_oUooepp",
+  "$id": "EIoUnBbXoUX218CXvDQ0rS8K4lohyYf3cVWD1PavyKZK",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "AI user code of conduct attestation",
   "description": "Attest that the issuer is committed to follow a particular code of conduct with respect to their personal use of AI.",
@@ -7,10 +7,11 @@
   "credentialType": "ai-user-coca",
   "version": "1.0.0",
   "required": [
+    "v",
+    "d",
     "i",
     "ri",
     "s",
-    "d",
     "a"
   ],
   "properties": {

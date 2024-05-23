@@ -1,18 +1,16 @@
-## Awards
+## AI Coder License
 
 ### Purpose
-This type of verifiable data embodies official praise of the issuee by an issuer. Usually, the issuer is an organization, and the recipient is an individual (e.g., a staff member). However, the schema and use cases are flexible &mdash; an individual can give another individual an award, and an organization can give an award to someone other than an employee. Awards do not necessarily confer privileges (and thus, are unlike most credentials). However, they do prove that the recipient received a formal recognition. A particular verifier can decide to confer privileges based on the award, if they wish.
+This credential certifies that a software developer has appropriate training and experience to safely use AI tools while writing code.
+
+Coding with AI tools can be fast and productive. However, AIs may misunderstand requirements, hallucinate, suggest unwise dependencies, or provide code with subtle bugs, vulnerabilities, or IP problems. Embedding AIs in software triggers additional concerns. Developers who have an AI coder license are committed to and capable of managing these issues.
 
 ### Suggested visual
-As a general category, awards might be visualized like this: 
-
-![suggested award visual](award-256.png)<br>
-[1024 px](award-1024.png) | [256 px](award-256.png) | [64 px](award-64.png) | [32 px](award-32.png)
-
-However, each instance of an award supports inclusion of a unique image -- or subcategories can be defined that all share a common visual representation.
+![suggested visual](ai-coder-256.png)<br>
+[svg](ai-coder.svg) | [800 px](ai-coder-800.png) | [256 px](ai-coder-256.png) | [64 px](ai-coder-64.png) | [32 px](ai-coder-32.png)
 
 ### Schema
-Individual fields are described in [award.schema.json](award.schema.json). Some notable features:
+Individual fields are described in [ai-coder.schema.json](ai-coder.schema.json). Some notable features:
 
 * Awards can have an optional category (e.g., it's a Nobel prize, specifically in the *literature* category).
 

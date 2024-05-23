@@ -1,5 +1,5 @@
 {
-  "$id": "EG-DzAk65LJF3oA3BE4EIKd7K8Y49hceayitL74dJIZu",
+  "$id": "EGCnwCE84J-av07S9inGsqxFBgy5Sy6JXtkxDlbn318F",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Award",
   "description": "Confer an award on a staff member or other associated person or group.",
@@ -7,10 +7,12 @@
   "credentialType": "Award",
   "version": "1.0.0",
   "required": [
+    "v",
+    "d",
     "i",
     "ri",
     "s",
-    "d"
+    "a"
   ],
   "properties": {
     "v": {
@@ -40,16 +42,16 @@
           "type": "string"
         },
         {
-          "$id": "EO2rMkLedYA9w7-t-QUrRP5vQ8CjXGbBfEZHAXIHT0Kz",
+          "$id": "EO0dng2Crwz6k7CBoof2zXfWkQTYc_HGkBi5K3JRNgZt",
           "description": "Attributes block",
           "type": "object",
           "required": [
             "d",
+            "u",
             "i",
             "dt",
-            "LEI",
-            "personLegalName",
-            "officialRole"
+            "issuer_name",
+            "award_name"
           ],
           "properties": {
             "d": {
@@ -71,6 +73,10 @@
             },
             "issuer_name": {
               "description": "Self-asserted name of the issuer. This field exists for convenience, and may be empty. It should only be trusted if it can be tied to some formal proof of the issuer's identity.",
+              "type": "string"
+            },
+            "award_name": {
+              "description": "Name of the award.",
               "type": "string"
             },
             "category": {
@@ -113,7 +119,7 @@
                       "type": "string"
                     },
                     "image": {
-                      "description": "A data URL (RFC 2397), an ordinary URL, or the SAID/hash of an image that should accompany this award. Ordinary URLs represent a commitment by the issuee to a location where an image will be published, but not to a specific image content. This may or may not satisfy a verifier's need to trust an image.",
+                      "description": "A data URL (RFC 2397), an ordinary URL, or the SAID/hash of an image that should accompany this award. Ordinary URLs represent a commitment by the issuer to a location where an image will be published, but not to a specific image content. This may or may not satisfy a verifier's need to trust an image.",
                       "type": "string"
                     }
                   },

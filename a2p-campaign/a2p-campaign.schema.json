@@ -1,11 +1,20 @@
 {
-  "$id": "ENUJUYc1Jtelb4vflYIRAQe2xED0I-nIlE_SuMGyKNdR",
+  "$id": "EG8RjlYnHI5Ygbaud1m2Ja9x_EdDEJAhNaWP599aMdZo",
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Campaign Credential",
-  "description": "A Campaign Credential issued to a Brand for A2P 10DLC messaging campaigns",
+  "title": "A2P Campaign Credential",
+  "description": "A credential issued to a brand for A2P 10DLC messaging campaigns",
   "type": "object",
-  "credentialType": "CampaignCredential",
+  "credentialType": "a2p-campaign-credential",
   "version": "1.0.0",
+  "required": [
+    "v",
+    "d",
+    "i",
+    "ri",
+    "s",
+    "a",
+    "e"
+  ],
   "properties": {
     "v": {
       "description": "Version",
@@ -195,12 +204,5 @@
       "format": "cesr"
     }
   },
-  "additionalProperties": false,
-  "required": [
-    "i",
-    "ri",
-    "s",
-    "d",
-    "e"
-  ]
+  "additionalProperties": false
 }

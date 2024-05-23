@@ -1,13 +1,14 @@
 {
-  "$id": "EDvCQPuollfb7kp8zOLgJ1N95aPN6enZsilU2uYE0QXU",
+  "$id": "ECothfK5Uhv3uoPYbWpa9M_a6Hr14MLI0_oOYKLv-r6G",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "generalized cooperative delegation",
   "description": "Define the authorizations, duties, and constraints of a person who receives delegated authority.",
   "$comment": "These credentials have no edges. They can be chained by showing that the issuer's identifier is also an identifier associated with another credential of whatever type, but they do not require chaining.",
   "type": "object",
-  "credentialType": "gcdCredential",
+  "credentialType": "gcd-credential",
   "version": "1.0.0",
   "required": [
+    "v",
     "d",
     "i",
     "ri",
@@ -43,13 +44,21 @@
           "type": "string"
         },
         {
-          "$id": "EPssq4EDt6X7R2-LNCWO3UEKQUl5krq_zoLJV5n750E2",
+          "$id": "EC-tNC3OacCrwl3uPGj1ZVhOV3iP3j8FTLXko0MExMz4",
           "description": "Attributes block",
           "type": "object",
-          "required": ["d", "i", "dt"],
+          "required": [
+            "d",
+            "u",
+            "i"
+          ],
           "properties": {
             "d": {
               "description": "SAID of attributes block",
+              "type": "string"
+            },
+            "u": {
+              "description": "A salty nonce",
               "type": "string"
             },
             "i": {
@@ -59,20 +68,31 @@
             "gfw": {
               "description": "A SAID that identifies a governance framework that adds richer semantics to the role field and any custom constraints present in this credential. The SAID identifies a JSON rules block that supplements the generic rules in the rules block (r field). The location of this additional rules block is assumed to be published somewhere that stakeholders know. When defined, a verifier MUST NOT impute a delegator's approval of delegated authority to a delegate without understanding and enforcing the rules of thse extra rules.",
               "type": "string",
-              "examples": ["EK2r6EnDXre2pecTBO8s99j4OtNaaDIhVyr7uGugDhmp"]
-            },            
+              "examples": [
+                "EK2r6EnDXre2pecTBO8s99j4OtNaaDIhVyr7uGugDhmp"
+              ]
+            },
             "role": {
               "description": "A string that names a profile of duties and corresponding authorizations that the delegator intends to confer on the delegate. When gfw is defined, if it specifies formal semantics for this role, then the role may supplement or clarify constraints, or add new ones that a GCD credential is otherwise incapable of modeling. When gfw is NOT defined, this field becomes a simple descriptive label, and no party is justified in expecting it to convey any constraints.",
               "type": "string",
-              "examples": ["realtor", "guardian", "coach"]
-            },            
+              "examples": [
+                "realtor",
+                "guardian",
+                "coach"
+              ]
+            },
             "c_goal": {
               "description": "Array of Hyperledger Aries goal codes (https://bit.ly/3ROeww6) that describe purpose-seeking behaviors that are valid for the delegate. Goal codes are matched as if they contained a trailing .* wildcard; that is, the \"sell\" goal code matches \"sell.consumer\" and \"sell.enterprise\". This field is case-insensitive.",
               "type": "array",
               "uniqueItems": true,
               "minItems": 1,
               "items": {
-                "examples": ["sell.consumer", "meetupcorp.personal.date", "employment.check-references", "cci.healthcare.arrange"],
+                "examples": [
+                  "sell.consumer",
+                  "meetupcorp.personal.date",
+                  "employment.check-references",
+                  "cci.healthcare.arrange"
+                ],
                 "type": "string",
                 "pattern": "^([a-z]([a-z0-9]*[-._/]?))+[a-z0-9]+$"
               }
@@ -83,9 +103,15 @@
               "uniqueItems": true,
               "minItems": 1,
               "items": {
-                "examples": ["US-CA", "FR", "CA-BC", "CA-ON"],
+                "examples": [
+                  "US-CA",
+                  "FR",
+                  "CA-BC",
+                  "AD-07",
+                  "AU-NSW"
+                ],
                 "type": "string",
-                "pattern": "^([A-Z][A-Z]([-][a-z0-9]++$"
+                "pattern": "^([A-Z]{2})([-][A-Za-z0-9]+)?$"
               }
             },
             "c_rgeo": {
@@ -94,9 +120,15 @@
               "uniqueItems": true,
               "minItems": 1,
               "items": {
-                "examples": ["US-CA", "FR", "CA-BC", "CA-ON"],
+                "examples": [
+                  "US-CA",
+                  "FR",
+                  "CA-BC",
+                  "AD-07",
+                  "AU-NSW"
+                ],
                 "type": "string",
-                "pattern": "^([A-Z][A-Z]([-][a-z0-9]++$"
+                "pattern": "^([A-Z]{2})([-][A-Za-z0-9]+)?$"
               }
             },
             "c_jur": {
@@ -105,9 +137,15 @@
               "uniqueItems": true,
               "minItems": 1,
               "items": {
-                "examples": ["IN-TN", "IN-MH", "BD", "JP", "KR-11"],
+                "examples": [
+                  "IN-TN",
+                  "IN-MH",
+                  "BD",
+                  "JP",
+                  "KR-11"
+                ],
                 "type": "string",
-                "pattern": "^([A-Z][A-Z]([-][a-z0-9]++$"
+                "pattern": "^([A-Z]{2})([-][A-Za-z0-9]+)?$"
               }
             },
             "c_ical": {
@@ -129,7 +167,10 @@
               "uniqueItems": true,
               "minItems": 1,
               "items": {
-                "examples": ["rfc7540:client,server,gateway", "emv3.0: Acquirer, Merchant"],
+                "examples": [
+                  "rfc7540:client,server,gateway",
+                  "emv3.0: Acquirer, Merchant"
+                ],
                 "type": "string",
                 "pattern": "^[^:]+: *.+$"
               }
@@ -140,7 +181,9 @@
               "uniqueItems": true,
               "minItems": 1,
               "items": {
-                "examples": ["EGZ_DdmzryjQOtOdQauTm_YxggbVM7EWelk8IBxsnC-d"],
+                "examples": [
+                  "EGZ_DdmzryjQOtOdQauTm_YxggbVM7EWelk8IBxsnC-d"
+                ],
                 "type": "string"
               }
             },

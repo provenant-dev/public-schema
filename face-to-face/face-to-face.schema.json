@@ -1,5 +1,5 @@
 {
-  "$id": "EJ724Yz1kobeOdqtMuK-UnS3eolL9yunDKxw72Fs04-k",
+  "$id": "EJd1p1-LSs3umkXzOwqpweEeYnrKeMsA9rys-U8ga1cE",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "face-to-face",
   "description": "Assert that an issuer knows the issuee to be a human being, based one or more face-to-face interactions.",
@@ -8,6 +8,7 @@
   "credentialType": "faceToFaceCredential",
   "version": "1.0.0",
   "required": [
+    "v",
     "d",
     "i",
     "ri",

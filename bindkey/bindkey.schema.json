@@ -1,5 +1,5 @@
 {
-  "$id": "EDRcdVpb8SXY2xuI7LVgcX33ilJwvUYKHX0oBfY-3uk2",
+  "$id": "EAxes7ZBFHHeWsr5vlkAx-96hhlS7U-iDxt_dEytnZYI",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Bind Key",
   "description": "Declare that issuer uses a cryptographic key that's not directly managed by the KEL (e.g., to conform to an external standard). Issuing this ACDC makes key binding provable and revokable.",
@@ -8,6 +8,7 @@
   "credentialType": "BindKeyCredential",
   "version": "1.0.0",
   "required": [
+    "v",
     "d",
     "i",
     "ri",

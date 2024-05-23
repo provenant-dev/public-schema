@@ -1,0 +1,141 @@
+{
+  "$id": "EG-DzAk65LJF3oA3BE4EIKd7K8Y49hceayitL74dJIZu",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI coder license",
+  "description": "Certify that a software developer is committed to and capable of using AI coding tools with appropriate guard rails, according to the governance in the rules section.",
+  "type": "object",
+  "credentialType": "ai-coder-license",
+  "version": "1.0.0",
+  "required": [
+    "v",
+    "d",
+    "i",
+    "ri",
+    "s",
+    "a"
+  ],
+  "properties": {
+    "v": {
+      "description": "Version string using ACDC conventions",
+      "type": "string"
+    },
+    "d": {
+      "description": "SAID of the credential",
+      "type": "string"
+    },
+    "i": {
+      "description": "Identifier of the issuer",
+      "type": "string"
+    },
+    "ri": {
+      "description": "Registry for issuer's credential status",
+      "type": "string"
+    },
+    "s": {
+      "description": "SAID of this schema",
+      "type": "string"
+    },
+    "a": {
+      "oneOf": [
+        {
+          "description": "SAID of attributes block",
+          "type": "string"
+        },
+        {
+          "$id": "EO2rMkLedYA9w7-t-QUrRP5vQ8CjXGbBfEZHAXIHT0Kz",
+          "description": "Attributes block",
+          "type": "object",
+          "required": [
+            "d",
+            "i",
+            "dt",
+            "issuer_name"
+          ],
+          "properties": {
+            "d": {
+              "description": "Attributes block SAID",
+              "type": "string"
+            },
+            "i": {
+              "description": "AID of issuee",
+              "type": "string"
+            },
+            "dt": {
+              "description": "Time at which the license should begin conferring privileges. This may be before or after the time of issuance.",
+              "type": "string",
+              "format": "date-time"
+            },
+            "expire_dt": {
+              "description": "Time at which license should stop conferring privileges. Issuer stops managing revocation on this date.",
+              "format": "date-time",
+              "type": "string"
+            },
+            "issuer_name": {
+              "description": "Self-asserted name of the issuer. This field exists for convenience, and may be empty. It should only be trusted if it can be tied to some formal proof of the issuer's identity.",
+              "type": "string"
+            },
+            "issuee_name": {
+              "description": "Name of the issuee, as asserted by issuer. This field exists for convenience, and may be empty. It should only be trusted if it can be tied to some formal proof of the issuee's identity.",
+              "type": "string"
+            },
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "e": {
+      "oneOf": [
+        {
+          "description": "Edges block SAID",
+          "type": "string"
+        },
+        {
+          "$id": "ELSumn6IoIYKIvHRwsV4kVjfpcTW0XhOU0Z7iQ_WIeZs",
+          "description": "Edges block",
+          "type": "object",
+          "required": [
+            "d",
+            "u",
+            "issuer"
+          ],
+          "properties": {
+            "d": {
+              "description": "Edges block SAID",
+              "type": "string"
+            },
+            "u": {
+              "description": "A salty nonce",
+              "type": "string"
+            },
+            "issuer": {
+              "description": "SAID of a credential that proves the identity of the issuer, if chaining is desired.",
+              "type": "string"
+            },
+            "coca": {
+              "description": "Chain to a code of conduct attestation (coca) by the issuee",
+              "type": "object",
+              "properties": {
+                "n": {
+                  "description": "SAID of coca",
+                  "type": "string"
+                },
+                "s": {
+                  "description": "SAID of required schema of the credential pointed to by this node",
+                  "type": "string",
+                  "const": "ELM3_-KOgRfRKTDnDLOEIdT-hy2aHzCM6amG_oUooepp"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "r": {
+      "description": "SAID of rules",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

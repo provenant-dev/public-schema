@@ -1,6 +1,6 @@
 {
-  "v": "ACDC10JSON00011c_",
-  "d": "EMqNHUFjZNmyYzT32xGbzFoBMfCNOtACXCi1xgtpMLEp",
+  "v": "ACDC10JSON000253_",
+  "d": "ECY_sgmNXZ0o6JHgWCk-aOVvT4HVcRIse5ms8zcVCZTK",
   "i": "EMRlhEQK44_V5804rsRvQ99Gtf7uDpYQqZuvrw0LhV3S",
   "ri": "EKfi58Jiv-NVqr6GOrxgxzhrE5RsDaH4QNwv9rCyZCwZ",
   "s": "EJ724Yz1kobeOdqtMuK-UnS3eolL9yunDKxw72Fs04-k",
@@ -11,7 +11,9 @@
     "knownAs": "Alice",
     "minutes": 10,
     "dt": "2023-03-13T16:15:07.686737+00:00",
-    "biometricHashes": ["EDIai3Wkd-Z_4cezz9nYEcCK3KNH5saLvZoS_84JL6NU"],
+    "biometricHashes": [
+      "EDIai3Wkd-Z_4cezz9nYEcCK3KNH5saLvZoS_84JL6NU"
+    ],
     "basis": "acquaintance",
     "caveats": "Loud conference; hard to hear Alice speaking."
   },

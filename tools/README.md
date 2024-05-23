@@ -33,45 +33,48 @@
 
 ## Commands
 
-### saidify-schema
+### register_all
+`register_all` runs the other commands on all relevant files in the repo, updating whatever SADs and schemas are out-of-date, and re-writing the registry.json file. It takes no arguments.
 
-`saidify-schema` command computes self addressing identifier (SAID) of ACDC schema json. It updates value of `$id` property in `a`, `e`, `r` objects(if present) and the `$id` property at root level with the SAIDs.
+### saidify_schema
+
+`saidify_schema` command computes self addressing identifier (SAID) of ACDC schema json. It updates value of `$id` property in `a`, `e`, `r` objects(if present) and the `$id` property at root level with the SAIDs.
 
 #### Usage
 
-* Execute `saidify-schema` command from `tools` directory:    
+* Execute `saidify_schema` command from `tools` directory:    
     ```bash
-    saidify-schema -f <file path of schema file(JSON) to saidify>
+    saidify_schema -f <file path of schema file(JSON) to saidify>
     ```
 
 * Examples:
     ```bash
-    saidify-schema -f tn/tn.schema.json
+    saidify_schema -f tn/tn.schema.json
 
     # OR
 
-    saidify-schema -f a2p-campaign/a2p-campaign.schema.json
+    saidify_schema -f a2p-campaign/a2p-campaign.schema.json
     ```
 
-### saidify-sad
+### saidify_sad
 
-`saidify-sad` command computes self addressing identifier (SAID) of the provided self addressing data(SAD) JSON. It updates computed SAID as the value of SAID field label in the JSON as per the argument `field-label`. Possible field label options are `$id`, `@id`, `id`, `i`, `d`.
+`saidify_sad` command computes self addressing identifier (SAID) of the provided self addressing data(SAD) JSON. It updates computed SAID as the value of SAID field label in the JSON as per the argument `field-label`. Possible field label options are `$id`, `@id`, `id`, `i`, `d`.
 
 
 #### Usage
 
-* Execute `saidify-sad` command from `tools` directory:    
+* Execute `saidify_sad` command from `tools` directory:    
     ```bash
-    saidify-sad -f <full file path of file containing SAD JSON to saidify> -l <SAID field label>
+    saidify_sad -f <full file path of file containing SAD JSON to saidify> -l <SAID field label>
     ```
 
 * Examples:
     ```bash
 
     ## saidify tn/rules.json file
-    saidify-sad -f ~/Projects/public-schema/tn/rules.json -l 'd'
+    saidify_sad -f ~/Projects/public-schema/tn/rules.json -l 'd'
 
     # OR
 
-    saidify-sad -f ~/Projects/public-schema/tn/rules.json -l '$id'
+    saidify_sad -f ~/Projects/public-schema/tn/rules.json -l '$id'
     ```

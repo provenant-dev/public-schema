@@ -3,5 +3,4 @@ This repo holds [ACDC](https://trustoverip.github.io/tswg-acdc-specification/dra
 
 All released schemas are enumerated in [registry.json](registry.json). This makes them discoverable in simple code, without crawling.
 
-> [!NOTE]  
-> Use `saidify-schema` command from  [CLI tools](tools/README.md) to generate SAIDs of ACDC schema json
+>NOTE: You can use the `register_all.py` script to regenerate all SAIDs and schemas, and rebuild the registry.json file. You can also use the `saidify-schema.py` or `saidify-sad.py` scripts to do lower-level work with the schema files. You must have keri installed (`pip install keri`) first.

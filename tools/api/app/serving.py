@@ -15,8 +15,7 @@ class SchemaEnd:
 
     def __init__(self, schemaCache):
         self.schemaCache = schemaCache
-        print()
-        # print(f"Cached schemas from {registryFile}")
+        print()        
 
         
     def on_get(self, _, rep, said):
@@ -27,20 +26,13 @@ class SchemaEnd:
             rep.content_type = "application/schema+json"
             rep.data = data
             return
-    
-    # def on_get_list(self, _, rep):
-    #     said_list = list(self.schemaCache.keys())
-    #     rep.status = falcon.HTTP_200
-    #     rep.content_type = "application/json"
-    #     rep.data = json.dumps(said_list)
+
 
 class SchemaCollectionEnd:
 
     def __init__(self, schemaCache):
         self.schemaCache = schemaCache
-        # print()
-        # # print(f"Cached schemas from {registryFile}")
-
+        
     def on_get(self, req, rep):
         """ GET cached schema SAIDs
 
@@ -65,7 +57,7 @@ class SchemaCollectionEnd:
         
 
 class HealthEnd:
-    """Health resource for determining that watcher is live"""
+    """Health resource for determining that schema-registry is live"""
 
     def on_get(self, req, resp):
         resp.status = falcon.HTTP_OK
@@ -74,7 +66,7 @@ class HealthEnd:
 def loadEnds(app, registryFile):
     sink = http.serving.StaticSink(staticDirPath="./static")
     app.add_sink(sink, prefix=sink.DefaultStaticSinkBasePath)
-        
+
     schemaCache = caching.cacheSchema(registryFile, dict())
 
     schemaEnd = SchemaEnd(schemaCache=schemaCache)

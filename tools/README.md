@@ -34,7 +34,7 @@
 ### Run Server
 * Run Schema Registry API server, default port is 7723 :
     ```bash
-    schema_registry_api -r registry.json
+    schema_registry_server -r registry.json
     ```
 
 ### Endpoints

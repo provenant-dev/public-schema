@@ -1,0 +1,20 @@
+version: "3"
+name: schema-registry
+services:
+  schema-registry:
+    # image: provenant/schema-registry:dev
+    container_name: schema-registry-public-schema
+    build:
+      context: .
+    restart: no
+    env_file:
+      - .env
+    ports:
+      - "${SCHEMA_REGISTRY_PORT}:${SCHEMA_REGISTRY_PORT}"
+    environment:
+      - SCHEMA_REGISTRY_PORT=${SCHEMA_REGISTRY_PORT}
+    develop:
+      watch:
+        - path: ./registry.json
+          target: /public-schema/
+          action: rebuild

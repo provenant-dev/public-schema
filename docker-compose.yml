@@ -2,7 +2,6 @@ version: "3"
 name: schema-registry
 services:
   schema-registry:
-    # image: provenant/schema-registry:dev
     container_name: schema-registry-public-schema
     build:
       context: .
@@ -16,5 +15,5 @@ services:
     develop:
       watch:
         - path: ./registry.json
-          target: /public-schema/
+          target: /public-schema
           action: rebuild

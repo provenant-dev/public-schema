@@ -13,3 +13,8 @@ docker compose up
 ```
 
 This will start the http server that serves schema json for requested OOBIs. See [API endpoints](tools/README.md#endpoints)
+
+## How to add new schemas
+
+- If the schema is vLEI specific, then create new <schema-name>.json file in either [vLEI](vLEFI) folder or [vLEI/acdc] folder.
+- Run docker compose with [register_all](tools/README.md#register_all) command `docker compose up --command=register_all`

@@ -18,3 +18,7 @@ This will start the http server that serves schema json for requested OOBIs. See
 
 - If the schema is vLEI specific, then create new <schema-name>.json file in either [vLEI](vLEFI) folder or [vLEI/acdc] folder.
 - Run docker compose with [register_all](tools/README.md#register_all) command `docker compose up --command=register_all`
+
+## How to trigger build after adding new schema(s)
+
+- Trigger a build manually in `schema-registry-deployment` repo. We don't want to run an automatic build from this public repo as of now. So, the action to trigger build generation and deployment are manual actions.

@@ -6,14 +6,7 @@
   "type": "object",
   "credentialType": "ai-coder-license",
   "version": "1.0.0",
-  "required": [
-    "v",
-    "d",
-    "i",
-    "ri",
-    "s",
-    "a"
-  ],
+  "required": ["v", "d", "i", "ri", "s", "a"],
   "properties": {
     "v": {
       "description": "Version string using ACDC conventions",
@@ -45,12 +38,7 @@
           "$id": "EO2rMkLedYA9w7-t-QUrRP5vQ8CjXGbBfEZHAXIHT0Kz",
           "description": "Attributes block",
           "type": "object",
-          "required": [
-            "d",
-            "i",
-            "dt",
-            "issuer_name"
-          ],
+          "required": ["d", "i", "dt", "issuer_name"],
           "properties": {
             "d": {
               "description": "Attributes block SAID",
@@ -77,7 +65,7 @@
             "issuee_name": {
               "description": "Name of the issuee, as asserted by issuer. This field exists for convenience, and may be empty. It should only be trusted if it can be tied to some formal proof of the issuee's identity.",
               "type": "string"
-            },
+            }
           },
           "additionalProperties": false
         }
@@ -93,11 +81,7 @@
           "$id": "ELSumn6IoIYKIvHRwsV4kVjfpcTW0XhOU0Z7iQ_WIeZs",
           "description": "Edges block",
           "type": "object",
-          "required": [
-            "d",
-            "u",
-            "issuer"
-          ],
+          "required": ["d", "u", "issuer"],
           "properties": {
             "d": {
               "description": "Edges block SAID",

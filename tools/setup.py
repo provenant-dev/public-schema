@@ -22,7 +22,8 @@ setup(
         'console_scripts': [
             'schema_registry_server = api.server:main',
             'saidify_schema = cli.saidify_schema:main',
-            'saidify_sad = cli.saidify_sad:main'
+            'saidify_sad = cli.saidify_sad:main',
+            'register_all = cli.register_all:main'
         ]
     }
 )

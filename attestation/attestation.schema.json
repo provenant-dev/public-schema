@@ -1,5 +1,5 @@
 {
-  "$id": "ENDcMNUZjag27T_GTxiCmB2kYstg_kqipqz39906E_FD",
+  "$id": "ED9ta8o1xTm3LR9apIj6ImS1wQEOcEUmMd19aUa7tjDL",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Data Attestation Credential",
   "description": "Data attestation credential enables verifiable attestation of the data(cryptographic digest) by the Issuer",
@@ -28,7 +28,7 @@
       "type": "string"
     },
     "a": {
-      "$id": "EFhlO29-R6YzNrnJtBQcm3-qb-YgkVolx166NSCT-jJ7",
+      "$id": "EPd8VTJOJ6S1rDQzQWE9nWSCFCJwiNSqTWHaTELZDAON",
       "description": "Attributes block",
       "type": "object",
       "properties": {
@@ -41,21 +41,90 @@
           "format": "date-time",
           "type": "string"
         },
-        "digest": {
+        "xsaid": {
           "type": "string",
-          "description": "Cryptographic digest of the data."
-        },
-        "digestAlgo": {
-          "type": "string",
-          "description": "Algorithm used to generate digest of the data in digest field. Examples are SHA-256, SHA-512, MD5, BLAKE3, BLAKE2b, etc."
+          "description": "CESR-encoded digest of the data."
         }
       },
       "additionalProperties": false,
       "required": [
         "d",
         "dt",
-        "digest",
-        "digestAlgo"
+        "xsaid"
+      ]
+    },
+    "e": {
+      "oneOf": [
+        {
+          "$id": "EGdpNTt_v5NAIhzWZjisHE5oaYnoJVOC7iVFySw9eFKX",
+          "description": "Chained vLEI OOR Credential",
+          "properties": {
+            "d": {
+              "description": "SAID of edge block containing OOR Credential node",
+              "type": "string"
+            },
+            "oor": {
+              "description": "node SAID of signer OOR credential",
+              "properties": {
+                "n": {
+                  "type": "string"
+                },
+                "s": {
+                  "type": "string",
+                  "description": "SAID of required schema of the credential pointed to by this node",
+                  "const": "EBNaNu-M9P5cgrnfl2Fvymy4E_jvxxyjb70PRtiANlJy"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "n",
+                "s"
+              ],
+              "type": "object"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "d",
+            "oor"
+          ],
+          "type": "object"
+        },
+        {
+          "$id": "EO2AOkCvsjm5RyQYAPpUZP96pbXlPGym57VemjxlOlMe",
+          "description": "Chained vLEI ECR Credential",
+          "properties": {
+            "d": {
+              "description": "SAID of edge block contai0ning ECR Credential node",
+              "type": "string"
+            },
+            "ecr": {
+              "description": "node SAID of signer ECR credential",
+              "properties": {
+                "n": {
+                  "type": "string"
+                },
+                "s": {
+                  "type": "string",
+                  "description": "SAID of required schema of the credential pointed to by this node",
+                  "const": "EEy9PkikFcANV1l7EHukCeXqrzT1hNZjGlUk7wuMO5jw"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "n",
+                "s"
+              ],
+              "type": "object"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "d",
+            "ecr"
+          ],
+          "type": "object"
+        }
       ]
     }
   },

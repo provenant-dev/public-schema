@@ -1,5 +1,5 @@
 {
-  "$id": "ENDcMNUZjag27T_GTxiCmB2kYstg_kqipqz39906E_FD",
+  "$id": "EB4AsU1rKGOAf7m4MS324XhanXq8G01sR_bUdUV2TULm",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Data Attestation Credential",
   "description": "Data attestation credential enables verifiable attestation of the data(cryptographic digest) by the Issuer",
@@ -28,7 +28,7 @@
       "type": "string"
     },
     "a": {
-      "$id": "EFhlO29-R6YzNrnJtBQcm3-qb-YgkVolx166NSCT-jJ7",
+      "$id": "ENhgUPygyvCD3yllT62KHZofN0zcKUoMoi2IEbm6tdDz",
       "description": "Attributes block",
       "type": "object",
       "properties": {
@@ -43,19 +43,47 @@
         },
         "digest": {
           "type": "string",
-          "description": "Cryptographic digest of the data."
-        },
-        "digestAlgo": {
-          "type": "string",
-          "description": "Algorithm used to generate digest of the data in digest field. Examples are SHA-256, SHA-512, MD5, BLAKE3, BLAKE2b, etc."
+          "description": "CESR-encoded digest of the data."
         }
       },
       "additionalProperties": false,
       "required": [
         "d",
         "dt",
-        "digest",
-        "digestAlgo"
+        "digest"
+      ]
+    },
+    "e": {
+      "oneOf": [
+        {
+          "description": "Edges block SAID",
+          "type": "string"
+        },
+        {
+          "$id": "ELSumn6IoIYKIvHRwsV4kVjfpcTW0XhOU0Z7iQ_WIeZs",
+          "description": "Edges block",
+          "type": "object",
+          "required": [
+            "d",
+            "u",
+            "issuer"
+          ],
+          "properties": {
+            "d": {
+              "description": "Edges block SAID",
+              "type": "string"
+            },
+            "u": {
+              "description": "A salty nonce",
+              "type": "string"
+            },
+            "issuer": {
+              "description": "SAID of a credential that proves the identity of the issuer, if chaining is desired.",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
       ]
     }
   },

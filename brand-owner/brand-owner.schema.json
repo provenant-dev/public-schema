@@ -1,0 +1,175 @@
+{
+  "$id": "EKUPqIZ1irc7FjYBMYMvELPfZ-4qSQyLjOrkP0RWB9Wh",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Brand Owner Credential",
+  "description": "Issued to a legal entity that has the right to use a brand because it is the direct owner or a licensee of that brand.",
+  "type": "object",
+  "credentialType": "BrandOwnerCredential",
+  "version": "1.0.0",
+  "properties": {
+    "v": {
+      "description": "Version",
+      "type": "string"
+    },
+    "d": {
+      "description": "Credential SAID",
+      "type": "string"
+    },
+    "u": {
+      "description": "One time use nonce",
+      "type": "string"
+    },
+    "i": {
+      "description": "Issuer AID",
+      "type": "string"
+    },
+    "ri": {
+      "description": "Credential status registry",
+      "type": "string"
+    },
+    "s": {
+      "description": "Schema SAID",
+      "type": "string"
+    },
+    "a": {
+      "oneOf": [
+        {
+          "description": "Attributes block SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EA9ju6MyrMRI40O-d0Ae38nbu1QCYo6qVvaFqXeOiUzt",
+          "description": "Attributes block",
+          "type": "object",
+          "properties": {
+            "d": {
+              "description": "Attributes block SAID",
+              "type": "string"
+            },
+            "i": {
+              "description": "AID of the legal entity that is the direct owner or a licensee of the brand",
+              "type": "string"
+            },
+            "dt": {
+              "description": "Issuance date time",
+              "format": "date-time",
+              "type": "string"
+            },
+            "fn": {
+              "description": "See fn property in 10.4.1 of draft-ietf-sipcore-callinfo-rcd-12",
+              "type": "string"
+            },
+            "n": {
+              "description": "See n property in 10.4.2 of draft-ietf-sipcore-callinfo-rcd-12",
+              "type": "string"
+            },
+            "nickname": {
+              "description": "See nickname property in 10.4.3 of draft-ietf-sipcore-callinfo-rcd-12",
+              "type": "string"
+            },
+            "photo": {
+              "description": "See photo property in 10.4.4 of draft-ietf-sipcore-callinfo-rcd-12",
+              "type": "string"
+            },
+            "adr": {
+              "description": "See adr property in 10.5.1 of draft-ietf-sipcore-callinfo-rcd-12",
+              "type": "string"
+            },
+            "email": {
+              "description": "See email property in 10.6.2 of draft-ietf-sipcore-callinfo-rcd-12",
+              "type": "string"
+            },
+            "lang": {
+              "description": "See lang property in 10.6.3 of draft-ietf-sipcore-callinfo-rcd-12",
+              "type": "string"
+            },
+            "tz": {
+              "description": "See tz property in 10.7.1 of draft-ietf-sipcore-callinfo-rcd-12",
+              "type": "string"
+            },
+            "geo": {
+              "description": "See geo property in 10.8.1 of draft-ietf-sipcore-callinfo-rcd-12",
+              "type": "string"
+            },
+            "logo": {
+              "description": "See logo property in 10.8.3 of draft-ietf-sipcore-callinfo-rcd-12",
+              "type": "string"
+            },
+            "sound": {
+              "description": "See sound property in 10.9.3 of draft-ietf-sipcore-callinfo-rcd-12",
+              "type": "string"
+            },
+            "url": {
+              "description": "See url property in 10.9.5 of draft-ietf-sipcore-callinfo-rcd-12",
+              "type": "string"
+            },
+          },
+          "additionalProperties": false,
+          "required": [
+            "i",
+            "dt"
+          ]
+        }
+      ]
+    },
+    "e": {
+      "oneOf": [
+        {
+          "description": "Edges block SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EJrEovSBvm4odgfVI9zldtlju8_lD2m1gDiryDqvB8Lt",
+          "description": "Edges block",
+          "type": "object",
+          "properties": {
+            "d": {
+              "description": "Edges block SAID",
+              "type": "string"
+            },
+            "le": {
+              "description": "Chain to legal entity vLEI credential",
+              "type": "object",
+              "properties": {
+                "n": {
+                  "description": "SAID of Legal Entity vLEI Credential issued by a Qualified vLEI issuer to a Legal Entity",
+                  "type": "string"
+                },
+                "s": {
+                  "description": "SAID of Legal Entity vLEI Credential schema",
+                  "type": "string",
+                  "const": "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "n",
+                "s"
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "d",
+            "le"
+          ]
+        }
+      ]
+    },
+    "r": {
+      "description": "SAID of rules block",
+      "type": "string",
+      "const": "EJFhpp0uU7D7PKooYM5QIO1hhPKTjHE18sR4Dn0GFscR",
+      "format": "cesr"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "i",
+    "ri",
+    "s",
+    "d",
+    "e",
+    "r"
+  ]
+}

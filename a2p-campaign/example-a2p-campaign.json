@@ -1,32 +1,38 @@
 {
-    "d": "Ez6QKIKLzrGqpq4v9Bj908pQanoRKwOgBXjPW-w-P_8Q",
-    "v": "1.0",
-    "s": "ENUJUYc1Jtelb4vflYIRAQe2xED0I-nIlE_SuMGyKNdR",
-    "i": "Ez6QKIKLzrGqpq4v9Bj908pQanoRKwOgBXjPW-w-P_8Q",
-    "ri": "EiySMSMLRrpt9AD_b34VEtUD6tDO0yaGoWCwB1iyJOgY",
-    "a": {
-      "d": "EAS6jFIgA_WqWEIX6bQTi6Hvdox3GuyRbDKY8JCEfyZG",
-      "i": "EK2r6EnDXre2pecTBO8s99j4OtNaaDIhVyr7uGugDhmp",
-      "campaignId": "CVN1LXI",
-      "campaignType": "Fraud Alert",
-      "startDate": "2024-11-13T20:20:39+00:00",
-      "endDate": "2024-12-13T20:20:39+00:00",
-      "telephoneNumbers": ["+18013612446"],
-      "authorizedServiceProvider": "Twilio",
-      "campaignAttributes": {
-        "subscriberOptIn": true,
-        "subscriberOptOut": false,
-        "subscriberHelp": true,
-        "embeddedLink": false,
-        "affiliateMarketing": false
-      }
-    },
-    "r": "EMS9_VeDinkCdVlMVJKwbeBrsjnVj8VO1OS0walgg05X",
-    "e": {
-      "d": "EOS9BUu6iHS6QaTADgHWcWG36tsKYY3g_z3nCkrnbBMr",
-      "le": {
-        "n": "EOy_g1RrcQW_uh63l9SH7TGflNefu3Pe2C3asw_H2CFv",
-        "s": "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY"
-      }
+  "v": "ACDC10JSON0005c8_",
+  "d": "Ez6QKIKLzrGqpq4v9Bj908pQanoRKwOgBXjPW-w-P_8Q",
+  "i": "Ez6QKIKLzrGqpq4v9Bj908pQanoRKwOgBXjPW-w-P_8Q",
+  "ri": "EiySMSMLRrpt9AD_b34VEtUD6tDO0yaGoWCwB1iyJOgY",
+  "s": "ELtCd1s8TXGNYC2VUVzBtFcY73ec9pBMZg1LCfGP6LJQ",
+  "a": {
+    "d": "EAS6jFIgA_WqWEIX6bQTi6Hvdox3GuyRbDKY8JCEfyZG",
+    "i": "EK2r6EnDXre2pecTBO8s99j4OtNaaDIhVyr7uGugDhmp",
+    "campaignId": "CVN1LXI",
+    "campaignType": "Fraud Alert",
+    "startDate": "2024-11-13T20:20:39+00:00",
+    "endDate": "2024-12-13T20:20:39+00:00",
+    "telephoneNumbers": [
+      "+18013612446"
+    ],
+    "authorizedServiceProvider": "Twilio",
+    "campaignAttributes": {
+      "subscriberOptIn": true,
+      "subscriberOptOut": false,
+      "subscriberHelp": true,
+      "embeddedLink": false,
+      "affiliateMarketing": false
     }
+  },
+  "e": {
+    "d": "EOS9BUu6iHS6QaTADgHWcWG36tsKYY3g_z3nCkrnbBMr",
+    "le": {
+      "n": "EOy_g1RrcQW_uh63l9SH7TGflNefu3Pe2C3asw_H2CFv",
+      "s": "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY"
+    }
+  },
+  "r": {
+    "d": "EMS9_VeDinkCdVlMVJKwbeBrsjnVj8VO1OS0walgg05X",
+    "brandPrivacy": "Verifiers agree that, if they learn the identity of a brand as a sender of SMS messages by verifying this credential, they will not use this information to infer or model relationships between the brand and service providers.",
+    "nonrepudiableBySig": "Senders of SMS messages agree that their reputation as a sender may be non-repudiably associated with messages that cite this campaign, exactly and only to the extent that the messages are signed by an entity cryptographically authorized to represent the brand."
   }
+}

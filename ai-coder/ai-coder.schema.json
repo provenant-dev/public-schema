@@ -1,12 +1,19 @@
 {
-  "$id": "EG-DzAk65LJF3oA3BE4EIKd7K8Y49hceayitL74dJIZu",
+  "$id": "EI-M3dPjbT6YUNb-sJRABkXfC0iHmroW7m5mQfIFUjai",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "AI coder license",
   "description": "Certify that a software developer is committed to and capable of using AI coding tools with appropriate guard rails, according to the governance in the rules section.",
   "type": "object",
   "credentialType": "ai-coder-license",
   "version": "1.0.0",
-  "required": ["v", "d", "i", "ri", "s", "a"],
+  "required": [
+    "v",
+    "d",
+    "i",
+    "ri",
+    "s",
+    "a"
+  ],
   "properties": {
     "v": {
       "description": "Version string using ACDC conventions",
@@ -14,6 +21,10 @@
     },
     "d": {
       "description": "SAID of the credential",
+      "type": "string"
+    },
+    "u": {
+      "description": "A salty nonce",
       "type": "string"
     },
     "i": {
@@ -35,13 +46,23 @@
           "type": "string"
         },
         {
-          "$id": "EO2rMkLedYA9w7-t-QUrRP5vQ8CjXGbBfEZHAXIHT0Kz",
+          "$id": "EIQrvXDSt5ikFLbaen_9iCmSBVB2-B1S5LQxRXmXrGs7",
           "description": "Attributes block",
           "type": "object",
-          "required": ["d", "i", "dt", "issuer_name"],
+          "required": [
+            "d",
+            "i",
+            "dt",
+            "effective_dt",
+            "issuer_name"
+          ],
           "properties": {
             "d": {
               "description": "Attributes block SAID",
+              "type": "string"
+            },
+            "u": {
+              "description": "A salty nonce",
               "type": "string"
             },
             "i": {
@@ -49,6 +70,11 @@
               "type": "string"
             },
             "dt": {
+              "description": "Issuance datetime, ISO-8601 datetime string",
+              "type": "string",
+              "format": "date-time"
+            },
+            "effective_dt": {
               "description": "Time at which the license should begin conferring privileges. This may be before or after the time of issuance.",
               "type": "string",
               "format": "date-time"
@@ -74,17 +100,20 @@
     "e": {
       "oneOf": [
         {
-          "description": "Edges block SAID",
+          "description": "Edges section SAID",
           "type": "string"
         },
         {
-          "$id": "ELSumn6IoIYKIvHRwsV4kVjfpcTW0XhOU0Z7iQ_WIeZs",
-          "description": "Edges block",
+          "$id": "EAMfCYTsPehFTOoTX416dkS_T7bGrZedxibe-j1EUl4B",
+          "description": "Edges detail",
           "type": "object",
-          "required": ["d", "u", "issuer"],
+          "required": [
+            "d",
+            "issuer"
+          ],
           "properties": {
             "d": {
-              "description": "Edges block SAID",
+              "description": "Edges section SAID",
               "type": "string"
             },
             "u": {
@@ -92,21 +121,44 @@
               "type": "string"
             },
             "issuer": {
-              "description": "SAID of a credential that proves the identity of the issuer, if chaining is desired.",
-              "type": "string"
+              "description": "Edge credential that proves the identity of the issuer",
+              "oneOf": [
+                {
+                  "description": "Simple compact form of node SAID",
+                  "type": "string"
+                },
+                {
+                  "description": "Edge credential that proves the identity of the issuer detail",
+                  "type": "object",
+                  "required": [
+                    "n"
+                  ],
+                  "properties": {
+                    "n": {
+                      "description": "SAID of a credential that proves the identity of the issuer, if chaining is desired.",
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
             },
             "coca": {
-              "description": "Chain to a code of conduct attestation (coca) by the issuee",
+              "description": "Chain to a code of conduct attestation(coca) credential by the issuee",
               "type": "object",
+              "required": [
+                "n",
+                "s"
+              ],
               "properties": {
                 "n": {
-                  "description": "SAID of coca",
+                  "description": "SAID of AI user code of conduct attestation(coca) credential",
                   "type": "string"
                 },
                 "s": {
-                  "description": "SAID of required schema of the credential pointed to by this node",
+                  "description": "SAID of AI user code of conduct attestation schema",
                   "type": "string",
-                  "const": "ELM3_-KOgRfRKTDnDLOEIdT-hy2aHzCM6amG_oUooepp"
+                  "const": "EH517Qc7ulPGL0yBJD8VEtw6nD3qmmtrzr9kAKEJbPU5"
                 }
               },
               "additionalProperties": false
@@ -117,8 +169,27 @@
       ]
     },
     "r": {
-      "description": "SAID of rules",
-      "type": "string"
+      "oneOf": [
+        {
+          "description": "Rules section SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EGFgHT7Xrzy9YLdQNXnNTYVBu9_Q0O7K5A2VCWjg93t3",
+          "description": "Rules detail",
+          "type": "object",
+          "properties": {
+            "d": {
+              "description": "Rule section SAID",
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "d"
+          ]
+        }
+      ]
     }
   },
   "additionalProperties": false

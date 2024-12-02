@@ -16,7 +16,7 @@ setup(
     python_requires='>=3.10.4',
     packages=find_packages(include=['cli', 'api', 'cli.*', 'api.*']),
     install_requires=[
-        'keri @ git+https://git@github.com/provenant-dev/keripy.git#v1.1.13'
+        'keri @ git+https://github.com/provenant-dev/keripy.git@pr-main'
     ],    
     entry_points={
         'console_scripts': [

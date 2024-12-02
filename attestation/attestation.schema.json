@@ -1,11 +1,19 @@
 {
-  "$id": "EB4AsU1rKGOAf7m4MS324XhanXq8G01sR_bUdUV2TULm",
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "EJH39k_xxuXt5SKfsLYKdx08mnqy8fSUEPtpil6RabsE",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Data Attestation Credential",
   "description": "Data attestation credential enables verifiable attestation of the data(cryptographic digest) by the Issuer",
   "type": "object",
   "credentialType": "DataAttestationCredential",
   "version": "1.0.0",
+  "required": [
+    "v",
+    "d",
+    "i",
+    "ri",
+    "s",
+    "a"
+  ],
   "properties": {
     "v": {
       "description": "Version",
@@ -24,11 +32,11 @@
       "type": "string"
     },
     "s": {
-      "description": "schema SAID",
+      "description": "Schema SAID",
       "type": "string"
     },
     "a": {
-      "$id": "ENhgUPygyvCD3yllT62KHZofN0zcKUoMoi2IEbm6tdDz",
+      "$id": "EI8qxQC1_PL25lTLRLwkrijM_VJofc1zsLPjvjqNyuls",
       "description": "Attributes block",
       "type": "object",
       "properties": {
@@ -37,7 +45,7 @@
           "type": "string"
         },
         "dt": {
-          "description": "Issuance date time",
+          "description": "Issuance datetime, ISO-8601 datetime string",
           "format": "date-time",
           "type": "string"
         },
@@ -60,26 +68,40 @@
           "type": "string"
         },
         {
-          "$id": "ELSumn6IoIYKIvHRwsV4kVjfpcTW0XhOU0Z7iQ_WIeZs",
-          "description": "Edges block",
+          "$id": "EOMPXC5IzK_sztnsUf3pmUlN-nWc0tOzbR9G4DbPhtNS",
+          "description": "Edges detail",
           "type": "object",
           "required": [
             "d",
-            "u",
             "issuer"
           ],
           "properties": {
             "d": {
-              "description": "Edges block SAID",
-              "type": "string"
-            },
-            "u": {
-              "description": "A salty nonce",
+              "description": "Edges section SAID",
               "type": "string"
             },
             "issuer": {
-              "description": "SAID of a credential that proves the identity of the issuer, if chaining is desired.",
-              "type": "string"
+              "description": "Edge credential that proves the identity of the issuer",
+              "oneOf": [
+                {
+                  "description": "Simple compact form of node SAID",
+                  "type": "string"
+                },
+                {
+                  "description": "Edge credential that proves the identity of the issuer detail",
+                  "type": "object",
+                  "required": [
+                    "n"
+                  ],
+                  "properties": {
+                    "n": {
+                      "description": "SAID of a credential that proves the identity of the issuer",
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
             }
           },
           "additionalProperties": false
@@ -87,11 +109,5 @@
       ]
     }
   },
-  "additionalProperties": false,
-  "required": [
-    "i",
-    "ri",
-    "s",
-    "d"
-  ]
+  "additionalProperties": false
 }

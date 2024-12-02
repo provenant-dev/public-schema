@@ -1,11 +1,11 @@
 {
-  "$id": "EJd1p1-LSs3umkXzOwqpweEeYnrKeMsA9rys-U8ga1cE",
+  "$id": "EL5mNxhTeS_B9kxGzFj_fIs2yoWb7st4D6lY9ITwqc0R",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "face-to-face",
+  "title": "Face-to-Face credential",
   "description": "Assert that an issuer knows the issuee to be a human being, based one or more face-to-face interactions.",
   "$comment": "These credentials have no edges. They can be chained by showing that the issuer's identifier is also an identifier associated with another credential of whatever type, but they do not require chaining.",
   "type": "object",
-  "credentialType": "faceToFaceCredential",
+  "credentialType": "FaceToFaceCredential",
   "version": "1.0.0",
   "required": [
     "v",
@@ -25,8 +25,12 @@
       "description": "SAID of the credential",
       "type": "string"
     },
+    "u": {
+      "description": "A salty nonce",
+      "type": "string"
+    },
     "i": {
-      "description": "Identifier of the issuer",
+      "description": "AID of the issuer",
       "type": "string"
     },
     "ri": {
@@ -44,7 +48,7 @@
           "type": "string"
         },
         {
-          "$id": "EPssq4EDt6X7R2-LNCWO3UEKQUl5krq_zoLJV5n750E2",
+          "$id": "EC4HJKhOFNgTj2szmTDgbPHoVZCUrjDelK4CjAlcv82q",
           "description": "Attributes block",
           "type": "object",
           "required": [
@@ -64,10 +68,15 @@
               "type": "string"
             },
             "i": {
-              "description": "Identifier that issuee controls, according to issuer",
+              "description": "AID that issuee controls, according to issuer",
               "type": "string"
             },
             "dt": {
+              "description": "Issuance datetime, ISO-8601 datetime string",
+              "type": "string",
+              "format": "date-time"
+            },
+            "assertDate": {
               "description": "Time as of which the issuer asserts the face-to-face interaction (and any other information about the issuee) to be fresh. This may be before the time of issuance.",
               "format": "date-time",
               "type": "string"
@@ -111,10 +120,235 @@
       ]
     },
     "r": {
-      "description": "SAID of rules block",
-      "type": "string",
-      "const": "EGhkNqT1LbfYlimCBMsorDt7PpeGKYdOdj6hKpUjrqtB",
-      "format": "cesr"
+      "oneOf": [
+        {
+          "description": "Rules section SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EEfBMOYviHkTR6vh40DL3MstehkEBevZBrE0uGqLeXki",
+          "description": "Rules detail",
+          "type": "object",
+          "properties": {
+            "d": {
+              "description": "Rule section SAID",
+              "type": "string"
+            },
+            "humanIssuer": {
+              "description": "Human Issuer Disclaimer",
+              "oneOf": [
+                {
+                  "description": "simple compact rule form",
+                  "type": "string",
+                  "const": "Issuers MUST be human beings. By issuing any face-to-face credential, issuers become accountable to the world (all conceivable verifiers) for asserting that fact about themselves."
+                },
+                {
+                  "description": "Rule detail",
+                  "type": "object",
+                  "properties": {
+                    "l": {
+                      "description": "Associated legal language",
+                      "type": "string",
+                      "const": "Issuers MUST be human beings. By issuing any face-to-face credential, issuers become accountable to the world (all conceivable verifiers) for asserting that fact about themselves."
+                    }
+                  },
+                  "required": [
+                    "l"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "issuerAssertsFaceToFace": {
+              "description": "IssuerAssertsFaceToFace Disclaimer",
+              "oneOf": [
+                {
+                  "description": "simple compact rule form",
+                  "type": "string",
+                  "const": "Issuers MUST issue face-to-face credentials only to a human being distinct from the issuer, with whom the issuer has interacted face-to-face. \"Face-to-face\" means occurring physically and in close proximity, with the face (and often, the rest of the body) of the issuee observable closely, clearly, and long enough that ordinary human observation can tell the difference between a real human and any artificial construct. Except under unusual circumstances which MUST be documented in the `caveats` field (e.g., blindness, deafness, talking in a dark cave), it also means that normal sensory experiences were available. Teleconferences and phone calls are not \"face-to-face\" and in and of themselves do not provide a valid basis for face-to-face credentials."
+                },
+                {
+                  "description": "rule detail",
+                  "type": "object",
+                  "properties": {
+                    "l": {
+                      "description": "Associated legal language",
+                      "type": "string",
+                      "const": "Issuers MUST issue face-to-face credentials only to a human being distinct from the issuer, with whom the issuer has interacted face-to-face. \"Face-to-face\" means occurring physically and in close proximity, with the face (and often, the rest of the body) of the issuee observable closely, clearly, and long enough that ordinary human observation can tell the difference between a real human and any artificial construct. Except under unusual circumstances which MUST be documented in the `caveats` field (e.g., blindness, deafness, talking in a dark cave), it also means that normal sensory experiences were available. Teleconferences and phone calls are not \"face-to-face\" and in and of themselves do not provide a valid basis for face-to-face credentials."
+                    }
+                  },
+                  "required": [
+                    "l"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "humanIssuee": {
+              "description": "Human Issuee Disclaimer",
+              "oneOf": [
+                {
+                  "description": "simple compact rule form",
+                  "type": "string",
+                  "const": "Issuees MUST be human beings. By accepting a face-to-face credential, issuees become accountable for asserting that fact to the issuer. By using a face-to-face credential to characterize themselves to others, issuees become accountable for asserting that fact to verifiers."
+                },
+                {
+                  "description": "Rule detail",
+                  "type": "object",
+                  "properties": {
+                    "l": {
+                      "description": "Associated legal language",
+                      "type": "string",
+                      "const": "Issuees MUST be human beings. By accepting a face-to-face credential, issuees become accountable for asserting that fact to the issuer. By using a face-to-face credential to characterize themselves to others, issuees become accountable for asserting that fact to verifiers."
+                    }
+                  },
+                  "required": [
+                    "l"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "issueeAssertsFaceToFace": {
+              "description": "IssueeAssertsFaceToFace Disclaimer",
+              "oneOf": [
+                {
+                  "description": "simple compact rule form",
+                  "type": "string",
+                  "const": "Issuees MUST accept and use face-to-face credentials only from issuers with whom they have interacted face-to-face. By using a face-to-face credential to characterize themselves to others, issuees ALSO become accountable for asserting the reality of such interaction(s) to verifiers."
+                },
+                {
+                  "description": "Rule detail",
+                  "type": "object",
+                  "properties": {
+                    "l": {
+                      "description": "Associated legal language",
+                      "type": "string",
+                      "const": "Issuees MUST accept and use face-to-face credentials only from issuers with whom they have interacted face-to-face. By using a face-to-face credential to characterize themselves to others, issuees ALSO become accountable for asserting the reality of such interaction(s) to verifiers."
+                    }
+                  },
+                  "required": [
+                    "l"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "noOverstatement": {
+              "description": "noOverstatement Disclaimer",
+              "oneOf": [
+                {
+                  "description": "simple compact rule form",
+                  "type": "string",
+                  "const": "Both issuers and issuees MUST agree that the face-to-face credential does not overstate the time or basis of their interaction. It may understate it (e.g., for privacy reasons)."
+                },
+                {
+                  "description": "Rule detail",
+                  "type": "object",
+                  "properties": {
+                    "l": {
+                      "description": "Associated legal language",
+                      "type": "string",
+                      "const": "Both issuers and issuees MUST agree that the face-to-face credential does not overstate the time or basis of their interaction. It may understate it (e.g., for privacy reasons)."
+                    }
+                  },
+                  "required": [
+                    "l"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "confirmIdentifiers": {
+              "description": "confirmIdentifiers Disclaimer",
+              "oneOf": [
+                {
+                  "description": "simple compact rule form",
+                  "type": "string",
+                  "const": "The original communication of the issuer and issuee identifiers associated with a face-to-face credential may take place digitally (e.g., by NFC touch, by QR code). However, both parties MUST confirm to the other party during their face-to-face interaction(s) or via another secured out-of-band channel that they are using the identifier that the other party expects. This prevents man-in-the-middle attacks."
+                },
+                {
+                  "description": "Rule detail",
+                  "type": "object",
+                  "properties": {
+                    "l": {
+                      "description": "Associated legal language",
+                      "type": "string",
+                      "const": "The original communication of the issuer and issuee identifiers associated with a face-to-face credential may take place digitally (e.g., by NFC touch, by QR code). However, both parties MUST confirm to the other party during their face-to-face interaction(s) or via another secured out-of-band channel that they are using the identifier that the other party expects. This prevents man-in-the-middle attacks."
+                    }
+                  },
+                  "required": [
+                    "l"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "fairBiometric": {
+              "description": "fairBiometric Disclaimer",
+              "oneOf": [
+                {
+                  "description": "simple compact rule form",
+                  "type": "string",
+                  "const": "If the credential includes a hash of a biometric (e.g., photo or voice print), both parties MUST agree the associated data is a reasonable representation of how the issuer perceived the issuee near the time of issuance."
+                },
+                {
+                  "description": "Rule detail",
+                  "type": "object",
+                  "properties": {
+                    "l": {
+                      "description": "Associated legal language",
+                      "type": "string",
+                      "const": "If the credential includes a hash of a biometric (e.g., photo or voice print), both parties MUST agree the associated data is a reasonable representation of how the issuer perceived the issuee near the time of issuance."
+                    }
+                  },
+                  "required": [
+                    "l"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "promptRevocation": {
+              "description": "promptRevocation Disclaimer",
+              "oneOf": [
+                {
+                  "description": "simple compact rule form",
+                  "type": "string",
+                  "const": "Issuers parties MUST agree to make prompt efforts to revoke any face-to-face credentials that they believe to be inaccurate. Issuees agree to immediately renounce any face-to-face credentials that they believe were not issued by a human."
+                },
+                {
+                  "description": "Rule detail",
+                  "type": "object",
+                  "properties": {
+                    "l": {
+                      "description": "Associated legal language",
+                      "type": "string",
+                      "const": "Issuers parties MUST agree to make prompt efforts to revoke any face-to-face credentials that they believe to be inaccurate. Issuees agree to immediately renounce any face-to-face credentials that they believe were not issued by a human."
+                    }
+                  },
+                  "required": [
+                    "l"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "d",
+            "humanIssuer",
+            "issuerAssertsFaceToFace",
+            "humanIssuee",
+            "issueeAssertsFaceToFace",
+            "noOverstatement",
+            "confirmIdentifiers",
+            "fairBiometric",
+            "promptRevocation"
+          ]
+        }
+      ]
     }
   },
   "additionalProperties": false

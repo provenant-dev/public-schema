@@ -1,10 +1,10 @@
 {
   "$id": "EKUPqIZ1irc7FjYBMYMvELPfZ-4qSQyLjOrkP0RWB9Wh",
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Brand Owner Credential",
-  "description": "Issued to a legal entity that has the right to use a brand because it is the direct owner or a licensee of that brand.",
+  "title": "Telephone Number Credential",
+  "description": "Telephone Number Credential issued to a Brand for A2P 10DLC messaging campaigns",
   "type": "object",
-  "credentialType": "BrandOwnerCredential",
+  "credentialType": "TelephoneNumberCredential",
   "version": "1.0.0",
   "properties": {
     "v": {
@@ -47,7 +47,7 @@
               "type": "string"
             },
             "i": {
-              "description": "AID of the legal entity that is the direct owner or a licensee of the brand",
+              "description": "Recipient Brand AID",
               "type": "string"
             },
             "dt": {
@@ -55,63 +55,46 @@
               "format": "date-time",
               "type": "string"
             },
-            "fn": {
-              "description": "See fn property in 10.4.1 of draft-ietf-sipcore-callinfo-rcd-12",
+            "numbers": {
+              "description": "Telephone Numbers for the campaign",
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "description": "Telephone number in E164 format",
+                "pattern": "[+][0-9]{7,15}"
+              }
+            },
+            "channel": {
+              "description": "Communication channel for which number will be used (e.g., sms, voice, etc.)",
+              "type": "string",
+              "pattern": "sms|voice"
+            },
+            "doNotOriginate": {
+              "description": "True or False based on condition if telephone number is a 'do not originate' number (inbound only)",
+              "type": "boolean"
+            },
+            "startDate": {
+              "description": "Start date",
+              "format": "date-time",
               "type": "string"
             },
-            "n": {
-              "description": "See n property in 10.4.2 of draft-ietf-sipcore-callinfo-rcd-12",
+            "endDate": {
+              "description": "Expiration date",
+              "format": "date-time",
               "type": "string"
-            },
-            "nickname": {
-              "description": "See nickname property in 10.4.3 of draft-ietf-sipcore-callinfo-rcd-12",
-              "type": "string"
-            },
-            "photo": {
-              "description": "See photo property in 10.4.4 of draft-ietf-sipcore-callinfo-rcd-12",
-              "type": "string"
-            },
-            "adr": {
-              "description": "See adr property in 10.5.1 of draft-ietf-sipcore-callinfo-rcd-12",
-              "type": "string"
-            },
-            "email": {
-              "description": "See email property in 10.6.2 of draft-ietf-sipcore-callinfo-rcd-12",
-              "type": "string"
-            },
-            "lang": {
-              "description": "See lang property in 10.6.3 of draft-ietf-sipcore-callinfo-rcd-12",
-              "type": "string"
-            },
-            "tz": {
-              "description": "See tz property in 10.7.1 of draft-ietf-sipcore-callinfo-rcd-12",
-              "type": "string"
-            },
-            "geo": {
-              "description": "See geo property in 10.8.1 of draft-ietf-sipcore-callinfo-rcd-12",
-              "type": "string"
-            },
-            "logo": {
-              "description": "See logo property in 10.8.3 of draft-ietf-sipcore-callinfo-rcd-12",
-              "type": "string"
-            },
-            "sound": {
-              "description": "See sound property in 10.9.3 of draft-ietf-sipcore-callinfo-rcd-12",
-              "type": "string"
-            },
-            "website": {
-              "description": "See url property in 10.9.5 of draft-ietf-sipcore-callinfo-rcd-12",
-              "type": "string"
-            },
-            "chatbot": {
-              "description": "The URL of a chatbot that represents the brand",
-              "type": "string"
-            },
+            }
           },
           "additionalProperties": false,
           "required": [
             "i",
-            "dt"
+            "dt",
+            "numbers",
+            "channel",
+            "doNotOriginate",
+            "startDate",
+            "endDate"
           ]
         }
       ]

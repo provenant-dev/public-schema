@@ -1,0 +1,178 @@
+{
+  "$id": "EL3mANFohCJSfsZVc3jrqIKEZsLC-KdCC455UCOGPWGi",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Verifiable Voice Dossier Credential",
+  "description": "Attestation credential, issued by the accountable party, that assembles all of the evidence required as per the Verifiable Voice Protocol",
+  "type": "object",
+  "credentialType": "VvpDossierCredential",
+  "version": "1.0.0",
+  "required": [
+    "v",
+    "d",
+    "i",
+    "ri",
+    "s",
+    "a",
+    "e"
+  ],
+  "properties": {
+    "v": {
+      "description": "Version",
+      "type": "string"
+    },
+    "d": {
+      "description": "Credential SAID",
+      "type": "string"
+    },
+    "i": {
+      "description": "Issuer AID",
+      "type": "string"
+    },
+    "ri": {
+      "description": "Credential status registry",
+      "type": "string"
+    },
+    "s": {
+      "description": "Schema SAID",
+      "type": "string"
+    },
+    "a": {
+      "$id": "EEMVwHco23OmIGm4k3czzLZqePejuZH9Mr11kwNnMMX3",
+      "description": "Attributes block",
+      "type": "object",
+      "properties": {
+        "d": {
+          "description": "Attributes block SAID",
+          "type": "string"
+        },
+        "dt": {
+          "description": "Issuance datetime, ISO-8601 datetime string",
+          "format": "date-time",
+          "type": "string"
+        },
+        "LEI": {
+          "description": "LEI of the Accountavble Party",
+          "type": "string",
+          "format": "ISO 17442"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "d",
+        "dt"
+      ]
+    },
+    "e": {
+      "oneOf": [
+        {
+          "description": "Edges section SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EBhxRTNOozLecDcwLmhcJeiIsaF2dP9Mcw0AFKSrbVsb",
+          "description": "Edges detail",
+          "type": "object",
+          "required": [
+            "d",
+            "alloc",
+            "tnalloc",
+            "delsig"
+          ],
+          "properties": {
+            "d": {
+              "description": "Edges section SAID",
+              "type": "string"
+            },
+            "vetting": {
+              "description": "Chain to a credential proves the identity of the accountable party as a legal entity",
+              "type": "object",
+              "required": [
+                "n",
+                "s"
+              ],
+              "properties": {
+                "n": {
+                  "description": "SAID of credential that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "s": {
+                  "description": "SAID of the legal entity vlei schema",
+                  "type": "string",
+                  "const": "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY"
+                }
+              },
+              "additionalProperties": false
+            },
+            "alloc": {
+              "description": "Chain to a allocator credential for the committee that manages TN allocations at the accountable party legal entity",
+              "type": "object",
+              "required": [
+                "n",
+                "s"
+              ],
+              "properties": {
+                "n": {
+                  "description": "SAID of allocator auth credential",
+                  "type": "string"
+                },
+                "s": {
+                  "description": "SAID of allocator auth schema",
+                  "type": "string",
+                  "const": "EGXReFvL0ZPJx5CXSIK4R5-cMFnO4XS30u9p-JZ4cKI3"
+                }
+              },
+              "additionalProperties": false
+            },
+            "tnalloc": {
+              "description": "Chain to a TN allocation (RTU) credential that proves with a valid chain back to the regulator",
+              "type": "object",
+              "required": [
+                "n",
+                "s"
+              ],
+              "properties": {
+                "n": {
+                  "description": "SAID of TN allocation credential",
+                  "type": "string"
+                },
+                "s": {
+                  "description": "SAID of TN allocation schema",
+                  "type": "string",
+                  "const": "EGEebb1pVRcZ6OXHlYitl5DNh-LDrMWPwRtstiKiDhRy"
+                }
+              },
+              "additionalProperties": false
+            },
+            "delsig": {
+              "description": "Chain to a delegated signer credential proving that the party that signed is authorized to sign on behalf of the legal entity ",
+              "type": "object",
+              "required": [
+                "n",
+                "s"
+              ],
+              "properties": {
+                "n": {
+                  "description": "SAID of delegated signer credential",
+                  "type": "string"
+                },
+                "s": {
+                  "description": "SAID of delegated signer schema",
+                  "type": "string",
+                  "const": "EGXReFvL0ZPJx5CXSIK4R5-cMFnO4XS30u9p-JZ4cKI3"
+                },
+                "o": {
+                  "description": "Operator indicating issuer AID of this ACDC MAY or MAY not be the Issuee AID of this node.",
+                  "type": "string",
+                  "const": "NI2I"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "additionalProperties": false
+}

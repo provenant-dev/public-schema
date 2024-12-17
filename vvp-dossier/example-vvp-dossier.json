@@ -1,0 +1,28 @@
+{
+  "v": "ACDC10JSON0002fb_",
+  "d": "ENKvBDgVxcoLY_KghDq5IoVPyOz2MQGwSZ0yq6aD4-4_",
+  "i": "EAt3TsAudsZWhQ-U8OPaBZqBaLWqpCMNWsDRPG3-UBWd",
+  "ri": "EH8y2GjzeBonizRk6oqAyC9ER5OSFiQXOObGJKTA8Ldr",
+  "s": "EL3mANFohCJSfsZVc3jrqIKEZsLC-KdCC455UCOGPWGi",
+  "a": {
+    "d": "EFZkbTkgS3jPpc1BOD_KusEM8p7VDzycVZiw2ou-tLzK",
+    "dt": "2024-12-17T13:17:48.296000+00:00",
+    "LEI": "549300QME1XNVC6ESHEL"
+  },
+  "e": {
+    "d": "ECiwLPGHribzd818mX0paS13FgQa5HJdPTlULGMspyof",
+    "alloc": {
+      "n": "EILt7p93hrG_LLgvdaoXFUl2FCGMI2_GAzAXbRtIjk4v",
+      "s": "EGXReFvL0ZPJx5CXSIK4R5-cMFnO4XS30u9p-JZ4cKI3"
+    },
+    "tnalloc": {
+      "n": "EIFIwg-iJoSGThCLAFX4cpFoHNfwQBchsUohnCf8h1x5",
+      "s": "EGEebb1pVRcZ6OXHlYitl5DNh-LDrMWPwRtstiKiDhRy"
+    },
+    "delsig": {
+      "n": "EPSYXKY5bSdrFVv_7RzsfJwWiQ8INjZEs0X3MCY13OsO",
+      "s": "EGXReFvL0ZPJx5CXSIK4R5-cMFnO4XS30u9p-JZ4cKI3",
+      "o": "NI2I"
+    }
+  }
+}

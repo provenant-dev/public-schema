@@ -1,27 +1,34 @@
 {
-  "v": "ACDC10JSON0002fb_",
-  "d": "ENKvBDgVxcoLY_KghDq5IoVPyOz2MQGwSZ0yq6aD4-4_",
-  "i": "EAt3TsAudsZWhQ-U8OPaBZqBaLWqpCMNWsDRPG3-UBWd",
-  "ri": "EH8y2GjzeBonizRk6oqAyC9ER5OSFiQXOObGJKTA8Ldr",
-  "s": "EL3mANFohCJSfsZVc3jrqIKEZsLC-KdCC455UCOGPWGi",
+  "v": "ACDC10JSON00038c_",
+  "d": "EP6gLgvPptV7lTDxB9AShDvIXx9tkFbAarWUzS7UczpS",
+  "i": "EE96HbjOckzsdPKUFAjEOVtuAA-56TIMu7XTMCfQ4ERE",
+  "ri": "EAHHNkOEBKrYyuMW7sH03DuKwXWNBeln0wEu1HlCk849",
+  "s": "ENqfM_0nrtWIC9DZxBRm4xjXMhqA8_epmbA2drUr2XNJ",
   "a": {
-    "d": "EFZkbTkgS3jPpc1BOD_KusEM8p7VDzycVZiw2ou-tLzK",
-    "dt": "2024-12-17T13:17:48.296000+00:00",
+    "d": "ED1fbXtdnLmhR2DG0Tlz5v5tcoS71IsrEF4VfXwY7T91",
+    "dt": "2024-12-17T21:51:40.889000+00:00",
     "LEI": "549300QME1XNVC6ESHEL"
   },
   "e": {
-    "d": "ECiwLPGHribzd818mX0paS13FgQa5HJdPTlULGMspyof",
+    "d": "EMFJKUHA7uswbCQYnzHCHrD4FFQJCJT-pLaA0KoevSgt",
+    "vetting": {
+      "n": "EIHrBsIu4dF-YtvIrwr6d5OYHM0pPLeMCALoD1S73A7q",
+      "s": "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY",
+      "o": "NI2I"
+    },
     "alloc": {
-      "n": "EILt7p93hrG_LLgvdaoXFUl2FCGMI2_GAzAXbRtIjk4v",
-      "s": "EGXReFvL0ZPJx5CXSIK4R5-cMFnO4XS30u9p-JZ4cKI3"
+      "n": "EPEjL-vytgDPQXkhBKzYC6UaU5-6737L2aE7YBw42i6t",
+      "s": "EAb4sF9w3CrkrcFxbKWcR0QSftF74FKUN6wHrjBTNuRx",
+      "o": "I2I"
     },
     "tnalloc": {
-      "n": "EIFIwg-iJoSGThCLAFX4cpFoHNfwQBchsUohnCf8h1x5",
-      "s": "EGEebb1pVRcZ6OXHlYitl5DNh-LDrMWPwRtstiKiDhRy"
+      "n": "EG7B0NhDbUjH7MyirmgfeBdYXwoFrE9NXmguCFr7wPGL",
+      "s": "EGEebb1pVRcZ6OXHlYitl5DNh-LDrMWPwRtstiKiDhRy",
+      "o": "I2I"
     },
     "delsig": {
-      "n": "EPSYXKY5bSdrFVv_7RzsfJwWiQ8INjZEs0X3MCY13OsO",
-      "s": "EGXReFvL0ZPJx5CXSIK4R5-cMFnO4XS30u9p-JZ4cKI3",
+      "n": "ELXpAX1jassAFL4C8FohZhKOoYF9ZxBFdLqVZkUvVRNg",
+      "s": "EAb4sF9w3CrkrcFxbKWcR0QSftF74FKUN6wHrjBTNuRx",
       "o": "NI2I"
     }
   }

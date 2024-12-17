@@ -1,5 +1,5 @@
 {
-  "$id": "EN_m9jS3lHwArrzXlPV12w5itcxJsl2s2LO08czte3ht",
+  "$id": "EBxJHMk6MOEUogB6A1rP5x9te7DscPfxFfUGJCkq1Lq5",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Award Credential",
   "description": "Confer an award on a staff member or other associated person or group.",
@@ -146,12 +146,11 @@
           "type": "string"
         },
         {
-          "$id": "EFYMvjZAnrTxsEwDqYOeLaoUTP7YbIQASwSRYZT5xX12",
+          "$id": "EKk5ejftEjNwjRhw2lYQAwKwvRWapqCNEOx3gUR7WW7n",
           "description": "Edges detail",
           "type": "object",
           "required": [
             "d",
-            "u",
             "issuer"
           ],
           "properties": {
@@ -159,31 +158,29 @@
               "description": "Edges block SAID",
               "type": "string"
             },
-            "u": {
-              "description": "A salty nonce",
-              "type": "string"
-            },
             "issuer": {
-              "description": "Edge credential that proves the identity of the issuer, if chaining is desired.",
-              "oneOf": [
-                {
-                  "description": "Simple compact form of node SAID",
+              "description": "Edge credential that proves the identity of the issuer.",
+              "type": "object",
+              "properties": {
+                "n": {
+                  "description": "SAID of a credential that proves the identity of the issuer",
                   "type": "string"
                 },
-                {
-                  "description": "Edge credential that proves the identity of the issuer detail",
-                  "type": "object",
-                  "required": [
-                    "n"
-                  ],
-                  "properties": {
-                    "n": {
-                      "description": "SAID of a credential that proves the identity of the issuer",
-                      "type": "string"
-                    }
-                  },
-                  "additionalProperties": false
+                "s": {
+                  "description": "SAID of credential schema that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "o": {
+                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "type": "string",
+                  "const": "I2I"
                 }
+              },
+              "additionalProperties": false,
+              "required": [
+                "n",
+                "s",
+                "o"
               ]
             }
           },

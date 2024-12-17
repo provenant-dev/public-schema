@@ -1,5 +1,5 @@
 {
-  "$id": "EL3mANFohCJSfsZVc3jrqIKEZsLC-KdCC455UCOGPWGi",
+  "$id": "ENqfM_0nrtWIC9DZxBRm4xjXMhqA8_epmbA2drUr2XNJ",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Verifiable Voice Dossier Credential",
   "description": "Attestation credential, issued by the accountable party, that assembles all of the evidence required as per the Verifiable Voice Protocol",
@@ -69,11 +69,12 @@
           "type": "string"
         },
         {
-          "$id": "EBhxRTNOozLecDcwLmhcJeiIsaF2dP9Mcw0AFKSrbVsb",
+          "$id": "EIPJC8S5xriUoicufBXaV6KIGHBe_zzbB3d0ZhpjxfUi",
           "description": "Edges detail",
           "type": "object",
           "required": [
             "d",
+            "vetting",
             "alloc",
             "tnalloc",
             "delsig"
@@ -88,7 +89,8 @@
               "type": "object",
               "required": [
                 "n",
-                "s"
+                "s",
+                "o"
               ],
               "properties": {
                 "n": {
@@ -99,6 +101,11 @@
                   "description": "SAID of the legal entity vlei schema",
                   "type": "string",
                   "const": "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY"
+                },
+                "o": {
+                  "description": "Operator indicating issuer AID of this ACDC MAY or MAY not be the Issuee AID of this node.",
+                  "type": "string",
+                  "const": "NI2I"
                 }
               },
               "additionalProperties": false
@@ -108,7 +115,8 @@
               "type": "object",
               "required": [
                 "n",
-                "s"
+                "s",
+                "o"
               ],
               "properties": {
                 "n": {
@@ -118,7 +126,12 @@
                 "s": {
                   "description": "SAID of allocator auth schema",
                   "type": "string",
-                  "const": "EGXReFvL0ZPJx5CXSIK4R5-cMFnO4XS30u9p-JZ4cKI3"
+                  "const": "EAb4sF9w3CrkrcFxbKWcR0QSftF74FKUN6wHrjBTNuRx"
+                },
+                "o": {
+                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "type": "string",
+                  "const": "I2I"
                 }
               },
               "additionalProperties": false
@@ -128,7 +141,8 @@
               "type": "object",
               "required": [
                 "n",
-                "s"
+                "s",
+                "o"
               ],
               "properties": {
                 "n": {
@@ -139,6 +153,11 @@
                   "description": "SAID of TN allocation schema",
                   "type": "string",
                   "const": "EGEebb1pVRcZ6OXHlYitl5DNh-LDrMWPwRtstiKiDhRy"
+                },
+                "o": {
+                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "type": "string",
+                  "const": "I2I"
                 }
               },
               "additionalProperties": false
@@ -148,7 +167,8 @@
               "type": "object",
               "required": [
                 "n",
-                "s"
+                "s",
+                "o"
               ],
               "properties": {
                 "n": {
@@ -158,7 +178,7 @@
                 "s": {
                   "description": "SAID of delegated signer schema",
                   "type": "string",
-                  "const": "EGXReFvL0ZPJx5CXSIK4R5-cMFnO4XS30u9p-JZ4cKI3"
+                  "const": "EAb4sF9w3CrkrcFxbKWcR0QSftF74FKUN6wHrjBTNuRx"
                 },
                 "o": {
                   "description": "Operator indicating issuer AID of this ACDC MAY or MAY not be the Issuee AID of this node.",

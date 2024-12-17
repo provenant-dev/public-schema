@@ -1,5 +1,5 @@
 {
-  "$id": "EGXReFvL0ZPJx5CXSIK4R5-cMFnO4XS30u9p-JZ4cKI3",
+  "$id": "EAb4sF9w3CrkrcFxbKWcR0QSftF74FKUN6wHrjBTNuRx",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Generalized Cooperative Delegation Credential",
   "description": "Define the authorizations, duties, and constraints of a person who receives delegated authority.",
@@ -211,6 +211,55 @@
               "type": "string"
             }
           }
+        }
+      ]
+    },
+    "e": {
+      "oneOf": [
+        {
+          "description": "Edges block SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EKk5ejftEjNwjRhw2lYQAwKwvRWapqCNEOx3gUR7WW7n",
+          "description": "Edges detail",
+          "type": "object",
+          "required": [
+            "d",
+            "issuer"
+          ],
+          "properties": {
+            "d": {
+              "description": "Edges block SAID",
+              "type": "string"
+            },
+            "issuer": {
+              "description": "Edge credential that proves the identity of the issuer.",
+              "type": "object",
+              "properties": {
+                "n": {
+                  "description": "SAID of a credential that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "s": {
+                  "description": "SAID of credential schema that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "o": {
+                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "type": "string",
+                  "const": "I2I"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "n",
+                "s",
+                "o"
+              ]
+            }
+          },
+          "additionalProperties": false
         }
       ]
     },

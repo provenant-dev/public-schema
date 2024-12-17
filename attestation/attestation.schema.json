@@ -1,5 +1,5 @@
 {
-  "$id": "EJH39k_xxuXt5SKfsLYKdx08mnqy8fSUEPtpil6RabsE",
+  "$id": "EBYs1o7ZI7ZOyoFDOk7FmxpEtQrv3V0pJkjgCrcbJHbc",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Data Attestation Credential",
   "description": "Data attestation credential enables verifiable attestation of the data(cryptographic digest) by the Issuer",
@@ -68,7 +68,7 @@
           "type": "string"
         },
         {
-          "$id": "EOMPXC5IzK_sztnsUf3pmUlN-nWc0tOzbR9G4DbPhtNS",
+          "$id": "EMEXQmfeEwDtyTVrF1EtRQWJvM-Wnd6kNzocJA-dbHEA",
           "description": "Edges detail",
           "type": "object",
           "required": [
@@ -81,26 +81,28 @@
               "type": "string"
             },
             "issuer": {
-              "description": "Edge credential that proves the identity of the issuer",
-              "oneOf": [
-                {
-                  "description": "Simple compact form of node SAID",
+              "description": "Edge credential that proves the identity of the issuer.",
+              "type": "object",
+              "properties": {
+                "n": {
+                  "description": "SAID of a credential that proves the identity of the issuer",
                   "type": "string"
                 },
-                {
-                  "description": "Edge credential that proves the identity of the issuer detail",
-                  "type": "object",
-                  "required": [
-                    "n"
-                  ],
-                  "properties": {
-                    "n": {
-                      "description": "SAID of a credential that proves the identity of the issuer",
-                      "type": "string"
-                    }
-                  },
-                  "additionalProperties": false
+                "s": {
+                  "description": "SAID of credential schema that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "o": {
+                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "type": "string",
+                  "const": "I2I"
                 }
+              },
+              "additionalProperties": false,
+              "required": [
+                "n",
+                "s",
+                "o"
               ]
             }
           },

@@ -1,5 +1,5 @@
 {
-  "$id": "EL5mNxhTeS_B9kxGzFj_fIs2yoWb7st4D6lY9ITwqc0R",
+  "$id": "EKrv2S0OVc8SeKCzIAOSE-y4j5ybLOOgB69y12Lzxh6Y",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Face-to-Face credential",
   "description": "Assert that an issuer knows the issuee to be a human being, based one or more face-to-face interactions.",
@@ -48,7 +48,7 @@
           "type": "string"
         },
         {
-          "$id": "EC4HJKhOFNgTj2szmTDgbPHoVZCUrjDelK4CjAlcv82q",
+          "$id": "EDj-sksErd9pEJNhd4aX9TeKbCPsgLoZ4JHTAL-5Cq2a",
           "description": "Attributes block",
           "type": "object",
           "required": [
@@ -68,7 +68,7 @@
               "type": "string"
             },
             "i": {
-              "description": "AID that issuee controls, according to issuer",
+              "description": "Identifier that issuee controls, according to issuer",
               "type": "string"
             },
             "dt": {

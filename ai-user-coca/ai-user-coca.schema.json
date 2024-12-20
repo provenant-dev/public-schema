@@ -1,5 +1,5 @@
 {
-  "$id": "EH517Qc7ulPGL0yBJD8VEtw6nD3qmmtrzr9kAKEJbPU5",
+  "$id": "EBCnd7qk82wLBOgFukdmsdkksAuPpmzt5-eg9YKWWP3j",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "AI user code of conduct attestation",
   "description": "Attest that the issuer is committed to follow a particular code of conduct with respect to their personal use of AI.",
@@ -24,11 +24,11 @@
       "type": "string"
     },
     "i": {
-      "description": "Identifier of the issuer(the one giving the award)",
+      "description": "Identifier of the issuer (the one giving the award)",
       "type": "string"
     },
     "ri": {
-      "description": "Credential status registry",
+      "description": "Registry for issuer's assertion status",
       "type": "string"
     },
     "s": {

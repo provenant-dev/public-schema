@@ -1,10 +1,10 @@
 {
-  "$id": "EBYs1o7ZI7ZOyoFDOk7FmxpEtQrv3V0pJkjgCrcbJHbc",
+  "$id": "EJxFPpyDRV-W6O2Vtjdy2K90ltWmQK8l1jePw5YOo_Ft",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Data Attestation Credential",
-  "description": "Data attestation credential enables verifiable attestation of the data(cryptographic digest) by the Issuer",
+  "title": "Data Attestation",
+  "description": "Data attestation enables verifiable attestation of the data(cryptographic digest) by the Issuer",
   "type": "object",
-  "credentialType": "DataAttestationCredential",
+  "credentialType": "DataAttestation",
   "version": "1.0.0",
   "required": [
     "v",

@@ -1,0 +1,32 @@
+{
+  "v": "ACDC10JSON0003cd_",
+  "d": "EEeg55Yr01gDyCScFUaE2QgzC7IOjQRpX2sTckFZp1RP",
+  "u": "0AC8kpfo-uHQvxkuGZdlSjGy",
+  "i": "EANghOmfYKURt3rufd9JNzQDw_7sQFxnDlIew4C3YCnM",
+  "ri": "EDoSO5PEPLsstDr_XXa8aHAf0YKfPlJQcxZvkpMSzQDB",
+  "s": "EFvnoHDY7I-kaBBeKlbDbkjG4BaI0nKLGadxBdjMGgSQ",
+  "a": {
+      "d": "ECFFejktQA0ThTqLtAUTmW46unVGf28I_arbBFnIwnWB",
+      "u": "0ADSLntzn8x8eNU6PhUF26hk",
+      "i": "EERawEn-XgvmDR_-2ESVUVC6pW-rkqBkxMTsL36HosAz",
+      "dt": "2024-12-20T20:40:57.888000+00:00",
+      "numbers": {
+          "rangeStart": "+1801361002",
+          "rangeEnd": "+1801361009"
+      },
+      "channel": "voice",
+      "doNotOriginate": false
+  },
+  "e": {
+      "d": "EI9qlgiDbMeJ7JTZTJfVanUFAoa0TMz281loi63nCSAH",
+      "tnalloc": {
+          "n": "EG16t8CpJROovnGpgEW1_pLxH5nSBs1xQCbRexINYJgz",
+          "s": "EFvnoHDY7I-kaBBeKlbDbkjG4BaI0nKLGadxBdjMGgSQ",
+          "o": "I2I"
+      }
+  },
+  "r": {
+      "d": "EJFhpp0uU7D7PKooYM5QIO1hhPKTjHE18sR4Dn0GFscR",
+      "perBrand": "Issuees agree not to share the phone number with other brands which may have a common owner but which will make it difficult to consistently identify the originator of traffic."
+  }
+}

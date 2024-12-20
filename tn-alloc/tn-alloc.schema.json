@@ -1,0 +1,256 @@
+{
+  "$id": "EFvnoHDY7I-kaBBeKlbDbkjG4BaI0nKLGadxBdjMGgSQ",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TN Allocation Credential",
+  "description": "TN Allocation credential proves an enterpise has the right to use(RTU) specific telephone numbers, either directly from a regulator or through a telephone number provider.",
+  "type": "object",
+  "credentialType": "TNAllocationCredential",
+  "version": "1.0.0",
+  "required": [
+    "v",
+    "d",
+    "u",
+    "i",
+    "ri",
+    "s",
+    "a",
+    "r"
+  ],
+  "properties": {
+    "v": {
+      "description": "Version",
+      "type": "string"
+    },
+    "d": {
+      "description": "Credential SAID",
+      "type": "string"
+    },
+    "u": {
+      "description": "A salty nonce",
+      "type": "string"
+    },
+    "i": {
+      "description": "Issuer AID",
+      "type": "string"
+    },
+    "ri": {
+      "description": "Credential status registry",
+      "type": "string"
+    },
+    "s": {
+      "description": "Schema SAID",
+      "type": "string"
+    },
+    "a": {
+      "oneOf": [
+        {
+          "description": "Attributes block SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EGgYbtyoE0qGfYfZWZ1lAd-UoWu_2OjqMcms_75s4atv",
+          "description": "Attributes block",
+          "type": "object",
+          "required": [
+            "d",
+            "u",
+            "i",
+            "dt",
+            "numbers",
+            "channel",
+            "doNotOriginate"
+          ],
+          "properties": {
+            "d": {
+              "description": "Attributes block SAID",
+              "type": "string"
+            },
+            "u": {
+              "description": "A salty nonce",
+              "type": "string"
+            },
+            "i": {
+              "description": "Recipient Brand AID",
+              "type": "string"
+            },
+            "dt": {
+              "description": "Issuance date time",
+              "format": "date-time",
+              "type": "string"
+            },
+            "numbers": {
+              "description": "Telephone Numbers allocated to enterpise either as a list of specific numbers or a range of numbers",
+              "type": "object",
+              "properties": {
+                "tn": {
+                  "description": "Specific telephone numbers list",
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "description": "Telephone number in E164 format",
+                    "pattern": "[+][0-9]{7,15}"
+                  }
+                },
+                "rangeStart": {
+                  "description": "Range start number in E164 format, inclusive of this number. If provided, rangeEnd must also be provided",
+                  "type": "string"
+                },
+                "rangeEnd": {
+                  "description": "Range end number in E164 format, inclusive of this number. If provided, rangeStart must also be provided",
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "channel": {
+              "description": "Communication channel for which number will be used (e.g., sms, voice, etc.)",
+              "type": "string",
+              "pattern": "sms|voice"
+            },
+            "doNotOriginate": {
+              "description": "True or False based on condition if telephone number is a 'do not originate' number (inbound only)",
+              "type": "boolean"
+            },
+            "startDate": {
+              "description": "Start date",
+              "format": "date-time",
+              "type": "string"
+            },
+            "endDate": {
+              "description": "Expiration date",
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "e": {
+      "oneOf": [
+        {
+          "description": "Edges block SAID",
+          "type": "string"
+        },
+        {
+          "$id": "ED-ETRO9FOiEgvK8P66Rut-Cun-0aZ5FbgTlngPf9yVT",
+          "description": "Edges block",
+          "type": "object",
+          "properties": {
+            "d": {
+              "description": "Edges block SAID",
+              "type": "string"
+            },
+            "tnalloc": {
+              "description": "Chain to a TN allocation (RTU) credential that proves with a valid chain back to the regulator",
+              "type": "object",
+              "required": [
+                "n",
+                "s",
+                "o"
+              ],
+              "properties": {
+                "n": {
+                  "description": "SAID of TN allocation credential",
+                  "type": "string"
+                },
+                "s": {
+                  "description": "SAID of TN allocation schema",
+                  "type": "string"
+                },
+                "o": {
+                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "type": "string",
+                  "const": "I2I"
+                }
+              },
+              "additionalProperties": false
+            },
+            "issuer": {
+              "description": "Edge credential that proves the identity of the issuer.",
+              "type": "object",
+              "properties": {
+                "n": {
+                  "description": "SAID of a credential that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "s": {
+                  "description": "SAID of credential schema that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "o": {
+                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "type": "string",
+                  "const": "NI2I"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "n",
+                "s",
+                "o"
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "d",
+            "tnalloc"
+          ]
+        }
+      ]
+    },
+    "r": {
+      "oneOf": [
+        {
+          "description": "Rules section SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EHIN5MfIpe7_by-Rl7oVK6dDg1o096wds_gwtcsZInzj",
+          "description": "Rules detail",
+          "type": "object",
+          "required": [
+            "d",
+            "perBrand"
+          ],
+          "properties": {
+            "d": {
+              "description": "Rule section SAID",
+              "type": "string"
+            },
+            "perBrand": {
+              "description": "perBrand Disclaimer",
+              "oneOf": [
+                {
+                  "description": "simple compact rule form",
+                  "type": "string",
+                  "const": "Issuees agree not to share the phone number with other brands which may have a common owner but which will make it difficult to consistently identify the originator of traffic."
+                },
+                {
+                  "description": "Rule detail",
+                  "type": "object",
+                  "properties": {
+                    "l": {
+                      "description": "Associated legal language",
+                      "type": "string",
+                      "const": "Issuees agree not to share the phone number with other brands which may have a common owner but which will make it difficult to consistently identify the originator of traffic."
+                    }
+                  },
+                  "required": [
+                    "l"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "additionalProperties": false
+}

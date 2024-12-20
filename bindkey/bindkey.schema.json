@@ -1,11 +1,11 @@
 {
-  "$id": "EPQ0xcsL__xZh7WiwMp_EVlKhieA8b_uFV87SFy44vzd",
+  "$id": "EFvHYHX0cUx9sdjxZOr9fpPcQKdzRNFH42D8R29p7lAH",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Bind Key Credential",
+  "title": "Bind Key",
   "description": "Declare that issuer uses a cryptographic key that's not directly managed by the KEL (e.g., to conform to an external standard). Issuing this ACDC makes key binding provable and revokable.",
   "$comment": "These credentials are intentionally public and untargeted. Hence they lack an issuee and don't support compaction.",
   "type": "object",
-  "credentialType": "BindKeyCredential",
+  "credentialType": "BindKeyAttestation",
   "version": "1.0.0",
   "required": [
     "v",
@@ -29,7 +29,7 @@
       "type": "string"
     },
     "ri": {
-      "description": "Registry for issuer's credential status",
+      "description": "Registry for issuer's assertion status",
       "type": "string"
     },
     "s": {

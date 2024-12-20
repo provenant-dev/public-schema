@@ -1,5 +1,5 @@
 {
-  "$id": "EEtgMWj7npUb2PiUbSphpk1pcYYHAHv9VSNuBvc_FIrm",
+  "$id": "EPhWFgeOy8g7yRy-Xtyvbdieqvl_3YVXNHMgTEZuJOWh",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "AI coder license",
   "description": "Certify that a software developer is committed to and capable of using AI coding tools with appropriate guard rails, according to the governance in the rules section.",
@@ -104,7 +104,7 @@
           "type": "string"
         },
         {
-          "$id": "EEeFk_8d4ZzVDIX_l-EOZRjW0h_RMiTCbnhQ76oi77oz",
+          "$id": "EP9TkdxfBqH0N1wW5onc2N71TAEfBmUMy3qaBSVq5efL",
           "description": "Edges detail",
           "type": "object",
           "required": [
@@ -142,7 +142,7 @@
               ]
             },
             "coca": {
-              "description": "Chain to a code of conduct attestation(coca) credential by the issuee",
+              "description": "Chain to a code of conduct attestation (coca) by the issuee",
               "type": "object",
               "required": [
                 "n",
@@ -150,13 +150,13 @@
               ],
               "properties": {
                 "n": {
-                  "description": "SAID of AI user code of conduct attestation(coca) credential",
+                  "description": "SAID of AI user code of conduct attestation (coca)",
                   "type": "string"
                 },
                 "s": {
                   "description": "SAID of AI user code of conduct attestation schema",
                   "type": "string",
-                  "const": "EH517Qc7ulPGL0yBJD8VEtw6nD3qmmtrzr9kAKEJbPU5"
+                  "const": "EBCnd7qk82wLBOgFukdmsdkksAuPpmzt5-eg9YKWWP3j"
                 }
               },
               "additionalProperties": false

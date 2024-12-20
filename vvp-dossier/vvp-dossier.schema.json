@@ -1,5 +1,5 @@
 {
-  "$id": "ENqfM_0nrtWIC9DZxBRm4xjXMhqA8_epmbA2drUr2XNJ",
+  "$id": "ECSETW93B53soVrfn6r_Fry4AXGQwP8NvPBAPKpw8DSS",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Verifiable Voice Dossier Credential",
   "description": "Attestation credential, issued by the accountable party, that assembles all of the evidence required as per the Verifiable Voice Protocol",
@@ -37,7 +37,7 @@
       "type": "string"
     },
     "a": {
-      "$id": "EEMVwHco23OmIGm4k3czzLZqePejuZH9Mr11kwNnMMX3",
+      "$id": "ELa-Y09YY2d1iYZxpcnSePo69Jc3qKWmVRuEZ6aUeDRX",
       "description": "Attributes block",
       "type": "object",
       "properties": {
@@ -51,7 +51,7 @@
           "type": "string"
         },
         "LEI": {
-          "description": "LEI of the Accountavble Party",
+          "description": "LEI of the Accountable Party",
           "type": "string",
           "format": "ISO 17442"
         }
@@ -69,7 +69,7 @@
           "type": "string"
         },
         {
-          "$id": "EIPJC8S5xriUoicufBXaV6KIGHBe_zzbB3d0ZhpjxfUi",
+          "$id": "EJ2V_ENmBGhizBL5_3YjSiG6FRMHnkrrwjYwQenvPm2l",
           "description": "Edges detail",
           "type": "object",
           "required": [
@@ -85,7 +85,7 @@
               "type": "string"
             },
             "vetting": {
-              "description": "Chain to a credential proves the identity of the accountable party as a legal entity",
+              "description": "Chain to a credential proves the identity of the accountable party",
               "type": "object",
               "required": [
                 "n",
@@ -98,9 +98,8 @@
                   "type": "string"
                 },
                 "s": {
-                  "description": "SAID of the legal entity vlei schema",
-                  "type": "string",
-                  "const": "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY"
+                  "description": "SAID of the vetting schema",
+                  "type": "string"
                 },
                 "o": {
                   "description": "Operator indicating issuer AID of this ACDC MAY or MAY not be the Issuee AID of this node.",
@@ -126,7 +125,7 @@
                 "s": {
                   "description": "SAID of allocator auth schema",
                   "type": "string",
-                  "const": "EAb4sF9w3CrkrcFxbKWcR0QSftF74FKUN6wHrjBTNuRx"
+                  "const": "ECnqJbobR55khlcL0xC5kpz3XMLVxKiDzQQQdgaJJTUG"
                 },
                 "o": {
                   "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
@@ -152,7 +151,7 @@
                 "s": {
                   "description": "SAID of TN allocation schema",
                   "type": "string",
-                  "const": "EGEebb1pVRcZ6OXHlYitl5DNh-LDrMWPwRtstiKiDhRy"
+                  "const": "EFvnoHDY7I-kaBBeKlbDbkjG4BaI0nKLGadxBdjMGgSQ"
                 },
                 "o": {
                   "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
@@ -178,12 +177,50 @@
                 "s": {
                   "description": "SAID of delegated signer schema",
                   "type": "string",
-                  "const": "EAb4sF9w3CrkrcFxbKWcR0QSftF74FKUN6wHrjBTNuRx"
+                  "const": "ECnqJbobR55khlcL0xC5kpz3XMLVxKiDzQQQdgaJJTUG"
                 },
                 "o": {
                   "description": "Operator indicating issuer AID of this ACDC MAY or MAY not be the Issuee AID of this node.",
                   "type": "string",
                   "const": "NI2I"
+                }
+              },
+              "additionalProperties": false
+            },
+            "bownr": {
+              "description": "Chain to a brand ownership credential that proves a company has the legal right to use specific brand names, logos, and related brand assets.",
+              "type": "object",
+              "required": [
+                "n",
+                "s"
+              ],
+              "properties": {
+                "n": {
+                  "description": "SAID of brand ownership credential",
+                  "type": "string"
+                },
+                "s": {
+                  "description": "SAID of brand ownership schema",
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "bproxy": {
+              "description": "Chain to a brand proxy credential that authorizes a call center to represent another company's brand when making calls on their behalf.",
+              "type": "object",
+              "required": [
+                "n",
+                "s"
+              ],
+              "properties": {
+                "n": {
+                  "description": "SAID of brand proxy credential",
+                  "type": "string"
+                },
+                "s": {
+                  "description": "SAID of brand proxy schema",
+                  "type": "string"
                 }
               },
               "additionalProperties": false

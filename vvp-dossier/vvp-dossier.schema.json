@@ -1,5 +1,5 @@
 {
-  "$id": "ECSETW93B53soVrfn6r_Fry4AXGQwP8NvPBAPKpw8DSS",
+  "$id": "ENcXlEByTc3u3U4f54fNBHVksnloUxSbVfCd6bAMzNGX",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Verifiable Voice Dossier Credential",
   "description": "Attestation credential, issued by the accountable party, that assembles all of the evidence required as per the Verifiable Voice Protocol",
@@ -37,7 +37,7 @@
       "type": "string"
     },
     "a": {
-      "$id": "ELa-Y09YY2d1iYZxpcnSePo69Jc3qKWmVRuEZ6aUeDRX",
+      "$id": "EAKHdisi7O0DGT72QeXchIrJbHPFggtscfrC2DXms9gU",
       "description": "Attributes block",
       "type": "object",
       "properties": {
@@ -49,11 +49,6 @@
           "description": "Issuance datetime, ISO-8601 datetime string",
           "format": "date-time",
           "type": "string"
-        },
-        "LEI": {
-          "description": "LEI of the Accountable Party",
-          "type": "string",
-          "format": "ISO 17442"
         }
       },
       "additionalProperties": false,

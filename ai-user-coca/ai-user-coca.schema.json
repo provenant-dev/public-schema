@@ -1,5 +1,5 @@
 {
-  "$id": "EIoUnBbXoUX218CXvDQ0rS8K4lohyYf3cVWD1PavyKZK",
+  "$id": "EBCnd7qk82wLBOgFukdmsdkksAuPpmzt5-eg9YKWWP3j",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "AI user code of conduct attestation",
   "description": "Attest that the issuer is committed to follow a particular code of conduct with respect to their personal use of AI.",
@@ -20,7 +20,7 @@
       "type": "string"
     },
     "d": {
-      "description": "SAID of the assertion",
+      "description": "Credential SAID",
       "type": "string"
     },
     "i": {
@@ -32,11 +32,11 @@
       "type": "string"
     },
     "s": {
-      "description": "SAID of this schema",
+      "description": "Schema SAID",
       "type": "string"
     },
     "a": {
-      "$id": "EI8jQ4S-xTZQAS_NzUYx1B90ijJWSCSWsWlspZ5WVQ9P",
+      "$id": "EAW5GnX6EEoSPYkOQPlF-uLs-IKPTaI1rkK1fHy0zwAw",
       "description": "Attributes block",
       "type": "object",
       "required": [
@@ -55,6 +55,11 @@
           "type": "string"
         },
         "dt": {
+          "description": "Issuance datetime, ISO-8601 datetime string",
+          "type": "string",
+          "format": "date-time"
+        },
+        "effective_dt": {
           "description": "Time at which the award becomes public. This may be before or after the time of issuance.",
           "type": "string",
           "format": "date-time"

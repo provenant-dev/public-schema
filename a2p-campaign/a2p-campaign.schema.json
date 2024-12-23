@@ -1,5 +1,5 @@
 {
-  "$id": "EG8RjlYnHI5Ygbaud1m2Ja9x_EdDEJAhNaWP599aMdZo",
+  "$id": "EK3YbEFp3zUuHPsGrLRzwr6zWBXcOFJNTTBqezXd_2yf",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "A2P Campaign Credential",
   "description": "A credential issued to a brand for A2P 10DLC messaging campaigns",
@@ -9,11 +9,13 @@
   "required": [
     "v",
     "d",
+    "u",
     "i",
     "ri",
     "s",
     "a",
-    "e"
+    "e",
+    "r"
   ],
   "properties": {
     "v": {
@@ -22,6 +24,10 @@
     },
     "d": {
       "description": "Credential SAID",
+      "type": "string"
+    },
+    "u": {
+      "description": "A salty nonce",
       "type": "string"
     },
     "i": {
@@ -43,7 +49,7 @@
           "type": "string"
         },
         {
-          "$id": "EIGZvBlg6Hwwq43XuS3RMivHXnM9FNqTNi5qf_Kph_rn",
+          "$id": "ENaGw3QznDw6OuygdexMzSmC-jVGoxSkrdJd76xthUqL",
           "description": "Attributes block",
           "type": "object",
           "properties": {
@@ -51,12 +57,16 @@
               "description": "Attributes block SAID",
               "type": "string"
             },
+            "u": {
+              "description": "A salty nonce",
+              "type": "string"
+            },
             "i": {
               "description": "AID of issuee (org that will send messages in this campaign)",
               "type": "string"
             },
             "dt": {
-              "description": "Issuance date time",
+              "description": "Issuance datetime, ISO-8601 datetime string",
               "type": "string",
               "format": "date-time"
             },
@@ -198,10 +208,79 @@
       ]
     },
     "r": {
-      "description": "SAID of rules block",
-      "type": "string",
-      "const": "EMS9_VeDinkCdVlMVJKwbeBrsjnVj8VO1OS0walgg05X",
-      "format": "cesr"
+      "oneOf": [
+        {
+          "description": "Rules section SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EIR5KMj9Z1Qj6gxn8O_93boQs4ApN1RPX3blcz6WzEB2",
+          "description": "Rules detail",
+          "type": "object",
+          "properties": {
+            "d": {
+              "description": "Rule section SAID",
+              "type": "string"
+            },
+            "brandPrivacy": {
+              "description": "Brand Privacy Disclaimer",
+              "oneOf": [
+                {
+                  "description": "simple compact rule form",
+                  "type": "string",
+                  "const": "Verifiers agree that, if they learn the identity of a brand as a sender of SMS messages by verifying this credential, they will not use this information to infer or model relationships between the brand and service providers."
+                },
+                {
+                  "description": "Rule detail",
+                  "type": "object",
+                  "properties": {
+                    "l": {
+                      "description": "Associated legal language",
+                      "type": "string",
+                      "const": "Verifiers agree that, if they learn the identity of a brand as a sender of SMS messages by verifying this credential, they will not use this information to infer or model relationships between the brand and service providers."
+                    }
+                  },
+                  "required": [
+                    "l"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "nonrepudiableBySig": {
+              "description": "Non-repudiable Disclaimer",
+              "oneOf": [
+                {
+                  "description": "simple compact rule form",
+                  "type": "string",
+                  "const": "Senders of SMS messages agree that their reputation as a sender may be non-repudiably associated with messages that cite this campaign, exactly and only to the extent that the messages are signed by an entity cryptographically authorized to represent the brand."
+                },
+                {
+                  "description": "rule detail",
+                  "type": "object",
+                  "properties": {
+                    "l": {
+                      "description": "Associated legal language",
+                      "type": "string",
+                      "const": "Senders of SMS messages agree that their reputation as a sender may be non-repudiably associated with messages that cite this campaign, exactly and only to the extent that the messages are signed by an entity cryptographically authorized to represent the brand."
+                    }
+                  },
+                  "required": [
+                    "l"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "d",
+            "brandPrivacy",
+            "nonrepudiableBySig"
+          ]
+        }
+      ]
     }
   },
   "additionalProperties": false

@@ -1,18 +1,18 @@
 {
-  "$id": "EAM1O26I6UlSQEFN58k_hNtWwimE5GEeVDO-FvKbq1tf",
+  "$id": "EG68irpfVX667KCLwG85Cn1Mp3sCe38ftARyQJrxP2kF",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "proof-of-control",
+  "title": "Proof-of-Control Credential",
   "description": "Assert the issuee has demonstrated to the issuer the ability to control a digital resource like a web site, social media handle, or email address.",
   "type": "object",
-  "credentialType": "proofOfControlCredential",
+  "credentialType": "ProofOfControlCredential",
   "version": "1.0.0",
   "required": [
+    "v",
     "d",
     "i",
     "ri",
     "s",
-    "a",
-    "r"
+    "a"
   ],
   "properties": {
     "v": {
@@ -23,8 +23,12 @@
       "description": "SAID of the credential",
       "type": "string"
     },
+    "u": {
+      "description": "A salty nonce",
+      "type": "string"
+    },
     "i": {
-      "description": "Identifier of the issuer",
+      "description": "AID of the issuer",
       "type": "string"
     },
     "ri": {
@@ -42,7 +46,7 @@
           "type": "string"
         },
         {
-          "$id": "EI_szomhnwfZ5WyA_q9Me49UEa_Rmi11zoJKQ4IqLRfc",
+          "$id": "EJCRA-bCyM960Md5eEb5EISCFJsavO11K6iqUVAVhlcO",
           "description": "Attributes block",
           "type": "object",
           "required": [
@@ -50,7 +54,7 @@
             "u",
             "i",
             "res",
-            "dt",
+            "assertDate",
             "minutes"
           ],
           "properties": {
@@ -65,6 +69,11 @@
             "i": {
               "description": "Identifier of issuee",
               "type": "string"
+            },
+            "dt": {
+              "description": "Issuance datetime, ISO-8601 datetime string",
+              "type": "string",
+              "format": "date-time"
             },
             "res": {
               "description": "Resource that issuee controls",
@@ -85,7 +94,7 @@
               "type": "integer",
               "exclusiveMin": 0
             },
-            "dt": {
+            "assertDate": {
               "description": "Time as of which the issuer asserts the control of the resource to be fresh. This may be before the time of issuance.",
               "format": "date-time",
               "type": "string"
@@ -95,10 +104,27 @@
       ]
     },
     "r": {
-      "description": "SAID of rules block",
-      "type": "string",
-      "const": "EDzA-H5YR2oc0sEUKzy_one8-jY2dxdOfjtT8PJJQds8",
-      "format": "cesr"
+      "oneOf": [
+        {
+          "description": "Rules section SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EGFgHT7Xrzy9YLdQNXnNTYVBu9_Q0O7K5A2VCWjg93t3",
+          "description": "Rules detail",
+          "type": "object",
+          "properties": {
+            "d": {
+              "description": "Rule section SAID",
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "d"
+          ]
+        }
+      ]
     }
   },
   "additionalProperties": false

@@ -1,11 +1,19 @@
 {
-  "$id": "ENDcMNUZjag27T_GTxiCmB2kYstg_kqipqz39906E_FD",
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Data Attestation Credential",
-  "description": "Data attestation credential enables verifiable attestation of the data(cryptographic digest) by the Issuer",
+  "$id": "EJxFPpyDRV-W6O2Vtjdy2K90ltWmQK8l1jePw5YOo_Ft",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Data Attestation",
+  "description": "Data attestation enables verifiable attestation of the data(cryptographic digest) by the Issuer",
   "type": "object",
-  "credentialType": "DataAttestationCredential",
+  "credentialType": "DataAttestation",
   "version": "1.0.0",
+  "required": [
+    "v",
+    "d",
+    "i",
+    "ri",
+    "s",
+    "a"
+  ],
   "properties": {
     "v": {
       "description": "Version",
@@ -24,11 +32,11 @@
       "type": "string"
     },
     "s": {
-      "description": "schema SAID",
+      "description": "Schema SAID",
       "type": "string"
     },
     "a": {
-      "$id": "EFhlO29-R6YzNrnJtBQcm3-qb-YgkVolx166NSCT-jJ7",
+      "$id": "EI8qxQC1_PL25lTLRLwkrijM_VJofc1zsLPjvjqNyuls",
       "description": "Attributes block",
       "type": "object",
       "properties": {
@@ -37,33 +45,71 @@
           "type": "string"
         },
         "dt": {
-          "description": "Issuance date time",
+          "description": "Issuance datetime, ISO-8601 datetime string",
           "format": "date-time",
           "type": "string"
         },
         "digest": {
           "type": "string",
-          "description": "Cryptographic digest of the data."
-        },
-        "digestAlgo": {
-          "type": "string",
-          "description": "Algorithm used to generate digest of the data in digest field. Examples are SHA-256, SHA-512, MD5, BLAKE3, BLAKE2b, etc."
+          "description": "CESR-encoded digest of the data."
         }
       },
       "additionalProperties": false,
       "required": [
         "d",
         "dt",
-        "digest",
-        "digestAlgo"
+        "digest"
+      ]
+    },
+    "e": {
+      "oneOf": [
+        {
+          "description": "Edges block SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EMEXQmfeEwDtyTVrF1EtRQWJvM-Wnd6kNzocJA-dbHEA",
+          "description": "Edges detail",
+          "type": "object",
+          "required": [
+            "d",
+            "issuer"
+          ],
+          "properties": {
+            "d": {
+              "description": "Edges section SAID",
+              "type": "string"
+            },
+            "issuer": {
+              "description": "Edge credential that proves the identity of the issuer.",
+              "type": "object",
+              "properties": {
+                "n": {
+                  "description": "SAID of a credential that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "s": {
+                  "description": "SAID of credential schema that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "o": {
+                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "type": "string",
+                  "const": "I2I"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "n",
+                "s",
+                "o"
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
       ]
     }
   },
-  "additionalProperties": false,
-  "required": [
-    "i",
-    "ri",
-    "s",
-    "d"
-  ]
+  "additionalProperties": false
 }

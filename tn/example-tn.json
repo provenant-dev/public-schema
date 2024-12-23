@@ -1,25 +1,33 @@
 {
-  "d": "EHWEdU7GMOOQZlhjtGaV_5689WmfWIu4C5gc9Iy7Tw2H",
-  "v": "ACDC10JSON00011c_",
-  "s": "EKUPqIZ1irc7FjYBMYMvELPfZ-4qSQyLjOrkP0RWB9Wh",
-  "i": "Ez6QKIKLzrGqpq4v9Bj908pQanoRKwOgBXjPW-w-P_8Q",
-  "ri": "EiySMSMLRrpt9AD_b34VEtUD6tDO0yaGoWCwB1iyJOgY",
+  "v": "ACDC10JSON00040c_",
+  "d": "EHhWLa-wy3agU2XrBQva9Aa_fn1quykH0g8VbEWLg4Oz",
+  "u": "0AD5Y0r_UJ3OaDC9ww7UcwMX",
+  "i": "EPf-n0htLTtNESESLTt4BuE-jadJtkomCNxlzos9pMOV",
+  "ri": "ENcuoFsOMgygryMcsWpMEoAwY9gzJGLmApjC6nVeFE9m",
+  "s": "EGEebb1pVRcZ6OXHlYitl5DNh-LDrMWPwRtstiKiDhRy",
   "a": {
-    "d": "EMICXupK5CUxj5QuItQ8GV-QNV7lWQZpaRqUxnNeU_0H",
-    "i": "EK2r6EnDXre2pecTBO8s99j4OtNaaDIhVyr7uGugDhmp",
-    "dt": "2024-11-01T14:23:16+00:00",
-    "numbers": ["+18013612446"],
-    "channel": "sms",
+    "d": "EPCnmKoZ8Sf_9QykiwXih2qjFveHcrhP0BVKSWd6ajpC",
+    "u": "0AB2S1oIA7MZcGgYMPnsQeCy",
+    "i": "EMqWlrNiLIyzsCebjb7mrGtn6RHNE359Y4iJSAmVMWdW",
+    "dt": "2024-12-17T11:22:07.958000+00:00",
+    "numbers": {
+      "rangeStart": "+1801361002",
+      "rangeEnd": "+1801361009"
+    },
+    "channel": "voice",
     "doNotOriginate": false,
-    "startDate": "2024-11-13T20:20:39+00:00",
-    "endDate": "2024-12-13T20:20:39+00:00"
+    "startDate": "2024-12-25T20:20:39+00:00",
+    "endDate": "2024-11-29T20:20:39+00:00"
   },
-  "r": "EJFhpp0uU7D7PKooYM5QIO1hhPKTjHE18sR4Dn0GFscR",
   "e": {
-    "d": "EOS9BUu6iHS6QaTADgHWcWG36tsKYY3g_z3nCkrnbBMr",
+    "d": "ELgUHQasEuGtntBtXLE7zlxFYTR5vRi8M3GMgqHxWVYN",
     "le": {
-      "n": "EOy_g1RrcQW_uh63l9SH7TGflNefu3Pe2C3asw_H2CFv",
+      "n": "EJDQgxYJJR_4AZwcjrdwQASgVwdYb0VfQskrFkGnVbUw",
       "s": "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY"
     }
+  },
+  "r": {
+    "d": "EJFhpp0uU7D7PKooYM5QIO1hhPKTjHE18sR4Dn0GFscR",
+    "perBrand": "Issuees agree not to share the phone number with other brands which may have a common owner but which will make it difficult to consistently identify the originator of traffic."
   }
 }

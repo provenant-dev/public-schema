@@ -1,10 +1,10 @@
 {
-  "$id": "EGCnwCE84J-av07S9inGsqxFBgy5Sy6JXtkxDlbn318F",
+  "$id": "EBxJHMk6MOEUogB6A1rP5x9te7DscPfxFfUGJCkq1Lq5",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Award",
+  "title": "Award Credential",
   "description": "Confer an award on a staff member or other associated person or group.",
   "type": "object",
-  "credentialType": "Award",
+  "credentialType": "AwardCredential",
   "version": "1.0.0",
   "required": [
     "v",
@@ -23,8 +23,12 @@
       "description": "SAID of the credential",
       "type": "string"
     },
+    "u": {
+      "description": "A salty nonce",
+      "type": "string"
+    },
     "i": {
-      "description": "Identifier of the issuer (the one giving the award)",
+      "description": "AID of the issuer(the one giving the award)",
       "type": "string"
     },
     "ri": {
@@ -42,15 +46,14 @@
           "type": "string"
         },
         {
-          "$id": "EO0dng2Crwz6k7CBoof2zXfWkQTYc_HGkBi5K3JRNgZt",
+          "$id": "EG-B0gHQdMUgacWfHmqLWE4ztyMP4qbRY_W0shDy5vTP",
           "description": "Attributes block",
           "type": "object",
           "required": [
             "d",
-            "u",
             "i",
             "dt",
-            "issuer_name",
+            "effective_dt",
             "award_name"
           ],
           "properties": {
@@ -67,6 +70,11 @@
               "type": "string"
             },
             "dt": {
+              "description": "Issuance datetime, ISO-8601 datetime string",
+              "type": "string",
+              "format": "date-time"
+            },
+            "effective_dt": {
               "description": "Time at which the award becomes public. This may be before or after the time of issuance.",
               "type": "string",
               "format": "date-time"
@@ -98,8 +106,7 @@
                   "description": "details block",
                   "type": "object",
                   "required": [
-                    "d",
-                    "u"
+                    "d"
                   ],
                   "properties": {
                     "d": {
@@ -139,12 +146,11 @@
           "type": "string"
         },
         {
-          "$id": "ELSumn6IoIYKIvHRwsV4kVjfpcTW0XhOU0Z7iQ_WIeZs",
-          "description": "Edges block",
+          "$id": "EKk5ejftEjNwjRhw2lYQAwKwvRWapqCNEOx3gUR7WW7n",
+          "description": "Edges detail",
           "type": "object",
           "required": [
             "d",
-            "u",
             "issuer"
           ],
           "properties": {
@@ -152,13 +158,30 @@
               "description": "Edges block SAID",
               "type": "string"
             },
-            "u": {
-              "description": "A salty nonce",
-              "type": "string"
-            },
             "issuer": {
-              "description": "SAID of a credential that proves the identity of the issuer, if chaining is desired.",
-              "type": "string"
+              "description": "Edge credential that proves the identity of the issuer.",
+              "type": "object",
+              "properties": {
+                "n": {
+                  "description": "SAID of a credential that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "s": {
+                  "description": "SAID of credential schema that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "o": {
+                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "type": "string",
+                  "const": "I2I"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "n",
+                "s",
+                "o"
+              ]
             }
           },
           "additionalProperties": false
@@ -166,8 +189,27 @@
       ]
     },
     "r": {
-      "description": "SAID of rules",
-      "type": "string"
+      "oneOf": [
+        {
+          "description": "Rules section SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EGFgHT7Xrzy9YLdQNXnNTYVBu9_Q0O7K5A2VCWjg93t3",
+          "description": "Rules detail",
+          "type": "object",
+          "properties": {
+            "d": {
+              "description": "Rule section SAID",
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "d"
+          ]
+        }
+      ]
     }
   },
   "additionalProperties": false

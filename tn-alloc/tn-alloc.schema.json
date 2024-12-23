@@ -1,10 +1,10 @@
 {
-  "$id": "EGEebb1pVRcZ6OXHlYitl5DNh-LDrMWPwRtstiKiDhRy",
+  "$id": "EFvnoHDY7I-kaBBeKlbDbkjG4BaI0nKLGadxBdjMGgSQ",
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Telephone Number Credential",
-  "description": "Telephone Number Credential issued to a Brand for A2P 10DLC messaging campaigns",
+  "title": "TN Allocation Credential",
+  "description": "TN Allocation credential proves an enterpise has the right to use(RTU) specific telephone numbers, either directly from a regulator or through a telephone number provider.",
   "type": "object",
-  "credentialType": "TelephoneNumberCredential",
+  "credentialType": "TNAllocationCredential",
   "version": "1.0.0",
   "required": [
     "v",
@@ -14,7 +14,6 @@
     "ri",
     "s",
     "a",
-    "e",
     "r"
   ],
   "properties": {
@@ -49,7 +48,7 @@
           "type": "string"
         },
         {
-          "$id": "EPBlIaGwdiP_PaMZHbIOUPtJ20qX4LaHbIzDZT4KAWtt",
+          "$id": "EGgYbtyoE0qGfYfZWZ1lAd-UoWu_2OjqMcms_75s4atv",
           "description": "Attributes block",
           "type": "object",
           "required": [
@@ -59,9 +58,7 @@
             "dt",
             "numbers",
             "channel",
-            "doNotOriginate",
-            "startDate",
-            "endDate"
+            "doNotOriginate"
           ],
           "properties": {
             "d": {
@@ -82,7 +79,7 @@
               "type": "string"
             },
             "numbers": {
-              "description": "Telephone Numbers allocated to brand either as a list of specific numbers or a range of numbers",
+              "description": "Telephone Numbers allocated to enterpise either as a list of specific numbers or a range of numbers",
               "type": "object",
               "properties": {
                 "tn": {
@@ -138,7 +135,7 @@
           "type": "string"
         },
         {
-          "$id": "EJrEovSBvm4odgfVI9zldtlju8_lD2m1gDiryDqvB8Lt",
+          "$id": "ED-ETRO9FOiEgvK8P66Rut-Cun-0aZ5FbgTlngPf9yVT",
           "description": "Edges block",
           "type": "object",
           "properties": {
@@ -146,31 +143,61 @@
               "description": "Edges block SAID",
               "type": "string"
             },
-            "le": {
-              "description": "Chain to legal entity vLEI credential",
+            "tnalloc": {
+              "description": "Chain to a TN allocation (RTU) credential that proves with a valid chain back to the regulator",
               "type": "object",
+              "required": [
+                "n",
+                "s",
+                "o"
+              ],
               "properties": {
                 "n": {
-                  "description": "SAID of Legal Entity vLEI Credential issued by a Qualified vLEI issuer to a Legal Entity",
+                  "description": "SAID of TN allocation credential",
                   "type": "string"
                 },
                 "s": {
-                  "description": "SAID of Legal Entity vLEI Credential schema",
+                  "description": "SAID of TN allocation schema",
+                  "type": "string"
+                },
+                "o": {
+                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
                   "type": "string",
-                  "const": "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY"
+                  "const": "I2I"
+                }
+              },
+              "additionalProperties": false
+            },
+            "issuer": {
+              "description": "Edge credential that proves the identity of the issuer.",
+              "type": "object",
+              "properties": {
+                "n": {
+                  "description": "SAID of a credential that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "s": {
+                  "description": "SAID of credential schema that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "o": {
+                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "type": "string",
+                  "const": "NI2I"
                 }
               },
               "additionalProperties": false,
               "required": [
                 "n",
-                "s"
+                "s",
+                "o"
               ]
             }
           },
           "additionalProperties": false,
           "required": [
             "d",
-            "le"
+            "tnalloc"
           ]
         }
       ]

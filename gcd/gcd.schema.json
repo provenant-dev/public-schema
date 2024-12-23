@@ -1,7 +1,7 @@
 {
-  "$id": "ECothfK5Uhv3uoPYbWpa9M_a6Hr14MLI0_oOYKLv-r6G",
+  "$id": "ECnqJbobR55khlcL0xC5kpz3XMLVxKiDzQQQdgaJJTUG",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "generalized cooperative delegation",
+  "title": "Generalized Cooperative Delegation Credential",
   "description": "Define the authorizations, duties, and constraints of a person who receives delegated authority.",
   "$comment": "These credentials have no edges. They can be chained by showing that the issuer's identifier is also an identifier associated with another credential of whatever type, but they do not require chaining.",
   "type": "object",
@@ -25,8 +25,12 @@
       "description": "SAID of the credential",
       "type": "string"
     },
+    "u": {
+      "description": "A salty nonce",
+      "type": "string"
+    },
     "i": {
-      "description": "Identifier of the issuer (the delegator)",
+      "description": "AID of the issuer (the delegator)",
       "type": "string"
     },
     "ri": {
@@ -44,7 +48,7 @@
           "type": "string"
         },
         {
-          "$id": "EC-tNC3OacCrwl3uPGj1ZVhOV3iP3j8FTLXko0MExMz4",
+          "$id": "EDPsonS8o4ODYrQtSxYmjBkfSMRDTiHS1xcVfDDpy3Gd",
           "description": "Attributes block",
           "type": "object",
           "required": [
@@ -64,6 +68,11 @@
             "i": {
               "description": "AID of delegate, as it appears in delegator's interaction event",
               "type": "string"
+            },
+            "dt": {
+              "description": "Issuance datetime, ISO-8601 datetime string",
+              "type": "string",
+              "format": "date-time"
             },
             "gfw": {
               "description": "A SAID that identifies a governance framework that adds richer semantics to the role field and any custom constraints present in this credential. The SAID identifies a JSON rules block that supplements the generic rules in the rules block (r field). The location of this additional rules block is assumed to be published somewhere that stakeholders know. When defined, a verifier MUST NOT impute a delegator's approval of delegated authority to a delegate without understanding and enforcing the rules of thse extra rules.",
@@ -205,11 +214,207 @@
         }
       ]
     },
+    "e": {
+      "oneOf": [
+        {
+          "description": "Edges block SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EKk5ejftEjNwjRhw2lYQAwKwvRWapqCNEOx3gUR7WW7n",
+          "description": "Edges detail",
+          "type": "object",
+          "required": [
+            "d",
+            "issuer"
+          ],
+          "properties": {
+            "d": {
+              "description": "Edges block SAID",
+              "type": "string"
+            },
+            "issuer": {
+              "description": "Edge credential that proves the identity of the issuer.",
+              "type": "object",
+              "properties": {
+                "n": {
+                  "description": "SAID of a credential that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "s": {
+                  "description": "SAID of credential schema that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "o": {
+                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "type": "string",
+                  "const": "I2I"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "n",
+                "s",
+                "o"
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
     "r": {
-      "description": "SAID of rules block",
-      "type": "string",
-      "const": "EDzA-H5YR2oc0sEUKzy_one8-jY2dxdOfjtT8PJJQds8",
-      "format": "cesr"
+      "oneOf": [
+        {
+          "description": "Rules section SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EJvjANVzieNsFP3Tok8b-ulGkvNPXzowbzIblmROizvU",
+          "description": "Rules detail",
+          "type": "object",
+          "properties": {
+            "d": {
+              "description": "Rule section SAID",
+              "type": "string"
+            },
+            "noRoleSemanticsWithoutGfw": {
+              "description": "noRoleSemanticsWithoutGfw Disclaimer",
+              "oneOf": [
+                {
+                  "description": "simple compact rule form",
+                  "type": "string",
+                  "const": "All parties agree that the role field has no enforceable semantics unless the gfw field is also defined, and its rules formally describe what the role means."
+                },
+                {
+                  "description": "Rule detail",
+                  "type": "object",
+                  "properties": {
+                    "l": {
+                      "description": "Associated legal language",
+                      "type": "string",
+                      "const": "All parties agree that the role field has no enforceable semantics unless the gfw field is also defined, and its rules formally describe what the role means."
+                    }
+                  },
+                  "required": [
+                    "l"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "issuerNotResponsibleOutsideConstraints": {
+              "description": "issuerNotResponsibleOutsideConstraints Disclaimer",
+              "oneOf": [
+                {
+                  "description": "simple compact rule form",
+                  "type": "string",
+                  "const": "Although verifiers set their own standards for verification, verifiers and issuees/delegates agree that they cannot not use this credential as proof that delegator has the right to exercise delegated authority under conditions when the constraints say otherwise."
+                },
+                {
+                  "description": "rule detail",
+                  "type": "object",
+                  "properties": {
+                    "l": {
+                      "description": "Associated legal language",
+                      "type": "string",
+                      "const": "Although verifiers set their own standards for verification, verifiers and issuees/delegates agree that they cannot not use this credential as proof that delegator has the right to exercise delegated authority under conditions when the constraints say otherwise."
+                    }
+                  },
+                  "required": [
+                    "l"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "noConstraintSansPrefix": {
+              "description": "noConstraintSansPrefix Disclaimer",
+              "oneOf": [
+                {
+                  "description": "simple compact rule form",
+                  "type": "string",
+                  "const": "Issuers agree that constraints exist only in fields with the c_ prefix, or in the role field with gfw defined. This allows verifiers to know with confidence whether all constraints have been satisfied, even if they do not understand some custom fields that lack the prefix."
+                },
+                {
+                  "description": "Rule detail",
+                  "type": "object",
+                  "properties": {
+                    "l": {
+                      "description": "Associated legal language",
+                      "type": "string",
+                      "const": "Issuers agree that constraints exist only in fields with the c_ prefix, or in the role field with gfw defined. This allows verifiers to know with confidence whether all constraints have been satisfied, even if they do not understand some custom fields that lack the prefix."
+                    }
+                  },
+                  "required": [
+                    "l"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "useStdIfPossible": {
+              "description": "useStdIfPossible Disclaimer",
+              "oneOf": [
+                {
+                  "description": "simple compact rule form",
+                  "type": "string",
+                  "const": "Issuers agree that if it is reasonable to express a constraint in one of the pre-defined ways, they will do so, rather than expressing the constraint in a note or in a custom field. This allows verifiers to be confident that when one of the pre-defined constraints is absent, delegated authority is unconstrained in its corresponding dimension."
+                },
+                {
+                  "description": "Rule detail",
+                  "type": "object",
+                  "properties": {
+                    "l": {
+                      "description": "Associated legal language",
+                      "type": "string",
+                      "const": "Issuers agree that if it is reasonable to express a constraint in one of the pre-defined ways, they will do so, rather than expressing the constraint in a note or in a custom field. This allows verifiers to be confident that when one of the pre-defined constraints is absent, delegated authority is unconstrained in its corresponding dimension."
+                    }
+                  },
+                  "required": [
+                    "l"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "onlyDelegateHeldAuthority": {
+              "description": "onlyDelegateHeldAuthority Disclaimer",
+              "oneOf": [
+                {
+                  "description": "simple compact rule form",
+                  "type": "string",
+                  "const": "Issuers agree to only delegate authority that they reasonably believe they hold. Whether they do in fact hold that authority is still a matter for verifiers to evaluate (e.g., via edges or separate proving interactions), but this rule creates a modest accountability for data quality."
+                },
+                {
+                  "description": "Rule detail",
+                  "type": "object",
+                  "properties": {
+                    "l": {
+                      "description": "Associated legal language",
+                      "type": "string",
+                      "const": "Issuers agree to only delegate authority that they reasonably believe they hold. Whether they do in fact hold that authority is still a matter for verifiers to evaluate (e.g., via edges or separate proving interactions), but this rule creates a modest accountability for data quality."
+                    }
+                  },
+                  "required": [
+                    "l"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "d",
+            "noRoleSemanticsWithoutGfw",
+            "issuerNotResponsibleOutsideConstraints",
+            "noConstraintSansPrefix",
+            "useStdIfPossible",
+            "onlyDelegateHeldAuthority"
+          ]
+        }
+      ]
     }
   },
   "additionalProperties": true

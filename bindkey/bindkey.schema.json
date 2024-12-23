@@ -1,11 +1,11 @@
 {
-  "$id": "EAxes7ZBFHHeWsr5vlkAx-96hhlS7U-iDxt_dEytnZYI",
+  "$id": "EFvHYHX0cUx9sdjxZOr9fpPcQKdzRNFH42D8R29p7lAH",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Bind Key",
   "description": "Declare that issuer uses a cryptographic key that's not directly managed by the KEL (e.g., to conform to an external standard). Issuing this ACDC makes key binding provable and revokable.",
   "$comment": "These credentials are intentionally public and untargeted. Hence they lack an issuee and don't support compaction.",
   "type": "object",
-  "credentialType": "BindKeyCredential",
+  "credentialType": "BindKeyAttestation",
   "version": "1.0.0",
   "required": [
     "v",
@@ -29,7 +29,7 @@
       "type": "string"
     },
     "ri": {
-      "description": "registry for issuer's credential status",
+      "description": "Registry for issuer's assertion status",
       "type": "string"
     },
     "s": {
@@ -37,25 +37,34 @@
       "type": "string"
     },
     "a": {
-      "$id": "EMowr28ZIiRKdhf5HNnPuc1ecfijcwhIOwuS4NJf3kJZ",
+      "$id": "EEuuowmRpUKeaR2myHZDnMXPlVWOoSOJSbk5QWSSVlDl",
       "description": "Attributes block",
       "type": "object",
       "required": [
         "pubkey"
       ],
       "properties": {
+        "d": {
+          "description": "Attributes block SAID",
+          "type": "string"
+        },
+        "dt": {
+          "description": "Issuance datetime, ISO-8601 datetime string",
+          "type": "string",
+          "format": "date-time"
+        },
         "pubkey": {
-          "description": "public key that issuer will use",
+          "description": "Public key that issuer will use",
           "format": "cesr",
           "type": "string"
         },
         "startDate": {
-          "description": "time issuer intends key binding to start; if missing, starts on issuance",
+          "description": "Time issuer intends key binding to start; if missing, starts on issuance",
           "format": "date-time",
           "type": "string"
         },
         "stopDate": {
-          "description": "time issuer intends key binding to stop; if missing, stops only on revocation",
+          "description": "Time issuer intends key binding to stop; if missing, stops only on revocation",
           "format": "date-time",
           "type": "string"
         },

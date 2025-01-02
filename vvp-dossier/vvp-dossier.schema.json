@@ -1,5 +1,5 @@
 {
-  "$id": "ENcXlEByTc3u3U4f54fNBHVksnloUxSbVfCd6bAMzNGX",
+  "$id": "EFv3_L64_xNhOGQkaAHQTI-lzQYDvlaHcuZbuOTuDBXj",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Verifiable Voice Dossier Credential",
   "description": "Attestation credential, issued by the accountable party, that assembles all of the evidence required as per the Verifiable Voice Protocol",
@@ -64,7 +64,7 @@
           "type": "string"
         },
         {
-          "$id": "EJ2V_ENmBGhizBL5_3YjSiG6FRMHnkrrwjYwQenvPm2l",
+          "$id": "EK9UwmpRmwrWPpixxeT5zVsMvzCRFDdzbUHQjRYBbM5h",
           "description": "Edges detail",
           "type": "object",
           "required": [
@@ -105,7 +105,7 @@
               "additionalProperties": false
             },
             "alloc": {
-              "description": "Chain to a allocator credential for the committee that manages TN allocations at the accountable party legal entity",
+              "description": "Chain to allocator credential for the committee that manages TN allocations at the accountable party legal entity",
               "type": "object",
               "required": [
                 "n",
@@ -120,7 +120,7 @@
                 "s": {
                   "description": "SAID of allocator auth schema",
                   "type": "string",
-                  "const": "ECnqJbobR55khlcL0xC5kpz3XMLVxKiDzQQQdgaJJTUG"
+                  "const": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o"
                 },
                 "o": {
                   "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
@@ -172,7 +172,7 @@
                 "s": {
                   "description": "SAID of delegated signer schema",
                   "type": "string",
-                  "const": "ECnqJbobR55khlcL0xC5kpz3XMLVxKiDzQQQdgaJJTUG"
+                  "const": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o"
                 },
                 "o": {
                   "description": "Operator indicating issuer AID of this ACDC MAY or MAY not be the Issuee AID of this node.",

@@ -1,5 +1,5 @@
 {
-  "$id": "ECnqJbobR55khlcL0xC5kpz3XMLVxKiDzQQQdgaJJTUG",
+  "$id": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Generalized Cooperative Delegation Credential",
   "description": "Define the authorizations, duties, and constraints of a person who receives delegated authority.",
@@ -48,12 +48,11 @@
           "type": "string"
         },
         {
-          "$id": "EDPsonS8o4ODYrQtSxYmjBkfSMRDTiHS1xcVfDDpy3Gd",
+          "$id": "EOzZucVeu1wmEih4lVOq1hoLpXLsfzEloYTykHGgWkYG",
           "description": "Attributes block",
           "type": "object",
           "required": [
             "d",
-            "u",
             "i"
           ],
           "properties": {

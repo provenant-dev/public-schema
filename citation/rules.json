@@ -1,0 +1,7 @@
+{
+  "d": "EM6kWxMNL9BFm0ReegqQfNJLw8OZAfn2ZxcjWs4Ceifh",
+  "onlyCommitToPoint": "All parties agree that the citation, in and of itself, only commits the issuer to point at content in a way that makes the issuer and the target verifiable. Unless or until context, governance, or other actions prove intent, the citation does NOT imply that the issuer owns, endorses, or agrees with the content.",
+  "useViaEdges": "All parties acknowledge that the citation is not intended to be used in isolation. Rather, the intended semantics for the citation should be communicated via a referencing ACDC that clarifies its issuer's intention.",
+  "undefinedVerification": "All parties agree that procedures for evaluating the authenticity and/or veracity of the referenced content are beyond the scope of standard ACDC verification, and that the verifier is responsible for evaluating in whatever way satisfies their requirements.",
+  "undefinedRevocation": "Unless or until governance specifies otherwise, all parties agree that there is no defined relationship between the revocation status of a citation and that of cited data. Cited data may be disavowed or revoked by its creator without a citation being revoked, and vice versa."
+}

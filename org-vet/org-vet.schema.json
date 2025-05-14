@@ -116,7 +116,8 @@
             }
           ]
         }
-      }
+      },
+      "additionalProperties": true
     },
     "r": {
       "description": "SAID of rules block",

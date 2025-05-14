@@ -1,5 +1,5 @@
 {
-  "$id": "EPO1lEL6zV_EKOKBfeiJTOxg9HDB7s1pQI49SS2ywO7Y",
+  "$id": "EDH3Q0MW6oCcwyYw2MN39n1YfPs37o1QEv86kB-fBzmh",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Citation",
   "description": "Formally reference non-ACDC content.",
@@ -37,7 +37,7 @@
       "type": "string"
     },
     "a": {
-      "$id": "EObM8QYuG69XUlqdkhllpJXy7gmjDV0SBk0flxH0tjv5",
+      "$id": "ENgIQ-1GjPSnc3xcL-UfYDXkCTARdjLW9D3s_8xYWpyw",
       "description": "Attributes block",
       "type": "object",
       "required": [
@@ -119,10 +119,7 @@
         },
         "siz": {
           "description": "The byte count of the content. Redundant and unnecessary (but MUST be correct if present) if cargo contains actual data. When cargo is compacted or contains only a cryptographic identifier, this may help a verifier evaluate how practical it is to fetch the content.",
-          "type": "string",
-          "examples": [
-            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-          ]
+          "type": "integer"
         },
         "loc": {
           "description": "A hint about where and/or how to locate the cited content. The issuer affirms a belief that this hint was useful at the time of issuance, but makes no guarantee that it will continue to locate the referenced content thereafter. If cargo contains only a cryptographic identifier, and this field is used to fetch content, verifiers MUST compare fetched content to the identifier in cargo, and MUST accept the content as what was referenced IFF that identifier and the content match; a discrepancy in such circumstances does not invalidate the ACDC, only the usefulness of this hint. Sharing content via loc is discouraged, as it is unstable and insecure. However, it is not formally deprecated, either, since some content is impractical to share in any other way. Could be a URL; an ISBN; a UPC; a DOI number; a Bluebook legal citation; an bibliographic reference in APA, MLA, Chicago, Harvard, ACM, BibTeX, or similar format; etc.",

@@ -1,5 +1,5 @@
 {
-  "$id": "EPO1lEL6zV_EKOKBfeiJTOxg9HDB7s1pQI49SS2ywO7Y",
+  "$id": "EK0QuXKzVQ0yXaZYXRp_nuwDoxZpuH03_AP6qlZ-MV5m",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Org Vet",
   "description": "Authenticate an org with an explicit level of assurance.",
@@ -37,7 +37,7 @@
       "type": "string"
     },
     "a": {
-      "$id": "EObM8QYuG69XUlqdkhllpJXy7gmjDV0SBk0flxH0tjv5",
+      "$id": "EOt6UyUDfF4Ocw1UHAI8rhEQIHOTswqNS2sT2zaXreI6",
       "description": "Attributes block",
       "type": "object",
       "required": [

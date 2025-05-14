@@ -1,5 +1,5 @@
 {
-  "$id": "EPO1lEL6zV_EKOKBfeiJTOxg9HDB7s1pQI49SS2ywO7Y",
+  "$id": "EDH3Q0MW6oCcwyYw2MN39n1YfPs37o1QEv86kB-fBzmh",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Citation",
   "description": "Formally reference non-ACDC content.",
@@ -37,7 +37,7 @@
       "type": "string"
     },
     "a": {
-      "$id": "EObM8QYuG69XUlqdkhllpJXy7gmjDV0SBk0flxH0tjv5",
+      "$id": "ENgIQ-1GjPSnc3xcL-UfYDXkCTARdjLW9D3s_8xYWpyw",
       "description": "Attributes block",
       "type": "object",
       "required": [

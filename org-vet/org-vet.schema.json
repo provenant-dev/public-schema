@@ -58,63 +58,21 @@
           "description": "Level of assurance.",
           "type": "number"
         },
-        "des": {
-          "description": "A human-friendly description of the content.",
-          "type": "string",
-          "examples": [
-            "Photo of the left front bumper of vehicle 1 from collision: a 2018 Ford F-150 XLT"
-          ]
-        },
-        "typ": {
-          "description": "The IANA content type of the cited content. This may help a verifier decide whether and how to download and process content.",
-          "type": "string",
-          "examples": [
-            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-            "image/jpeg"
-          ]
-        },
-        "lbl": {
-          "description": "A convenient label or recommended filename for the content. This may help a verifier match the cited content to its metadata in an original context, but has no defined meaning with respect to how the ACDC is verified.",
-          "type": "string",
-          "examples": [
-            "invoice-03-25-2022.docx",
-            "Post on X on 25 July 2025"
-          ]
-        },
-        "content": {
-          "oneOf": [
-            {
-              "description": "A SAID for the content section. This is not the same as a SAID for the pure content bytes, because it treats the content as a base64url JSOn string, and includes in the hash input a salty nonce.",
-              "type": "string",
-              "examples": [
-                "EK2r6EnDXre2pecTBO8s99j4OtNaaDIhVyr7uGugDhmp"
-              ]
-            },
-            {
-              "$id": "EFSLhiSLGmL-jp0sWcoDh2_05o4tO8dKJXY10EpXPjcT",
-              "description": "content block",
-              "type": "object",
-              "required": [
-                "d",
-                "u",
-                "cargo"
-              ],
-              "properties": {
-                "d": {
-                  "description": "SAID of attributes block",
-                  "type": "string"
-                },
-                "u": {
-                  "description": "A salty nonce",
-                  "type": "string"
-                },
-                "i": {
-                  "description": "AID of issuee",
-                  "type": "string"
-                }
-              }
-            }
-          ]
+        "lids": {
+          "description": "Array of linked identifiers (LIDs) that vetter claims were able to act as references for this legal entity when the org was vetted. At least one item in this list should be globally unambigious and portable across jurisdictions (e.g., an LEI). Others may come from national registries, OpenCorporates, EDGAR, Dun & Bradstreet, a stock exchange, a LinkedIn profile, a social media handle, a domain name, etc. The nature of individual item is detectable by regex match.",
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "examples": [
+              "5493001KJTIIGC8Y1R12",
+              "gb/01234567",
+              "CHE-123.456.789",
+              "12-345-6789",
+              "acmespacetravel.biz"
+            ],
+            "type": "string"
+          }
         }
       },
       "additionalProperties": true

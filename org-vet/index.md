@@ -2,7 +2,7 @@
 
 ### Purpose
 
-This credential asserts with an explicit level of assurance the existence and attributes of an organization. It is issued to a cryptographic identifier controlled by the org, allowing the org to authenticate itself on the basis of the credential.
+This credential asserts with an explicit level of assurance the existence and attributes of an organization. It is issued to a cryptographic identifier controlled by the org, allowing the org to authenticate itself on the basis of the credential. (The [LE vLEI](https://docs.origincloud.net/start/concepts/creds/vleis) is essentially an org vet credential at LoA 3, but its schema varies slightly to express some GLEIF governance requirements.)
 
 ![suggested org vet visual](org-vet-256.png)<br>
 Suggested visual: [svg](org-vet.svg) | [256 px](org-vet-256.png) | [128 px](org-vet-128.png) | [64 px](org-vet-64.png) | [32 px](org-vet-32.png)

@@ -1,0 +1,88 @@
+{
+  "$id": "EK0QuXKzVQ0yXaZYXRp_nuwDoxZpuH03_AP6qlZ-MV5m",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Org Vet",
+  "description": "Authenticate an org with an explicit level of assurance.",
+  "type": "object",
+  "credentialType": "orgVet",
+  "version": "1.0.0",
+  "required": [
+    "v",
+    "d",
+    "i",
+    "ri",
+    "s",
+    "a",
+    "r"
+  ],
+  "properties": {
+    "v": {
+      "description": "Version string using ACDC conventions",
+      "type": "string"
+    },
+    "d": {
+      "description": "SAID of the credential",
+      "type": "string"
+    },
+    "i": {
+      "description": "Identifier of the issuer",
+      "type": "string"
+    },
+    "ri": {
+      "description": "Issuer's ACDC status registry",
+      "type": "string"
+    },
+    "s": {
+      "description": "SAID of this schema",
+      "type": "string"
+    },
+    "a": {
+      "$id": "EOt6UyUDfF4Ocw1UHAI8rhEQIHOTswqNS2sT2zaXreI6",
+      "description": "Attributes block",
+      "type": "object",
+      "required": [
+        "d",
+        "dt"
+      ],
+      "properties": {
+        "d": {
+          "description": "SAID of attributes block",
+          "type": "string"
+        },
+        "dt": {
+          "description": "Issuance date (when the ACDC was signed).",
+          "format": "date-time",
+          "type": "string"
+        },
+        "loa": {
+          "description": "Level of assurance.",
+          "type": "number"
+        },
+        "lids": {
+          "description": "Array of linked identifiers (LIDs) that vetter claims were able to act as references for this legal entity when the org was vetted. At least one item in this list should be globally unambigious and portable across jurisdictions (e.g., an LEI). Others may come from national registries, OpenCorporates, EDGAR, Dun & Bradstreet, a stock exchange, a LinkedIn profile, a social media handle, a domain name, etc. The nature of individual item is detectable by regex match.",
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "examples": [
+              "5493001KJTIIGC8Y1R12",
+              "gb/01234567",
+              "CHE-123.456.789",
+              "12-345-6789",
+              "acmespacetravel.biz"
+            ],
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "r": {
+      "description": "SAID of rules block",
+      "type": "string",
+      "const": "EM6kWxMNL9BFm0ReegqQfNJLw8OZAfn2ZxcjWs4Ceifh",
+      "format": "cesr"
+    }
+  },
+  "additionalProperties": true
+}

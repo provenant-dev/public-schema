@@ -1,4 +1,5 @@
 {
+  "EDH3Q0MW6oCcwyYw2MN39n1YfPs37o1QEv86kB-fBzmh": "citation/citation.schema.json",
   "EK3YbEFp3zUuHPsGrLRzwr6zWBXcOFJNTTBqezXd_2yf": "a2p-campaign/a2p-campaign.schema.json",
   "EBxJHMk6MOEUogB6A1rP5x9te7DscPfxFfUGJCkq1Lq5": "award/award.schema.json",
   "EBCnd7qk82wLBOgFukdmsdkksAuPpmzt5-eg9YKWWP3j": "ai-user-coca/ai-user-coca.schema.json",
@@ -7,6 +8,7 @@
   "EPhWFgeOy8g7yRy-Xtyvbdieqvl_3YVXNHMgTEZuJOWh": "ai-coder/ai-coder.schema.json",
   "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o": "gcd/gcd.schema.json",
   "EFv3_L64_xNhOGQkaAHQTI-lzQYDvlaHcuZbuOTuDBXj": "vvp-dossier/vvp-dossier.schema.json",
+  "EJrcLKzq4d1PFtlnHLb9tl4zGwPAjO6v0dec4CiJMZk6": "org-vet/org-vet.schema.json",
   "EFvHYHX0cUx9sdjxZOr9fpPcQKdzRNFH42D8R29p7lAH": "bindkey/bindkey.schema.json",
   "EJxFPpyDRV-W6O2Vtjdy2K90ltWmQK8l1jePw5YOo_Ft": "attestation/attestation.schema.json",
   "EPy_7LE3tVdl8qEKN5i4L8eAgIM-1I51-DNiewmcq-fe": "tcr-vetting/tcr-vetting.schema.json",

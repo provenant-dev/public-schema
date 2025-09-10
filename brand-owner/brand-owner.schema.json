@@ -1,0 +1,182 @@
+{
+  "$id": "EFdennObbYoKFHlMbLkskgED-2w-npDO11yDvcNUhjsk",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Brand Owner Credential",
+  "description": "Issued to a legal entity that has the right to use a brand because it is the direct owner or a licensee of that brand.",
+  "type": "object",
+  "credentialType": "BrandOwnerCredential",
+  "version": "1.0.0",
+  "properties": {
+    "v": {
+      "description": "Version",
+      "type": "string"
+    },
+    "d": {
+      "description": "Credential SAID",
+      "type": "string"
+    },
+    "u": {
+      "description": "One time use nonce",
+      "type": "string"
+    },
+    "i": {
+      "description": "Issuer AID",
+      "type": "string"
+    },
+    "ri": {
+      "description": "Credential status registry",
+      "type": "string"
+    },
+    "s": {
+      "description": "Schema SAID",
+      "type": "string"
+    },
+    "a": {
+      "oneOf": [
+        {
+          "description": "Attributes block SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EIDYFHkBOgNVWGFRcN1cEXNvRV47-nrNJGx6mKHBA7ia",
+          "description": "Attributes block",
+          "type": "object",
+          "properties": {
+            "d": {
+              "description": "Attributes block SAID",
+              "type": "string"
+            },
+            "i": {
+              "description": "AID of the legal entity that is the direct owner or a licensee of the brand",
+              "type": "string"
+            },
+            "dt": {
+              "description": "Issuance date time",
+              "format": "date-time",
+              "type": "string"
+            },
+            "vcard": {
+              "description": "An ordered list of unfolded, VCard content lines (properties) per RFC 6350, where property and parameter names are upper case, and parameter names appear in lexicographic order. Values that are telephone numbers MUST be in strict E164 format with a leading + but no other spaces or punctuation. The CHATBOT property is standard and is of type URI. If the type of a particular value is URI and refers to static media files (as, for example, with LOGO), the HASH parameter SHOULD be included and MUST be the CESR-encoded value of the content at the URI. Alternatively, data URIs MAY be used. A URI that refers to mutable content SHOULD NOT be used, as it is insecure; if present, the credential is asserting only the location, not the content of the logo.",
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 1,
+              "items": {
+                "format": "cesr",
+                "type": "string"
+              },
+              "examples": [
+                "ORG:Example Company UK, Ltd",
+                "NICKNAME:Examples-R-Us",
+                "CHATBOT:https://example.com/chatwithus",
+                "LOGO;HASH=EK2r6EnDXre2pecTBO8s99j4OtNaaDIhVyr7uGugDhmp;VALUE=URI:https://example.com/logo64x48.png",
+                "TEL;TYPE=support:+445555555555",
+                "EMAIL:support@example.com",
+                "URL:https://www.example.com",
+                "ADR;TYPE=work:;;123 Example Street;London;;SW1A 1AA;United Kingdom",
+                "GEO:51.5074;-0.1278",
+                "TZ:Europe/London",
+                "LANG:en-GB"
+              ]
+            },
+            "goals": {
+              "description": "Goal codes (see https://bit.ly/49V8YqV) that enumerate formally-defined activities in which the brand's owner might engage using the asserted brand attributes. If specified, activities not covered by these goal codes are considered contexts in which the legitimate use of the brand is not asserted by this credential.",
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 1,
+              "items": {
+                "format": "cesr",
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "i",
+            "dt"
+          ]
+        }
+      ]
+    },
+    "e": {
+      "oneOf": [
+        {
+          "description": "Edges block SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EKk5ejftEjNwjRhw2lYQAwKwvRWapqCNEOx3gUR7WW7n",
+          "description": "Edges detail",
+          "type": "object",
+          "required": [
+            "d",
+            "issuer"
+          ],
+          "properties": {
+            "d": {
+              "description": "Edges block SAID",
+              "type": "string"
+            },
+            "issuer": {
+              "description": "Edge credential that proves the identity of the issuer.",
+              "type": "object",
+              "properties": {
+                "n": {
+                  "description": "SAID of a credential that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "s": {
+                  "description": "SAID of credential schema that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "o": {
+                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "type": "string",
+                  "const": "I2I"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "n",
+                "s",
+                "o"
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "r": {
+      "oneOf": [
+        {
+          "description": "Rules section SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EGFgHT7Xrzy9YLdQNXnNTYVBu9_Q0O7K5A2VCWjg93t3",
+          "description": "Rules detail",
+          "type": "object",
+          "properties": {
+            "d": {
+              "description": "Rule section SAID",
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "d"
+          ]
+        }
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "i",
+    "ri",
+    "s",
+    "d",
+    "e",
+    "r"
+  ]
+}

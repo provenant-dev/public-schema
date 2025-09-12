@@ -1,5 +1,5 @@
 {
-  "$id": "EFv3_L64_xNhOGQkaAHQTI-lzQYDvlaHcuZbuOTuDBXj",
+  "$id": "ELV1PaFi-QPDdelFNeSctIMZX3UtJan4Ex4Yl_lsGYHM",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Verifiable Voice Dossier Credential",
   "description": "Attestation credential, issued by the accountable party, that assembles all of the evidence required as per the Verifiable Voice Protocol",
@@ -37,7 +37,7 @@
       "type": "string"
     },
     "a": {
-      "$id": "EAKHdisi7O0DGT72QeXchIrJbHPFggtscfrC2DXms9gU",
+      "$id": "EAwY8VfT_6wtHBzpHhK01cbFSJLLd3wLUZwP8wcfHR7M",
       "description": "Attributes block",
       "type": "object",
       "properties": {
@@ -48,6 +48,10 @@
         "dt": {
           "description": "Issuance datetime, ISO-8601 datetime string",
           "format": "date-time",
+          "type": "string"
+        },
+        "name": {
+          "description": "A human-readable name for the dossier credential, useful for identification or labeling. This field is optional",
           "type": "string"
         }
       },
@@ -64,7 +68,7 @@
           "type": "string"
         },
         {
-          "$id": "EK9UwmpRmwrWPpixxeT5zVsMvzCRFDdzbUHQjRYBbM5h",
+          "$id": "EFrN76ncESwfcQNUSx8UhP3lIVpMUdOG_yWt8DeDL7SK",
           "description": "Edges detail",
           "type": "object",
           "required": [
@@ -187,7 +191,8 @@
               "type": "object",
               "required": [
                 "n",
-                "s"
+                "s",
+                "o"
               ],
               "properties": {
                 "n": {
@@ -197,6 +202,11 @@
                 "s": {
                   "description": "SAID of brand ownership schema",
                   "type": "string"
+                },
+                "o": {
+                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "type": "string",
+                  "const": "I2I"
                 }
               },
               "additionalProperties": false
@@ -218,7 +228,7 @@
                   "type": "string"
                 }
               },
-              "additionalProperties": false
+              "additionalProperties": true
             }
           },
           "additionalProperties": false

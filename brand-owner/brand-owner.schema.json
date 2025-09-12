@@ -1,5 +1,5 @@
 {
-  "$id": "EFdennObbYoKFHlMbLkskgED-2w-npDO11yDvcNUhjsk",
+  "$id": "EKxomi08u2QKbRZzOWrMiUzO20_wGtp5UABuk3kWBgJH",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Brand Owner Credential",
   "description": "Issued to a legal entity that has the right to use a brand because it is the direct owner or a licensee of that brand.",
@@ -176,7 +176,6 @@
     "ri",
     "s",
     "d",
-    "e",
     "r"
   ]
 }

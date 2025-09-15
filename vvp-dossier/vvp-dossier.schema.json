@@ -1,5 +1,5 @@
 {
-  "$id": "ELV1PaFi-QPDdelFNeSctIMZX3UtJan4Ex4Yl_lsGYHM",
+  "$id": "EH1jN4U4LMYHmPVI4FYdZ10bIPR7YWKp8TDdZ9Y9Al-P",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Verifiable Voice Dossier Credential",
   "description": "Attestation credential, issued by the accountable party, that assembles all of the evidence required as per the Verifiable Voice Protocol",
@@ -68,7 +68,7 @@
           "type": "string"
         },
         {
-          "$id": "EFrN76ncESwfcQNUSx8UhP3lIVpMUdOG_yWt8DeDL7SK",
+          "$id": "EH8ahNIz4OhynHwrs0L4eUX3ZSeWADEoJS7d_D6hUHQq",
           "description": "Edges detail",
           "type": "object",
           "required": [
@@ -206,7 +206,7 @@
                 "o": {
                   "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
                   "type": "string",
-                  "const": "I2I"
+                  "const": "NI2I"
                 }
               },
               "additionalProperties": false

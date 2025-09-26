@@ -1,5 +1,5 @@
 {
-  "$id": "EKxomi08u2QKbRZzOWrMiUzO20_wGtp5UABuk3kWBgJH",
+  "$id": "EBpGNZSWwj-btOJMJSMLCVoXbtKdJTcggO-zMevr4vH_",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Brand Owner Credential",
   "description": "Issued to a legal entity that has the right to use a brand because it is the direct owner or a licensee of that brand.",
@@ -104,7 +104,7 @@
           "type": "string"
         },
         {
-          "$id": "EKk5ejftEjNwjRhw2lYQAwKwvRWapqCNEOx3gUR7WW7n",
+          "$id": "EGt3Q1rQJweeryWfJGBYlKCFsYbNrYGYc6AaTRBzwzHG",
           "description": "Edges detail",
           "type": "object",
           "required": [
@@ -126,6 +126,31 @@
                 },
                 "s": {
                   "description": "SAID of credential schema that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "o": {
+                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "type": "string",
+                  "const": "I2I"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "n",
+                "s",
+                "o"
+              ]
+            },
+            "brandauth": {
+              "description": "Edge credential that proves the brand authority.",
+              "type": "object",
+              "properties": {
+                "n": {
+                  "description": "SAID of a credential that proves the brand authority",
+                  "type": "string"
+                },
+                "s": {
+                  "description": "SAID of credential schema that proves the brand authority",
                   "type": "string"
                 },
                 "o": {

@@ -1,5 +1,5 @@
 {
-  "$id": "EJrcLKzq4d1PFtlnHLb9tl4zGwPAjO6v0dec4CiJMZk6",
+  "$id": "EJvwY9n7EsJ4ZejUBHFrnrNammC8BkGI9YaW1Wnp5c22",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Org Vet",
   "description": "Authenticate an org with an explicit level of assurance.",
@@ -82,6 +82,55 @@
       "type": "string",
       "const": "EM6kWxMNL9BFm0ReegqQfNJLw8OZAfn2ZxcjWs4Ceifh",
       "format": "cesr"
+    },
+    "e": {
+      "oneOf": [
+        {
+          "description": "Edges block SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EKk5ejftEjNwjRhw2lYQAwKwvRWapqCNEOx3gUR7WW7n",
+          "description": "Edges detail",
+          "type": "object",
+          "required": [
+            "d",
+            "issuer"
+          ],
+          "properties": {
+            "d": {
+              "description": "Edges block SAID",
+              "type": "string"
+            },
+            "issuer": {
+              "description": "Edge credential that proves the identity of the issuer.",
+              "type": "object",
+              "properties": {
+                "n": {
+                  "description": "SAID of a credential that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "s": {
+                  "description": "SAID of credential schema that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "o": {
+                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "type": "string",
+                  "const": "I2I"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "n",
+                "s",
+                "o"
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
     }
   },
   "additionalProperties": true

@@ -2,6 +2,8 @@
 import sys
 import os
 import re
+import json
+from jsonschema import Draft202012Validator, exceptions as jsonschema_exceptions
 
 IGNORE_FILE = os.path.join(os.path.dirname(__file__), ".ignore_check_schemas")
 error_count = 0
@@ -35,9 +37,10 @@ def get_repo_root():
 def populate_folders():
     global folders
     repo_root = get_repo_root()
+    exclude = {"tools", "venv", "env"}
     for name in os.listdir(repo_root):
         path = os.path.join(repo_root, name)
-        if os.path.isdir(path) and not name.startswith(".") and name != "tools":
+        if os.path.isdir(path) and not name.startswith(".") and name not in exclude:
             folders.append(name)
 
 def check_folder_names():
@@ -45,6 +48,26 @@ def check_folder_names():
     for folder in folders:
         if not kabob_case_re.match(folder):
             report_error(f"Folder name '{folder}' is not lower-case kabob-case.")
+
+def check_0_schema_basics():
+    repo_root = get_repo_root()
+    for folder in folders:
+        schema_file = os.path.join(repo_root, folder, f"{folder}.schema.json")
+        if not os.path.isfile(schema_file):
+            report_error(f"Missing schema file: {schema_file}")
+            continue
+        # Check valid JSON
+        try:
+            with open(schema_file, "r") as f:
+                schema = json.load(f)
+        except Exception as e:
+            report_error(f"Invalid JSON in {schema_file}: {e}")
+            continue
+        # Check valid JSON Schema
+        try:
+            Draft202012Validator.check_schema(schema)
+        except jsonschema_exceptions.SchemaError as e:
+            report_error(f"Invalid JSON Schema in {schema_file}: {e}")
 
 def main():
     # Set working dir to repo root

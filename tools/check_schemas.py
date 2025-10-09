@@ -69,6 +69,19 @@ def check_0_schema_basics():
         except jsonschema_exceptions.SchemaError as e:
             report_error(f"Invalid JSON Schema in {schema_file}: {e}")
 
+def check_json_fragments():
+    repo_root = get_repo_root()
+    for folder in folders:
+        folder_path = os.path.join(repo_root, folder)
+        for fname in os.listdir(folder_path):
+            if fname.endswith(".json") and not fname.endswith(".schema.json"):
+                fpath = os.path.join(folder_path, fname)
+                try:
+                    with open(fpath, "r") as f:
+                        json.load(f)
+                except Exception as e:
+                    report_error(f"Invalid JSON in {fpath}: {e}")
+
 def main():
     # Set working dir to repo root
     os.chdir(get_repo_root())

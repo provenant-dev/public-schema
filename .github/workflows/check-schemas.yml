@@ -17,6 +17,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
+      - name: Install jsonschema
+        run: pip install jsonschema
       - name: Run check_schemas.py
         run: |
           python tools/check_schemas.py

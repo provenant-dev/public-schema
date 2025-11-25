@@ -1,0 +1,137 @@
+{
+  "$id": "EDkpj6esumvNUldacHvzeEP-s40Xnkkd9QXA6G30b2aC",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OVC Identity Credential",
+  "description": "Authenticate an org with an explicit level of assurance.",
+  "type": "object",
+  "credentialType": "orgVet",
+  "version": "1.0.0",
+  "required": [
+    "v",
+    "d",
+    "i",
+    "ri",
+    "s",
+    "a",
+    "r"
+  ],
+  "properties": {
+    "v": {
+      "description": "Version string using ACDC conventions",
+      "type": "string"
+    },
+    "d": {
+      "description": "SAID of the credential",
+      "type": "string"
+    },
+    "i": {
+      "description": "Identifier of the issuer",
+      "type": "string"
+    },
+    "ri": {
+      "description": "Issuer's ACDC status registry",
+      "type": "string"
+    },
+    "s": {
+      "description": "SAID of this schema",
+      "type": "string"
+    },
+    "a": {
+      "$id": "ELtdYgSHM9VElQtjd4P19IB24HH8PQZGbEctOjmP69QE",
+      "description": "Attributes block",
+      "type": "object",
+      "required": [
+        "d",
+        "dt"
+      ],
+      "properties": {
+        "d": {
+          "description": "SAID of attributes block",
+          "type": "string"
+        },
+        "dt": {
+          "description": "Issuance date (when the ACDC was signed).",
+          "format": "date-time",
+          "type": "string"
+        },
+        "loa": {
+          "description": "Level of assurance.",
+          "type": "number"
+        },
+        "lids": {
+          "description": "Array of linked identifiers (LIDs) that vetter claims were able to act as references for this legal entity when the org was vetted. At least one item in this list should be globally unambigious and portable across jurisdictions (e.g., an LEI). Others may come from national registries, OpenCorporates, EDGAR, Dun & Bradstreet, a stock exchange, a LinkedIn profile, a social media handle, a domain name, etc. The nature of individual item is detectable by regex match.",
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "examples": [
+              "5493001KJTIIGC8Y1R12",
+              "gb/01234567",
+              "CHE-123.456.789",
+              "12-345-6789",
+              "acmespacetravel.biz"
+            ],
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "r": {
+      "description": "SAID of rules block",
+      "type": "string",
+      "const": "EM6kWxMNL9BFm0ReegqQfNJLw8OZAfn2ZxcjWs4Ceifh",
+      "format": "cesr"
+    },
+    "e": {
+      "oneOf": [
+        {
+          "description": "Edges block SAID",
+          "type": "string"
+        },
+        {
+          "$id": "EKk5ejftEjNwjRhw2lYQAwKwvRWapqCNEOx3gUR7WW7n",
+          "description": "Edges detail",
+          "type": "object",
+          "required": [
+            "d",
+            "issuer"
+          ],
+          "properties": {
+            "d": {
+              "description": "Edges block SAID",
+              "type": "string"
+            },
+            "issuer": {
+              "description": "Edge credential that proves the identity of the issuer.",
+              "type": "object",
+              "properties": {
+                "n": {
+                  "description": "SAID of a credential that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "s": {
+                  "description": "SAID of credential schema that proves the identity of the issuer",
+                  "type": "string"
+                },
+                "o": {
+                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "type": "string",
+                  "const": "I2I"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "n",
+                "s",
+                "o"
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "additionalProperties": true
+}

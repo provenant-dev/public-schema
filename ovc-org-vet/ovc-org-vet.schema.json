@@ -1,5 +1,5 @@
 {
-  "$id": "EDkpj6esumvNUldacHvzeEP-s40Xnkkd9QXA6G30b2aC",
+  "$id": "EHFdm3U_4nML6lo-q_xDTO8183hC9HlWif2l4ycNo8TW",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "OVC Identity Credential",
   "description": "Authenticate an org with an explicit level of assurance.",
@@ -86,7 +86,7 @@
           "format": "cesr"
         },
         {
-          "$id": "EM6kWxMNL9BFm0ReegqQfNJLw8OZAfn2ZxcjWs4Ceifh",
+          "$id": "EADZYJg0S3xZEKlhAChF8smXRFtVmer5ocBXQ3uuQt_h",
           "description": "Rules detail",
           "type": "object",
           "required": [

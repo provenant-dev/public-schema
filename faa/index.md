@@ -18,16 +18,16 @@ Specifying how to digitize data is out of scope, but we make the simplifying ass
 
 Once a reference version of the data is available digitally, we need a way to refer to it. This reference must be tamper-evident (at least to the fidelity of the sample resolution, if quantized).
 
-ACDCs use hashes of the full content of the data for this purpose. If data lends itself to standard *saidification*, the SAID of the data SHOULD identify it. Otherwise, the [bytewise or externalized SAID algorithms](https://doi.org/10.2139/ssrn.6128466) SHOULD be applied to the data, or the data MAY simply be hashed. In all cases, the resulting digest is encoded as CESR, and in this form becomes the tamper-evident, self-describing way to reference the digital data it derives from. This CESR-encoded digest is stored in the `content_digest` field in the FAA schema. The data identified by this digest is called the *artifact* of the FAA.
+ACDCs use hashes of the full content of the data for this purpose. If data lends itself to standard *saidification*, the SAID of the data SHOULD identify it. Otherwise, the [bytewise or externalized SAID algorithms](https://doi.org/10.2139/ssrn.6128466) SHOULD be applied to the data, or the data MAY simply be hashed. In all cases, the resulting digest is encoded as CESR, and in this form becomes the tamper-evident, self-describing way to reference the digital data it derives from. This CESR-encoded digest is stored in the `art_digest` field in the FAA schema. The data identified by this digest is called the *artifact* of the FAA.
 
 ### What belongs in this credential
 
 In and of itself, a FAA makes no claim about the *meaning* or *significance* of its artifact. That interpretation is left to the ACDC (e.g., a [dossier](https://trustoverip.github.io/kswg-dossier-specification) that cites it and to any governance framework that provides context. The FAA attests to:
 
-- The artifact's cryptographic identity (`content_digest`)
+- The artifact's cryptographic identity (`art_digest`)
 - Optional metadata about the artifact: content type, size, location, filename, a human-readable description, a
   description of provenance, issuance date
-- The issuer's posture with respect to the artifact (`art_posture`): did the issuer merely record `content_digest` at the request of a third party, or witness the artifact directly and compute `content_digest` from it, or actually verify the integrity of the artifact at a particular moment, according to that artifact's native rules?
+- The issuer's posture with respect to the artifact (`art_posture`): did the issuer merely record `art_digest` at the request of a third party, or witness the artifact directly and compute `art_digest` from it, or actually verify the integrity of the artifact at a particular moment, according to that artifact's native rules?
 - The issuer's assertion with respect to revocation of the artifact (`rev_latency`): if the artifact is revoked, does the issuer of the FAA attempt a corresponding revocation of this ACDC -- and if so, how quickly? (Normally, the issuer of an FAA makes no attempt to react to revocation events of its corresponding artifact, either because the artfact has no revocation semantics, or because tracking revocation is a burden on an issuer that's just trying to create a lightweight affidavit. However, if the FAA is issued by an entity that's actively trying to bridge between another credential ecosystem and ACDCs, a non-zero value here allows verifiers to treat the FAA as a proxy for the foreign credential, assuming they trust the FAA issuer.)
 
 ### Schema
@@ -36,7 +36,7 @@ See [foreign-artifact.schema.json](foreign-artifact.schema.json).
 
 ### Example
 
-The example ([example.json](example.json)) shows a FAA wrapping a JPEG photograph of a traffic accident scene. The `content_digest` field holds an xSAID, reflected also in the `filename` field. The `provenance` field records the human-readable chain of custody from the traffic camera to the insurance adjustor.
+The example ([example.json](example.json)) shows a FAA wrapping a JPEG photograph of a traffic accident scene. The `art_digest` field holds an xSAID, reflected also in the `filename` field. The `provenance` field records the human-readable chain of custody from the traffic camera to the insurance adjustor.
 
 ### Extension
 

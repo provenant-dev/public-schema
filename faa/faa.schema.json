@@ -50,8 +50,8 @@
           "type": "object",
           "required": [
             "d",
-            "content_identifier",
-            "ref_posture"
+            "art_digest",
+            "art_posture"
           ],
           "properties": {
             "d": {
@@ -76,7 +76,7 @@
               ]
             },
             "art_posture": {
-              "description": "Posture of the issuer with respect to the artifact. Must be one of: 'record' (record the artifact's identifer without necessarily seeing the artifact), 'witness' (witness the artifact and compute content_digest from it), or 'verify' (verify the artifact according to its native rules).",
+              "description": "Posture of the issuer with respect to the artifact. Must be one of: 'record' (record the artifact's identifer without necessarily seeing the artifact), 'witness' (witness the artifact and compute art_digest from it), or 'verify' (verify the artifact according to its native rules).",
               "type": "string",
               "enum": [
                 "record",

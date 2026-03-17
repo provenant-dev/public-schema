@@ -1,0 +1,169 @@
+{
+  "$id": "ELuPsd1mylvD9iY_gH5hEJzoUd8OZWtU6J2svJwIq-TJ",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Foreign Artifact Affidavit",
+  "description": "An ACDC wrapper that gives arbitrary binary data a tamper-evident, cryptographic identity, and that documents key attributes. This allows it to be cited as evidence in a verifiable data graph.",
+  "type": "object",
+  "credentialType": "foreign-artifact-affidavit",
+  "version": "1.0.0",
+  "required": [
+    "v",
+    "d",
+    "i",
+    "s",
+    "a"
+  ],
+  "properties": {
+    "v": {
+      "description": "Version string using ACDC conventions",
+      "type": "string"
+    },
+    "d": {
+      "description": "SAID of this ACDC",
+      "type": "string",
+      "pattern": "^(?:[BE][A-Za-z0-9_-]{43}|0[DEFG][A-Za-z0-9_-]{86})$"
+    },
+    "u": {
+      "description": "A salty nonce, present if the issuer wishes to blind the attributes of this ACDC",
+      "type": "string"
+    },
+    "i": {
+      "description": "AID of the issuer -- the party attesting to the artifact's integrity and provenance",
+      "type": "string"
+    },
+    "ri": {
+      "description": "Registry for issuer's credential status",
+      "type": "string",
+      "pattern": "^(?:[BE][A-Za-z0-9_-]{43}|0[DEFG][A-Za-z0-9_-]{86})$"
+    },
+    "s": {
+      "description": "SAID of this schema",
+      "type": "string",
+      "pattern": "^(?:[BE][A-Za-z0-9_-]{43}|0[DEFG][A-Za-z0-9_-]{86})$"
+    },
+    "a": {
+      "oneOf": [
+        {
+          "description": "SAID of attributes block (compact form)",
+          "type": "string"
+        },
+        {
+          "description": "Attributes block",
+          "$id": "EHhP6un6a3BqmyTJbCJ4TBz4cctdDgKc9TAi7-cEUrDJ",
+          "type": "object",
+          "required": [
+            "d",
+            "art_digest",
+            "art_posture"
+          ],
+          "properties": {
+            "d": {
+              "description": "SAID of attributes block",
+              "type": "string",
+              "pattern": "^(?:[BE][A-Za-z0-9_-]{43}|0[DEFG][A-Za-z0-9_-]{86})$"
+            },
+            "u": {
+              "description": "A salty nonce",
+              "type": "string"
+            },
+            "dt": {
+              "description": "Issuance datetime, ISO 8601",
+              "type": "string",
+              "format": "date-time"
+            },
+            "content_identifier": {
+              "description": "A CESR-encoded cryptographic hash of the artifact. SHOULD be a SAID; see https://doi.org/10.2139/ssrn.6128466 for saidification options. MAY be a raw CESR hash if saidification is impractical.",
+              "type": "string",
+              "pattern": "^(?:[EFGHI][A-Za-z0-9_-]{43}|0[DEFG][A-Za-z0-9_-]{86})$",
+              "examples": [
+                "EK2r6EnDXre2pecTBO8s99j4OtNaaDIhVyr7uGugDhmp"
+              ]
+            },
+            "art_posture": {
+              "description": "Posture of the issuer with respect to the artifact. Must be one of: 'record' (record the artifact's identifer without necessarily seeing the artifact), 'witness' (witness the artifact and compute art_digest from it), or 'verify' (verify the artifact according to its native rules).",
+              "type": "string",
+              "enum": [
+                "record",
+                "witness",
+                "verify"
+              ]
+            },
+            "rev_latency": {
+              "description": "Assertion that the issuer makes about how quickly it will revoke this ACDC if its corresponding artifact is revoked. A non-negative integer measuring seconds of elapsed time between the artifact revocation and its subsequent ACDC revocation. The most common value is 0, meaning the artifact has no revocation semantics, and/or the issuer takes no responsibility for keeping the ACDC's revocation aligned with the artifact's. When the artifact is a foreign credential type, and the FAA issuer acts as a bridge, this field allows an indirect revocation test of the foreign value, if the issuer is trusted.",
+              "type": "integer",
+              "minimum": 0
+            },
+            "content_type": {
+              "description": "MIME type of the artifact, per IANA media type registry. Although 'application/octet-stream' is valid, overly generic types are discouraged because the limit low-context data processing.",
+              "type": "string",
+              "pattern": "^[a-z]+/[a-z0-9][a-z0-9._+-]*$",
+              "examples": [
+                "image/jpeg",
+                "application/pdf",
+                "audio/mpeg",
+                "application/octet-stream",
+                "text/plain"
+              ]
+            },
+            "content_size": {
+              "description": "Size of the artifact in bytes. Allows a recipient to anticipate transfer costs before retrieving the artifact.",
+              "type": "integer",
+              "minimum": 0
+            },
+            "content_location": {
+              "description": "One or more URIs from which the artifact may be retrieved. Multiple URIs may reflect redundant hosting, different transport protocols, or different access tiers (e.g., a public CDN and an authenticated endpoint). The presence of this field does not guarantee availability; it is informational. However, use of data:// URIs is supported and allows direct embedding of the content.",
+              "oneOf": [
+                {
+                  "type": "string",
+                  "format": "uri"
+                },
+                {
+                  "type": "array",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "string",
+                    "format": "uri"
+                  }
+                }
+              ]
+            },
+            "filename": {
+              "description": "The original filename of the artifact at the time of wrapping. For artifacts using the externalized SAID algorithm (xSAID), this field SHOULD reflect the saidified filename including the embedded SAID.",
+              "type": "string"
+            },
+            "description": {
+              "description": "A human-readable description of the artifact's content or significance. Not intended for machine interpretation.",
+              "type": "string"
+            },
+            "provenance": {
+              "description": "A human-readable statement of how the artifact was obtained or created \u2014 for example, 'Captured by device AID EX... at 2025-03-01T09:00:00Z', 'Downloaded from https://...', or 'Received via email from ...'. For machine-verifiable provenance, use an ACDC edge instead.",
+              "type": "string"
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "r": {
+      "oneOf": [
+        {
+          "description": "Rules section SAID (compact form)",
+          "type": "string"
+        },
+        {
+          "description": "Rules detail",
+          "type": "object",
+          "properties": {
+            "d": {
+              "description": "SAID of rules block",
+              "type": "string"
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    }
+  },
+  "additionalProperties": true
+}

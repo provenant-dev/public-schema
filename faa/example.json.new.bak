@@ -1,13 +1,16 @@
 {
   "v": "ACDC10JSON000000_",
-  "d": "SAID_PLACEHOLDER",
+  "d": "",
   "i": "EC4SuEyzrRwu3FWFrK0Ubd9xejlo5bUwAtGcbBGUk2nL",
   "ri": "EM2YZ78SKE8eO4W1lQOJeer5xKZqLmJV7SPr3Ji5DMBZ",
-  "s": "SAID_PLACEHOLDER",
+  "s": "EF1f9-7xwdba4L3b2OsnhUMWb02NyXJAYJ34RrAFkHs8",
   "a": {
-    "d": "SAID_PLACEHOLDER",
+    "d": "EFM0s2YlM32LAh0h77tvkz3OR6AaYmHcVchm9oVNkvbI",
+    "u": "0ADY50r_UJ3OaDC9ww7UcwXM",
     "dt": "2025-03-01T14:22:00.000000+00:00",
     "content_identifier": "EK2r6EnDXre2pecTBO8s99j4OtNaaDIhVyr7uGugDhmp",
+    "art_posture": "witness",
+    "rev_latency": 0,
     "content_type": "image/jpeg",
     "content_size": 2847392,
     "content_location": [

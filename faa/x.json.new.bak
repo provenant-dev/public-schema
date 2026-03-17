@@ -1,0 +1,17 @@
+{
+  "d": "EBYj1VT43Li-gmTxk8XhpHSpzmyQxCpKcihw_GSp7b5Q",
+  "u": "0ADY50r_UJ3OaDC9ww7UcwXM",
+  "dt": "2025-03-01T14:22:00.000000+00:00",
+  "content_identifier": "EK2r6EnDXre2pecTBO8s99j4OtNaaDIhVyr7uGugDhmp",
+  "art_posture": "witness",
+  "rev_latency": 0,
+  "content_type": "image/jpeg",
+  "content_size": 2847392,
+  "content_location": [
+    "https://evidence.example.org/artifacts/crash-scene-photo-01.jpg",
+    "https://backup.example.org/artifacts/crash-scene-photo-01.jpg"
+  ],
+  "filename": "crash-scene-photo-01.SAID:EK2r6EnDXre2pecTBO8s99j4OtNaaDIhVyr7uGugDhmp.jpg",
+  "description": "Photograph of the intersection of Main St and 5th Ave taken from the northwest corner, showing vehicle positions immediately after the collision.",
+  "provenance": "Captured by traffic camera AID EC4SuEyzrRwu3FWFrK0Ubd9xejlo5bUwAtGcbBGUk2nL at 2025-03-01T14:19:43Z and downloaded by the insurance adjustor at 2025-03-01T14:22:00Z."
+}

@@ -1,5 +1,5 @@
 {
-  "$id": "EF1f9-7xwdba4L3b2OsnhUMWb02NyXJAYJ34RrAFkHs8",
+  "$id": "ELuPsd1mylvD9iY_gH5hEJzoUd8OZWtU6J2svJwIq-TJ",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Foreign Artifact Affidavit",
   "description": "An ACDC wrapper that gives arbitrary binary data a tamper-evident, cryptographic identity, and that documents key attributes. This allows it to be cited as evidence in a verifiable data graph.",
@@ -20,23 +20,26 @@
     },
     "d": {
       "description": "SAID of this ACDC",
-      "type": "string"
+      "type": "string",
+      "pattern": "^(?:[BE][A-Za-z0-9_-]{43}|0[DEFG][A-Za-z0-9_-]{86})$"
     },
     "u": {
       "description": "A salty nonce, present if the issuer wishes to blind the attributes of this ACDC",
       "type": "string"
     },
     "i": {
-      "description": "AID of the issuer \u2014 the party attesting to the artifact's integrity and provenance",
+      "description": "AID of the issuer -- the party attesting to the artifact's integrity and provenance",
       "type": "string"
     },
     "ri": {
       "description": "Registry for issuer's credential status",
-      "type": "string"
+      "type": "string",
+      "pattern": "^(?:[BE][A-Za-z0-9_-]{43}|0[DEFG][A-Za-z0-9_-]{86})$"
     },
     "s": {
       "description": "SAID of this schema",
-      "type": "string"
+      "type": "string",
+      "pattern": "^(?:[BE][A-Za-z0-9_-]{43}|0[DEFG][A-Za-z0-9_-]{86})$"
     },
     "a": {
       "oneOf": [
@@ -46,7 +49,7 @@
         },
         {
           "description": "Attributes block",
-          "$id": "EHH-xs758EzJpUC1n4Et18n5nGc5vmM7w2KaqojwxJ40",
+          "$id": "EHhP6un6a3BqmyTJbCJ4TBz4cctdDgKc9TAi7-cEUrDJ",
           "type": "object",
           "required": [
             "d",
@@ -56,7 +59,8 @@
           "properties": {
             "d": {
               "description": "SAID of attributes block",
-              "type": "string"
+              "type": "string",
+              "pattern": "^(?:[BE][A-Za-z0-9_-]{43}|0[DEFG][A-Za-z0-9_-]{86})$"
             },
             "u": {
               "description": "A salty nonce",

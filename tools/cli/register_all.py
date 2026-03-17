@@ -56,8 +56,9 @@ def register_all(args):
             id = get_id(schema_file)
             schemas[id] = f"{vlei_dir}/{item}"
 
+    sorted_schemas = dict(sorted(schemas.items(), key=lambda item: item[1]))
     with open('registry.json', 'w') as f:
-        json.dump(schemas, f, indent=2)
+        json.dump(sorted_schemas, f, indent=2)
 
 def main():
     args = parser.parse_args()

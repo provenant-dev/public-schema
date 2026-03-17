@@ -117,7 +117,7 @@ def check_fields():
         a_spec = props.get('a')
         if a_spec:
             a_type = a_spec.get('type')
-            if a_type != 'object':
+            if a_type != 'object' and 'oneOf' not in a_spec:
                 report_error(f"In {filename}: Field 'a' should be type object, got {a_type}.")
             # Handle oneOf or direct object
             a_props = None

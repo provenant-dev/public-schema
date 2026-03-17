@@ -32,7 +32,7 @@ In and of itself, a FAA makes no claim about the *meaning* or *significance* of 
 
 ### Schema
 
-See [foreign-artifact.schema.json](foreign-artifact.schema.json).
+See [faa.schema.json](faa.schema.json).
 
 ### Example
 

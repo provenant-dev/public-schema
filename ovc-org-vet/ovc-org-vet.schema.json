@@ -1,7 +1,7 @@
 {
-  "$id": "EJvwY9n7EsJ4ZejUBHFrnrNammC8BkGI9YaW1Wnp5c22",
+  "$id": "EHFdm3U_4nML6lo-q_xDTO8183hC9HlWif2l4ycNo8TW",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Org Vet",
+  "title": "OVC Identity Credential",
   "description": "Authenticate an org with an explicit level of assurance.",
   "type": "object",
   "credentialType": "orgVet",
@@ -78,10 +78,48 @@
       "additionalProperties": true
     },
     "r": {
-      "description": "SAID of rules block",
-      "type": "string",
-      "const": "EM6kWxMNL9BFm0ReegqQfNJLw8OZAfn2ZxcjWs4Ceifh",
-      "format": "cesr"
+      "oneOf": [
+        {
+          "description": "SAID of rules block",
+          "type": "string",
+          "const": "EM6kWxMNL9BFm0ReegqQfNJLw8OZAfn2ZxcjWs4Ceifh",
+          "format": "cesr"
+        },
+        {
+          "$id": "EADZYJg0S3xZEKlhAChF8smXRFtVmer5ocBXQ3uuQt_h",
+          "description": "Rules detail",
+          "type": "object",
+          "required": [
+            "d",
+            "onlyCommitToPoint",
+            "useViaEdges",
+            "undefinedVerification",
+            "undefinedRevocation"
+          ],
+          "properties": {
+            "d": {
+              "description": "SAID of rules block",
+              "type": "string"
+            },
+            "onlyCommitToPoint": {
+              "description": "All parties agree that the citation, in and of itself, only commits the issuer to point at content in a way that makes the issuer and the target verifiable. Unless or until context, governance, or other actions prove intent, the citation does NOT imply that the issuer owns, endorses, or agrees with the content.",
+              "type": "string"
+            },
+            "useViaEdges": {
+              "description": "All parties acknowledge that the citation is not intended to be used in isolation. Rather, the intended semantics for the citation should be communicated via a referencing ACDC that clarifies its issuer's intention.",
+              "type": "string"
+            },
+            "undefinedVerification": {
+              "description": "All parties agree that procedures for evaluating the authenticity and/or veracity of the referenced content are beyond the scope of standard ACDC verification, and that the verifier is responsible for evaluating in whatever way satisfies their requirements.",
+              "type": "string"
+            },
+            "undefinedRevocation": {
+              "description": "Unless or until governance specifies otherwise, all parties agree that there is no defined relationship between the revocation status of a citation and that of cited data. Cited data may be disavowed or revoked by its creator without a citation being revoked, and vice versa.",
+              "type": "string"
+            }
+          }
+        }
+      ]
     },
     "e": {
       "oneOf": [

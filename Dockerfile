@@ -1,4 +1,4 @@
-FROM python:3.10.13-alpine3.18 as base-image
+FROM python:3.12-alpine as base-image
 FROM base-image as builder
 ARG KERIPY_BRANCH=main
 

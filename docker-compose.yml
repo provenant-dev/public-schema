@@ -5,6 +5,8 @@ services:
     container_name: schema-registry-public-schema
     build:
       context: .
+      args:
+        - KERIPY_BRANCH=pr-main
     restart: no
     env_file:
       - .env

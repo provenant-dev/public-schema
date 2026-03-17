@@ -1,40 +1,35 @@
-## Foreign Artifact Credentials
+## Foreign Artifact
 
 ### Purpose
 
-A Foreign Artifact credential is an ACDC wrapper that gives a non-JSON artifact
-a cryptographic identity, enabling it to be cited as evidence in a dossier or
-other ACDC edge graph.
+A Foreign Artifact ACDC is a wrapper that gives foreign credential types
+or arbitrary non-credential data the attributes that it needs to participate
+fully in an ACDC data graph.
 
-Most data in the KERI/ACDC ecosystem is natively JSON and can acquire a
-self-addressing identifier (SAID) through the standard saidification algorithm
-defined in the CESR specification. However, many commercially and legally
-important artifact types — photographs, audio and video recordings, PDFs,
-genomic data files, spreadsheets, musical scores, and arbitrary binary data —
-are opaquely structured: their internal format is not JSON, and applying the
-standard saidification algorithm to them is not possible.
+The world is full of credential and quasi-credential data types: X509 certs,
+W3C VCs, SD-JWTs, AnonCreds, ISO mDOC/mDL, a variety of tokens, and various
+flavors of signed PDF. These formats have various ways to identify an artifact
+and to point to parties that have a role relative to an artifact -- but we may
+still want them to participate in ACDC data graphs. ([Verifiable Voice Protocol](https://datatracker.ietf.org/doc/draft-hardman-verifiable-voice-protocol/) is an example of a standard that explicitly contemplates such integration.)
 
-In addition, foreign credential types such as W3C VCs, SD-JWTs, AnonCreds,
-ISO mDOC/mDL, and various flavors of signed PDF have different identifier and
-issuance + verification schemes, but may need to participate in ACDC data
-graphs. (The Verifiable Voice Protocol specification is an example of a
-standard that explicitly contemplates such integration.)
+In addition, the world is full of other forms of data that should often be formally
+referenced as evidence, but that are not credential-like at all: spreadsheets, documents, photographs, audio and video recordings, genomic data files, videos, musical scores, and arbitrary binary data. It is not clear how to cite such data in an ACDC.
 
-A Foreign Artifact credential solves this by acting as a verifiable envelope.
+A Foreign Artifact credential bridges these worlds providing a verifiable envelope.
 The artifact itself acquires a cryptographic identity either via its existing
 signature (if it's a foreign credential type), or through one of the
 algorithms defined in the *Bytewise and Externalized SAIDs* specification
-(referred to below as the BES specification). The resulting hash — a signature, a bytewise
+(referred to below as the BES specification). The resulting tamper-evident identifier for the foreign artifact — a signature, a bytewise
 SAID (bSAID) or externalized SAID (xSAID) — is recorded in the `content_identifier`
-field of this credential. The credential is then issued by the party attesting
+field of this ACDC type. The ACDC is then issued by the party attesting
 to the artifact's integrity and provenance, and can be cited by a dossier edge
 like any other ACDC.
 
 ### Relationship to other specifications
 
-When data is a foreign credential type, 
+When data *inherently* carries a digitally signed (typically, a foreign credential type), the signature of the data is its identifier, and whatever specification describes its signing algorithm becomes normative for how that signature is verified. 
 
-This credential may use concepts defined in the BES specification:
+When data isn't inherently signed, it should be referenced as described in BES specification:
 *Bytewise and Externalized SAIDs* by Daniel Hardman. Implementers should read
 that specification before issuing Foreign Artifact credentials. In particular:
 

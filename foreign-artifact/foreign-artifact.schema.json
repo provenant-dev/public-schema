@@ -1,0 +1,145 @@
+{
+  "$id": "",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Foreign Artifact",
+  "description": "An ACDC wrapper that gives a non-JSON artifact a cryptographic identity and attests to its provenance, enabling it to be cited as evidence in a dossier or other ACDC edge graph.",
+  "$comment": "Foreign artifacts have no issuee. The issuer is the party attesting to the artifact's integrity and provenance. Content integrity is anchored by a CESR-encoded hash in the content_identifier field, which SHOULD be a bytewise SAID (bSAID) or externalized SAID (xSAID) as defined in the Bytewise and Externalized SAIDs specification.",
+  "type": "object",
+  "credentialType": "foreign-artifact",
+  "version": "1.0.0",
+  "required": [
+    "v",
+    "d",
+    "i",
+    "s",
+    "a"
+  ],
+  "properties": {
+    "v": {
+      "description": "Version string using ACDC conventions",
+      "type": "string"
+    },
+    "d": {
+      "description": "SAID of this ACDC",
+      "type": "string"
+    },
+    "u": {
+      "description": "A salty nonce, present if the issuer wishes to blind the SAID of this ACDC",
+      "type": "string"
+    },
+    "i": {
+      "description": "AID of the issuer — the party attesting to the artifact's integrity and provenance",
+      "type": "string"
+    },
+    "ri": {
+      "description": "Registry for issuer's credential status",
+      "type": "string"
+    },
+    "s": {
+      "description": "SAID of this schema",
+      "type": "string"
+    },
+    "a": {
+      "oneOf": [
+        {
+          "description": "SAID of attributes block (compact form)",
+          "type": "string"
+        },
+        {
+          "description": "Attributes block",
+          "type": "object",
+          "required": [
+            "d",
+            "content_identifier",
+            "content_type"
+          ],
+          "properties": {
+            "d": {
+              "description": "SAID of attributes block",
+              "type": "string"
+            },
+            "dt": {
+              "description": "Issuance datetime, ISO 8601",
+              "type": "string",
+              "format": "date-time"
+            },
+            "content_identifier": {
+              "description": "A CESR-encoded cryptographic hash of the artifact's byte content. SHOULD be a bytewise SAID (bSAID) or externalized SAID (xSAID) as defined in the Bytewise and Externalized SAIDs specification, making the artifact a first-class participant in authenticated data graphs. MAY be a raw CESR hash if the artifact cannot be saidified (e.g., it was captured without an insertion point). The algorithm is self-describing via the CESR primitive code.",
+              "type": "string",
+              "examples": [
+                "EK2r6EnDXre2pecTBO8s99j4OtNaaDIhVyr7uGugDhmp"
+              ]
+            },
+            "content_type": {
+              "description": "MIME type of the artifact, per IANA media type registry. Use 'application/octet-stream' for arbitrary binary data with no more specific type.",
+              "type": "string",
+              "examples": [
+                "image/jpeg",
+                "application/pdf",
+                "audio/mpeg",
+                "application/octet-stream",
+                "text/plain"
+              ]
+            },
+            "content_size": {
+              "description": "Size of the artifact in bytes. Allows a recipient to anticipate transfer costs before retrieving the artifact.",
+              "type": "integer",
+              "minimum": 0
+            },
+            "content_location": {
+              "description": "One or more URIs from which the artifact may be retrieved. Multiple URIs may reflect redundant hosting, different transport protocols, or different access tiers (e.g., a public CDN and an authenticated endpoint). The presence of this field does not guarantee availability; it is informational.",
+              "oneOf": [
+                {
+                  "type": "string",
+                  "format": "uri"
+                },
+                {
+                  "type": "array",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "string",
+                    "format": "uri"
+                  }
+                }
+              ]
+            },
+            "filename": {
+              "description": "The original filename of the artifact at the time of wrapping. For artifacts using the externalized SAID algorithm (xSAID), this field SHOULD reflect the saidified filename including the embedded SAID.",
+              "type": "string"
+            },
+            "description": {
+              "description": "A human-readable description of the artifact's content or significance. Not intended for machine interpretation.",
+              "type": "string"
+            },
+            "provenance": {
+              "description": "A human-readable statement of how the artifact was obtained or created — for example, 'Captured by device AID EX... at 2025-03-01T09:00:00Z', 'Downloaded from https://...', or 'Received via email from ...'. For machine-verifiable provenance, use an ACDC edge instead.",
+              "type": "string"
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "r": {
+      "oneOf": [
+        {
+          "description": "Rules section SAID (compact form)",
+          "type": "string"
+        },
+        {
+          "description": "Rules detail",
+          "type": "object",
+          "properties": {
+            "d": {
+              "description": "SAID of rules block",
+              "type": "string"
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    }
+  },
+  "additionalProperties": true
+}

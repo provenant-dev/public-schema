@@ -6,7 +6,7 @@ on:
 
 jobs:
   check-schemas:
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_TYPE }}
     permissions:
       contents: read
       pull-requests: write

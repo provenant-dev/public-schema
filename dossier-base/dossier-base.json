@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "EFf_1uI94VBDwHH7yEkyWUq3jtWy1HXCvG5YYY1DNWfW",
+  "title": "Dossier (Base)",
+  "description": "Base schema for verifiable dossiers \u2014 issuer-curated, ACDC-native collections of evidence with no issuee. Any schema that derives from this one (via an allOf $ref to this schema's SAID) is considered a dossier schema.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "v",
+    "d",
+    "i",
+    "s",
+    "a",
+    "e"
+  ],
+  "properties": {
+    "v": {
+      "type": "string",
+      "description": "ACDC version string."
+    },
+    "d": {
+      "type": "string",
+      "description": "SAID of the dossier ACDC."
+    },
+    "u": {
+      "type": "string",
+      "description": "Optional salt/nonce supporting blinded or graduated disclosure."
+    },
+    "i": {
+      "type": "string",
+      "description": "AID of the issuer \u2014 the curator who attests to the composition of the evidence collection."
+    },
+    "rd": {
+      "type": "string",
+      "description": "SAID of the issuance/revocation registry, if one is in use."
+    },
+    "s": {
+      "type": "string",
+      "description": "SAID of the schema to which this dossier conforms."
+    },
+    "a": {
+      "description": "Proximate metadata about the dossier itself. MUST NOT carry primary evidence (which belongs in `e`). SHOULD NOT include an `i` (issuee) field.",
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "Compact form: SAID of the attributes block."
+        },
+        {
+          "type": "object",
+          "additionalProperties": true,
+          "required": [
+            "d",
+            "dt"
+          ],
+          "properties": {
+            "d": {
+              "type": "string",
+              "description": "SAID of this attributes block."
+            },
+            "dt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Issuance date-time of the dossier."
+            },
+            "assemble_dt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "When the evidence collection was assembled (may precede issuance)."
+            },
+            "assembler": {
+              "type": "string",
+              "description": "AID or human-readable name of the assembler, if distinct from the issuer."
+            },
+            "purpose": {
+              "type": "string",
+              "description": "Plain-language statement of why the dossier was assembled."
+            },
+            "ref": {
+              "type": "string",
+              "description": "External reference identifier (case number, docket, transaction ID, etc.)."
+            },
+            "gov": {
+              "type": "string",
+              "description": "SAID or URI of the governance framework under which the dossier was assembled."
+            },
+            "evt_dt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "When the documented event or incident occurred."
+            },
+            "evt_loc": {
+              "description": "Where the event or subject matter occurred. Format is domain-dependent."
+            },
+            "jur": {
+              "description": "The legal or regulatory jurisdiction (not a geographic location) within which the dossier's subject matter falls, or under whose authority the evidence was collected. Expressed as an ISO 3166-1 alpha-2 country code identifying the sovereign jurisdiction, optionally extended with an ISO 3166-2 subdivision code identifying a sub-jurisdiction (e.g., `US-TX`, `FR`, `CA-ON`). MAY be an array where multiple jurisdictions apply.",
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1
+                }
+              ]
+            },
+            "class": {
+              "type": "string",
+              "description": "Domain-dependent category or type identifier (offense code, NTSB event type, case type, etc.)."
+            },
+            "phase": {
+              "type": "string",
+              "description": "Procedural maturity at time of issuance (e.g., preliminary, factual, final)."
+            },
+            "gov_rules": {
+              "type": "string",
+              "description": "SAID or URI of the procedural ruleset that governed evidence collection."
+            }
+          }
+        }
+      ]
+    },
+    "e": {
+      "description": "Edges \u2014 references to external evidence and (optionally) prior versions, annotations, or joint-issuance operator groups. Primary evidence MUST enter the dossier through this section, not through `a`.",
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "Compact form: SAID of the edges block."
+        },
+        {
+          "type": "object",
+          "additionalProperties": true,
+          "required": [
+            "d"
+          ],
+          "properties": {
+            "d": {
+              "type": "string",
+              "description": "SAID of this edges block."
+            }
+          }
+        }
+      ]
+    },
+    "r": {
+      "description": "Rules block, if any.",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "additionalProperties": true
+        }
+      ]
+    }
+  }
+}

@@ -1,8 +1,12 @@
-## Org Vet Credentials
+## OVC Org Identity Credential
 
 ### Purpose
 
-This credential asserts with an explicit level of assurance the existence and attributes of an organization. It is issued to a cryptographic identifier controlled by the org, allowing the org to authenticate itself on the basis of the credential. (The [LE vLEI](https://docs.origincloud.net/start/concepts/creds/vleis) is essentially an org vet credential at LoA 3, but its schema varies slightly to express some GLEIF governance requirements.)
+This credential **connects different identifiers for the same organization**, binding legal entity identity to a cryptographic identifier (AID). It is issued to an AID that is provably controlled by the named legal entity, allowing verifiers to confirm that the AID belongs to a real, legally-recognized organization.
+
+This is the foundational trust anchor for the OVC ecosystem. Brand owner credentials, telephone number allocation credentials, and campaign credentials all trace back to an org identity credential as proof that the parties involved are real, accountable legal entities — not anonymous actors.
+
+The OVC Org Identity Credential is analogous in intent to the [LE vLEI](https://docs.origincloud.net/start/concepts/creds/vleis) defined by GLEIF (which maps to LoA 3), but its schema is designed to be simpler and to accommodate a wider range of national registry sources.
 
 ![suggested org vet visual](org-vet-256.png)<br>
 Suggested visual: [svg](org-vet.svg) | [256 px](org-vet-256.png) | [128 px](org-vet-128.png) | [64 px](org-vet-64.png) | [32 px](org-vet-32.png)
@@ -25,9 +29,57 @@ LoA | intended meaning | verification procedures | mappings
 
 ### Schema
 
-See [org-vet.schema.json](org-vet.schema.json) and also [rules.json](rules.json).
+See [ovc-org-vet.schema.json](ovc-org-vet.schema.json).
 
-### Governance Framework
+### Legal identifiers (`legalIdentifiers`)
 
-These credentials are governed by rules to enhance assurance, discourage abuse, and keep use cases crisp. The current rules are stated in [rules.json](rules.json) and are identified by SAID `EFthNcTE20MLMaCOoXlSmNtdooGEbZF8uGmO5G85eMSF`. New governance frameworks can be written that supplement these rules; see the `gfw` field in the schema. It is also possible to modify or override these rules, by placing a different value in the `r` field. The act of issuing or receiving a GCD credential constitutes binding acceptance of the rules.
+The `legalIdentifiers` field lists the external identifiers the vetter used to confirm the organization's existence and attributes at the time of issuance. Each entry has a `type` (the registry or source) and a `value` (the identifier within that registry).
+
+**At least one identifier should be globally unambiguous and portable across jurisdictions** — typically an LEI. National registry IDs (like UK Companies House `gb` or Swiss `che` numbers) are also valid and can coexist with the LEI.
+
+Domain names and social media handles are intentionally excluded: they do not unambiguously identify a legal entity across jurisdictions.
+
+Examples of valid types:
+
+| type | example value | source |
+|---|---|---|
+| `lei` | `5493001KJTIIGC8Y1R12` | GLEIF (ISO 17442) |
+| `uk-crn` | `01234567` | UK Companies House |
+| `che` | `CHE-123.456.789` | Swiss UID Register |
+| `us-ein` | `12-3456789` | US IRS EIN |
+| `duns` | `123456789` | Dun & Bradstreet |
+| `edgar` | `0001234567` | US SEC EDGAR |
+
+### Levels of Assurance (`LOA`)
+
+The `LOA` field is a positive number where larger values denote higher assurance. Integer values represent defined tiers; decimal sub-values (e.g., 2.1) allow nuance within a tier. Verifiers should accept any credential where `LOA >= their required threshold`.
+
+| LOA | Informal name | Intended meaning |
+|---|---|---|
+| 1 | Bronze | Basic proof of control + authorization of requester; no claim about legalities, tools, or governance. |
+| 2 | Silver | Cryptographic proof of control + legal accountability and tooling; no claim about governance or competence. |
+| 3 | Gold | Full legal signing authority proven; multisig signing committee; ceremony with no MITM. Equivalent to LE vLEI (GLEIF). |
+| 4 | Platinum | TBD — reserved for hardware security or specialized org attributes (e.g., security clearance). |
+
+### Edge structure
+
+The `e` (edges) block is optional. When present, it may contain:
+
+| Edge | Required in block? | Purpose |
+|---|---|---|
+| `issuer` | No | Links to an identity credential proving the identity of the issuing vetter (OVC). Uses `I2I` operator — the issuer AID of this credential must be the issuee AID of the referenced credential. |
+
+### Rules and governance
+
+The `r` (rules) block uses citation-style rules inherited from the credential design: the listed legal identifiers are citations — they point to external registry records. The rules make explicit that:
+
+- Pointing to an identifier does **not** imply endorsement of or agreement with the cited content (`onlyCommitToPoint`).
+- The credential is not meant to be used in isolation; its semantics are communicated via referencing ACDCs (`useViaEdges`).
+- Verifying the authenticity of the cited external data is the verifier's responsibility (`undefinedVerification`).
+- Revocation of the credential and revocation of the cited data are independent events (`undefinedRevocation`).
+- A `governance` field must identify the governance framework under which the credential was issued.
+
+### Multichannel readiness
+
+This credential is entirely channel-agnostic. It asserts the legal identity of an organization, regardless of how that organization communicates (voice, SMS, web, etc.). It is a building block used by channel-specific credentials, not a channel-specific credential itself.
 

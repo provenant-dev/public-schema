@@ -1,11 +1,10 @@
 {
-  "$id": "EHFdm3U_4nML6lo-q_xDTO8183hC9HlWif2l4ycNo8TW",
+  "$id": "EJZYoZAJGX29_Z_wKSw1IK8Ad236nvTlHVdPMsd1m3n6",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "OVC Identity Credential",
-  "description": "Authenticate an org with an explicit level of assurance.",
+  "title": "OVC Org Identity Credential",
+  "description": "Connects different identifiers for the same organization, binding legal entity identity to a cryptographic identifier.",
   "type": "object",
-  "credentialType": "orgVet",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "required": [
     "v",
     "d",
@@ -17,89 +16,194 @@
   ],
   "properties": {
     "v": {
-      "description": "Version string using ACDC conventions",
-      "type": "string"
+      "description": "Version string using ACDC conventions, encoding protocol, serialization, and size.",
+      "type": "string",
+      "pattern": "^ACDC[0-9]{2}[A-Z]{4}[0-9a-f]{6}_$",
+      "examples": [
+        "ACDC10JSON000345_"
+      ]
     },
     "d": {
-      "description": "SAID of the credential",
-      "type": "string"
+      "description": "SAID of the credential (Blake3-256 digest in CESR compact encoding).",
+      "type": "string",
+      "pattern": "^E[A-Za-z0-9_-]{43}$",
+      "examples": [
+        "EBwNam2e0mYdTx0i9xv78AIm16g1XCkQO8f8yJXaxmJC"
+      ]
+    },
+    "u": {
+      "description": "A salty nonce (high-entropy random value) used to prevent rainbow-table attacks on the credential SAID.",
+      "type": "string",
+      "examples": [
+        "0AHcgNghkDaG7ts1Bv8wkv3b"
+      ]
     },
     "i": {
-      "description": "Identifier of the issuer",
-      "type": "string"
+      "description": "AID of the issuer (the party asserting the org identity vetting).",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{44}$",
+      "examples": [
+        "EDC0Sj0CPYd70zUSY2ehvm7Z4kwZigugiA84wuS7lK2H",
+        "BCmx-dBiozRlK5MfRnznAHl9kmXjB3t-zxrE3hIIYkeS"
+      ]
     },
     "ri": {
-      "description": "Issuer's ACDC status registry",
-      "type": "string"
+      "description": "SAID of the issuer's ACDC credential status registry.",
+      "type": "string",
+      "pattern": "^E[A-Za-z0-9_-]{43}$",
+      "examples": [
+        "EOkdwKgeEF-Ww2d61uhHjAo13rjJROdbdIaxORQJRV2G"
+      ]
     },
     "s": {
-      "description": "SAID of this schema",
-      "type": "string"
+      "description": "SAID of this schema (Blake3-256 digest in CESR compact encoding).",
+      "type": "string",
+      "pattern": "^E[A-Za-z0-9_-]{43}$",
+      "examples": [
+        "ENPE4hUQ8Peu84tEcCni3koOQFOnBrDB0rg_at2NRhV9"
+      ]
     },
     "a": {
-      "$id": "ELtdYgSHM9VElQtjd4P19IB24HH8PQZGbEctOjmP69QE",
-      "description": "Attributes block",
-      "type": "object",
-      "required": [
-        "d",
-        "dt"
-      ],
-      "properties": {
-        "d": {
-          "description": "SAID of attributes block",
+      "oneOf": [
+        {
+          "description": "Attributes block SAID",
           "type": "string"
         },
-        "dt": {
-          "description": "Issuance date (when the ACDC was signed).",
-          "format": "date-time",
-          "type": "string"
-        },
-        "loa": {
-          "description": "Level of assurance.",
-          "type": "number"
-        },
-        "lids": {
-          "description": "Array of linked identifiers (LIDs) that vetter claims were able to act as references for this legal entity when the org was vetted. At least one item in this list should be globally unambigious and portable across jurisdictions (e.g., an LEI). Others may come from national registries, OpenCorporates, EDGAR, Dun & Bradstreet, a stock exchange, a LinkedIn profile, a social media handle, a domain name, etc. The nature of individual item is detectable by regex match.",
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "examples": [
-              "5493001KJTIIGC8Y1R12",
-              "gb/01234567",
-              "CHE-123.456.789",
-              "12-345-6789",
-              "acmespacetravel.biz"
-            ],
-            "type": "string"
-          }
+        {
+          "$id": "EIwSpdw2QNuJqli8PY12CB3h4VeusvUn6fAyY5sCR0zg",
+          "description": "Attributes block",
+          "type": "object",
+          "required": [
+            "d",
+            "i",
+            "dt"
+          ],
+          "properties": {
+            "d": {
+              "description": "SAID of the attributes block (Blake3-256 digest in CESR compact encoding).",
+              "type": "string",
+              "pattern": "^E[A-Za-z0-9_-]{43}$",
+              "examples": [
+                "ELtdYgSHM9VElQtjd4P19IB24HH8PQZGbEctOjmP69QE"
+              ]
+            },
+            "u": {
+              "description": "A salty nonce for the attributes block, enabling selective disclosure.",
+              "type": "string",
+              "examples": [
+                "0AHcgNghkDaG7ts1Bv8wkv3b"
+              ]
+            },
+            "i": {
+              "description": "AID of the legal entity (issuee) whose identity was vetted.",
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{44}$",
+              "examples": [
+                "EAZz0-cvLBLfqw3TRo-J0kBzM1TEwQ6a_v_892uH3Yjz"
+              ]
+            },
+            "dt": {
+              "description": "Issuance date-time (when the ACDC was signed), as an ISO-8601 datetime string with timezone.",
+              "type": "string",
+              "format": "date-time",
+              "examples": [
+                "2024-01-15T10:30:00.000000+00:00"
+              ]
+            },
+            "LOA": {
+              "description": "Level of Assurance \u2014 a positive number where larger values denote higher assurance (1=bronze, 2=silver, 3=gold). Integer values represent defined tiers; decimal sub-values (e.g., 2.1) allow nuance within a tier. Verifiers should accept any credential where LOA is >= their required threshold.",
+              "type": "number",
+              "minimum": 0,
+              "exclusiveMinimum": 0,
+              "examples": [
+                1,
+                2,
+                3
+              ]
+            },
+            "LEI": {
+              "description": "Legal Entity Identifier (LEI) \u2014 a globally unique 20-character alphanumeric code conforming to ISO 17442.",
+              "type": "string",
+              "pattern": "^[A-Z0-9]{20}$",
+              "examples": [
+                "5493001KJTIIGC8Y1R12345678"
+              ]
+            },
+            "legalIdentifiers": {
+              "description": "Array of legal identifiers associated with this organization, as referenced during vetting. Each item has a type and value, making the identity source explicit. Sources may include national registries, OpenCorporates, EDGAR, Dun & Bradstreet, or a stock exchange. At least one identifier should be globally unambiguous and portable across jurisdictions.",
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "description": "Category or source of the identifier (e.g., lei, gleif, gb, che, duns, edgar, domain, linkedin, etc.)",
+                    "type": "string"
+                  },
+                  "value": {
+                    "description": "The identifier value",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "value"
+                ],
+                "additionalProperties": true,
+                "examples": [
+                  {
+                    "type": "lei",
+                    "value": "5493001KJTIIGC8Y1R12"
+                  },
+                  {
+                    "type": "uk-crn",
+                    "value": "01234567"
+                  },
+                  {
+                    "type": "che",
+                    "value": "CHE-123.456.789"
+                  },
+                  {
+                    "type": "us-ein",
+                    "value": "12-3456789"
+                  }
+                ]
+              }
+            }
+          },
+          "additionalProperties": true
         }
-      },
-      "additionalProperties": true
+      ]
     },
     "r": {
       "oneOf": [
         {
-          "description": "SAID of rules block",
+          "description": "SAID of rules block (Blake3-256 digest in CESR compact encoding)",
           "type": "string",
-          "const": "EM6kWxMNL9BFm0ReegqQfNJLw8OZAfn2ZxcjWs4Ceifh",
-          "format": "cesr"
+          "format": "cesr",
+          "pattern": "^E[A-Za-z0-9_-]{43}$"
         },
         {
-          "$id": "EADZYJg0S3xZEKlhAChF8smXRFtVmer5ocBXQ3uuQt_h",
+          "$id": "EM45oGHaEdd_YIyGIFtNy5RVXRtsDSyj4SaOokXW6Qrr",
           "description": "Rules detail",
           "type": "object",
           "required": [
             "d",
-            "onlyCommitToPoint",
-            "useViaEdges",
-            "undefinedVerification",
-            "undefinedRevocation"
+            "governance"
           ],
           "properties": {
             "d": {
-              "description": "SAID of rules block",
-              "type": "string"
+              "description": "SAID of the rules block (Blake3-256 digest in CESR compact encoding).",
+              "type": "string",
+              "pattern": "^E[A-Za-z0-9_-]{43}$"
+            },
+            "governance": {
+              "description": "Statement identifying the governance framework under which this credential was issued.",
+              "type": "string",
+              "examples": [
+                "Issued under governance published at https://provenant.net/governance/ovc-org-identity/"
+              ]
             },
             "onlyCommitToPoint": {
               "description": "All parties agree that the citation, in and of itself, only commits the issuer to point at content in a way that makes the issuer and the target verifiable. Unless or until context, governance, or other actions prove intent, the citation does NOT imply that the issuer owns, endorses, or agrees with the content.",
@@ -117,7 +221,8 @@
               "description": "Unless or until governance specifies otherwise, all parties agree that there is no defined relationship between the revocation status of a citation and that of cited data. Cited data may be disavowed or revoked by its creator without a citation being revoked, and vice versa.",
               "type": "string"
             }
-          }
+          },
+          "additionalProperties": true
         }
       ]
     },
@@ -128,34 +233,45 @@
           "type": "string"
         },
         {
-          "$id": "EKk5ejftEjNwjRhw2lYQAwKwvRWapqCNEOx3gUR7WW7n",
+          "$id": "EC0EaCg4W4X8GP-t0zv_xOOOH-YCQ0BSmu-3AJQhE8Sl",
           "description": "Edges detail",
           "type": "object",
           "required": [
-            "d",
-            "issuer"
+            "d"
           ],
           "properties": {
             "d": {
-              "description": "Edges block SAID",
-              "type": "string"
+              "description": "SAID of the edges block (Blake3-256 digest in CESR compact encoding).",
+              "type": "string",
+              "pattern": "^E[A-Za-z0-9_-]{43}$",
+              "examples": [
+                "EKk5ejftEjNwjRhw2lYQAwKwvRWapqCNEOx3gUR7WW7n"
+              ]
             },
             "issuer": {
               "description": "Edge credential that proves the identity of the issuer.",
               "type": "object",
               "properties": {
                 "n": {
-                  "description": "SAID of a credential that proves the identity of the issuer",
-                  "type": "string"
+                  "description": "SAID of a credential that proves the identity of the issuer.",
+                  "type": "string",
+                  "pattern": "^E[A-Za-z0-9_-]{43}$",
+                  "examples": [
+                    "EBwNam2e0mYdTx0i9xv78AIm16g1XCkQO8f8yJXaxmJC"
+                  ]
                 },
                 "s": {
-                  "description": "SAID of credential schema that proves the identity of the issuer",
-                  "type": "string"
+                  "description": "SAID of the schema that the issuer identity credential must satisfy.",
+                  "type": "string",
+                  "pattern": "^E[A-Za-z0-9_-]{43}$",
+                  "examples": [
+                    "ENPE4hUQ8Peu84tEcCni3koOQFOnBrDB0rg_at2NRhV9"
+                  ]
                 },
                 "o": {
-                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "description": "Issuer-To-Issuee, operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
                   "type": "string",
-                  "const": "I2I"
+                  "default": "I2I"
                 }
               },
               "additionalProperties": false,
@@ -166,7 +282,7 @@
               ]
             }
           },
-          "additionalProperties": false
+          "additionalProperties": true
         }
       ]
     }

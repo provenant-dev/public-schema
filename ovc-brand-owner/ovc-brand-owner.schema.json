@@ -1,5 +1,5 @@
 {
-  "$id": "EE-IJkh0vnPivMWI0_qQCC2eirjnx1pLPdHDGg5Wk4_K",
+  "$id": "EImfvpfRx4YKhTzAzdZzCCjSNmwtY5yw9QlpZirG6OUa",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "OVC Brand Owner Credential",
   "description": "Issued to a legal entity that has the right to use a brand because it is the direct owner or a licensee of that brand.",
@@ -155,7 +155,7 @@
           "type": "string"
         },
         {
-          "$id": "EOV-sQoD3X--gy6W1foZn_1uGadqXFeTy8hDWkabtyY_",
+          "$id": "EFJV3CKaX9-_cbp7x1RWxhWQrlbo-Qe6r4HL2gUeTvx7",
           "description": "Edges detail",
           "type": "object",
           "required": [
@@ -191,11 +191,14 @@
                   ]
                 },
                 "o": {
-                  "description": "Issuer-To-Issuee operator: the issuer AID of this ACDC MUST be the issuee AID of the node this edge points to.",
+                  "description": "Edge operator. I2I: issuer AID must be the issuee AID of the far node. NI2I: no such requirement. DI2I: delegated issuer AID must be issuee AID of the far node. NOT: inverts the validity of the edge.",
                   "type": "string",
                   "default": "I2I",
-                  "examples": [
-                    "I2I"
+                  "enum": [
+                    "I2I",
+                    "NI2I",
+                    "DI2I",
+                    "NOT"
                   ]
                 }
               },
@@ -227,11 +230,14 @@
                   ]
                 },
                 "o": {
-                  "description": "Issuer-To-Issuee operator: the issuer AID of this ACDC MUST be the issuee AID of the node this edge points to.",
+                  "description": "Edge operator. I2I: issuer AID must be the issuee AID of the far node. NI2I: no such requirement. DI2I: delegated issuer AID must be issuee AID of the far node. NOT: inverts the validity of the edge.",
                   "type": "string",
                   "default": "I2I",
-                  "examples": [
-                    "I2I"
+                  "enum": [
+                    "I2I",
+                    "NI2I",
+                    "DI2I",
+                    "NOT"
                   ]
                 }
               },

@@ -12,7 +12,7 @@ See [ovc-brand-owner.schema.json](ovc-brand-owner.schema.json).
 
 ### Required and optional attributes
 
-Only `i` (issuee AID) and `dt` (issuance datetime) are required in the attributes block. `vcard` and `goals` are both optional, though in practice a brand owner credential without a `vcard` is of limited use. Both fields may be selectively disclosed.
+The attributes block requires `d` (attributes SAID), `i` (issuee AID), and `dt` (issuance datetime). `vcard` and `goals` are both optional, though in practice a brand owner credential without a `vcard` is of limited use. Both fields may be selectively disclosed.
 
 ### Brand attributes (`vcard`)
 
@@ -54,8 +54,6 @@ This field is the primary mechanism for **constraining channel and purpose**. Fo
 This allows a single OVC Brand Owner Credential to serve multiple channels without schema proliferation.
 
 ### Edge structure
-
-The `e` (edges) block contains:
 
 The `e` (edges) block is optional. When present, it may contain:
 

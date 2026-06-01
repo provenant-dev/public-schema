@@ -1,5 +1,5 @@
 {
-  "$id": "EJZYoZAJGX29_Z_wKSw1IK8Ad236nvTlHVdPMsd1m3n6",
+  "$id": "EBO8BH1epA3PnVEotSgU2bn2eAY2AI9jXFQZ6mr5P5rA",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "OVC Org Identity Credential",
   "description": "Connects different identifiers for the same organization, binding legal entity identity to a cryptographic identifier.",
@@ -70,7 +70,7 @@
           "type": "string"
         },
         {
-          "$id": "EIwSpdw2QNuJqli8PY12CB3h4VeusvUn6fAyY5sCR0zg",
+          "$id": "EOabMjwOpHWrJ5vJU0QNLoIfTKHpAviw547Cbl947swq",
           "description": "Attributes block",
           "type": "object",
           "required": [
@@ -126,7 +126,7 @@
               "type": "string",
               "pattern": "^[A-Z0-9]{20}$",
               "examples": [
-                "5493001KJTIIGC8Y1R12345678"
+                "5493001KJTIIGC8Y1R12"
               ]
             },
             "legalIdentifiers": {
@@ -233,7 +233,7 @@
           "type": "string"
         },
         {
-          "$id": "EC0EaCg4W4X8GP-t0zv_xOOOH-YCQ0BSmu-3AJQhE8Sl",
+          "$id": "EJh-O6xFidE8dcOakW95WVIC0n5oqVVkuwXDNr5PZcPU",
           "description": "Edges detail",
           "type": "object",
           "required": [
@@ -269,9 +269,15 @@
                   ]
                 },
                 "o": {
-                  "description": "Issuer-To-Issuee, operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "description": "Edge operator. I2I: issuer AID must be the issuee AID of the far node. NI2I: no such requirement. DI2I: delegated issuer AID must be issuee AID of the far node. NOT: inverts the validity of the edge.",
                   "type": "string",
-                  "default": "I2I"
+                  "default": "I2I",
+                  "enum": [
+                    "I2I",
+                    "NI2I",
+                    "DI2I",
+                    "NOT"
+                  ]
                 }
               },
               "additionalProperties": false,
@@ -287,5 +293,5 @@
       ]
     }
   },
-  "additionalProperties": true
+  "additionalProperties": false
 }

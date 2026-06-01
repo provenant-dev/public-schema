@@ -1,5 +1,5 @@
 {
-  "$id": "EIEe3CAVep2SfJFidtPJNwJtfEAwYt2SQ4vln2nl-rrf",
+  "$id": "EJ9YoTJ81TcQ_pS9GmU2UbVURRm3ylnx_Wr1GbKjg0QP",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Telephone Number Allocation Credential",
   "description": "Telephone Number Allocation credential proves an enterprise has the right to use (RTU) specific telephone numbers, either directly from a regulator or through a telephone number provider.",
@@ -199,7 +199,7 @@
           "type": "string"
         },
         {
-          "$id": "EGymY-9Iie1aYzIT5_SN9OniMb4dJRSt0jzfOk57WRo6",
+          "$id": "EAEskU02OaJCo5mJ43PaxSkl7WmDmMimvT5PiDUVkQe-",
           "description": "Edges block",
           "type": "object",
           "properties": {
@@ -239,7 +239,7 @@
                 "o": {
                   "description": "Issuer-To-Issuee, operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
                   "type": "string",
-                  "default": "I2I"
+                  "const": "I2I"
                 }
               },
               "additionalProperties": false
@@ -265,8 +265,14 @@
                   ]
                 },
                 "o": {
-                  "description": "Not-Issuer-To-Issuee, operator indicating Issuer AID of this ACDC MAY or MAY not be the Issuee AID of the node that this Edge points to",
+                  "description": "Edge operator. I2I: issuer AID must be the issuee AID of the far node. NI2I: no such requirement. DI2I: delegated issuer AID must be issuee AID of the far node. NOT: inverts the validity of the edge.",
                   "type": "string",
+                  "enum": [
+                    "I2I",
+                    "NI2I",
+                    "DI2I",
+                    "NOT"
+                  ],
                   "default": "NI2I"
                 }
               },
@@ -292,11 +298,12 @@
           "type": "string"
         },
         {
-          "$id": "EHrfdac4wurHKKoMsdBxgbYttUYXnsGVvmUL_J9xMJKt",
+          "$id": "EAmHGceHi6XHAXzbT1jwkgxd8_2k8QzlOE-VePPPFRal",
           "description": "Rules detail",
           "type": "object",
           "required": [
             "d",
+            "noSharing",
             "governance"
           ],
           "properties": {

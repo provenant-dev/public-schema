@@ -1,5 +1,5 @@
 {
-  "EK3YbEFp3zUuHPsGrLRzwr6zWBXcOFJNTTBqezXd_2yf": "a2p-campaign/a2p-campaign.schema.json",
+  "EOEjCWfZ-zRXj3E7zw0tA2Cgwmr6skydVTBsNZSgx3DX": "a2p-campaign/a2p-campaign.schema.json",
   "EKR1nFV0JvRhc4xkhzlZJfpN_taaspipcZWWSLj37Fdk": "aegis-std-vetting/aegis-std-vetting.schema.json",
   "EPhWFgeOy8g7yRy-Xtyvbdieqvl_3YVXNHMgTEZuJOWh": "ai-coder/ai-coder.schema.json",
   "EBCnd7qk82wLBOgFukdmsdkksAuPpmzt5-eg9YKWWP3j": "ai-user-coca/ai-user-coca.schema.json",
@@ -26,5 +26,5 @@
   "EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao": "vLEI/acdc/qualified-vLEI-issuer-vLEI-credential.json",
   "EMhvwOlyEJ9kN4PrwCpr9Jsv7TxPhiYveZ0oP3lJzdEi": "vLEI/acdc/verifiable-ixbrl-report-attestation.json",
   "ECYorXkheU7YsXZkYLGtvBOxEZ6alS5H5FJRn0tgDXV0": "vLEI/acdc/verifiable-ixbrl-report-d6-attestation.json",
-  "EH1jN4U4LMYHmPVI4FYdZ10bIPR7YWKp8TDdZ9Y9Al-P": "vvp-dossier/vvp-dossier.schema.json"
+  "EOumjoChd0G2TFnWTOpL6yd5eGbQeeentcjBDNXjPqdX": "vvp-dossier/vvp-dossier.schema.json"
 }

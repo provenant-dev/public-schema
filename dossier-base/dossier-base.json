@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "EFf_1uI94VBDwHH7yEkyWUq3jtWy1HXCvG5YYY1DNWfW",
+  "$id": "EJzCn6uLALHWKDkljAWHjRViG8iFhjtf9lZ7ruRYIbbY",
   "title": "Dossier (Base)",
   "description": "Base schema for verifiable dossiers \u2014 issuer-curated, ACDC-native collections of evidence with no issuee. Any schema that derives from this one (via an allOf $ref to this schema's SAID) is considered a dossier schema.",
   "type": "object",
@@ -62,7 +62,7 @@
               "format": "date-time",
               "description": "Issuance date-time of the dossier."
             },
-            "assemble_dt": {
+            "assembly_dt": {
               "type": "string",
               "format": "date-time",
               "description": "When the evidence collection was assembled (may precede issuance)."
@@ -106,7 +106,7 @@
                 }
               ]
             },
-            "class": {
+            "cls": {
               "type": "string",
               "description": "Domain-dependent category or type identifier (offense code, NTSB event type, case type, etc.)."
             },
@@ -152,7 +152,16 @@
         },
         {
           "type": "object",
-          "additionalProperties": true
+          "additionalProperties": true,
+          "required": [
+            "d"
+          ],
+          "properties": {
+            "d": {
+              "type": "string",
+              "description": "SAID of this edges block."
+            }
+          }
         }
       ]
     }

@@ -1,240 +1,330 @@
 {
-  "$id": "EH1jN4U4LMYHmPVI4FYdZ10bIPR7YWKp8TDdZ9Y9Al-P",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Verifiable Voice Dossier Credential",
-  "description": "Attestation credential, issued by the accountable party, that assembles all of the evidence required as per the Verifiable Voice Protocol",
-  "type": "object",
-  "credentialType": "VvpDossierCredential",
-  "version": "1.0.0",
-  "required": [
-    "v",
-    "d",
-    "i",
-    "ri",
-    "s",
-    "a",
-    "e"
-  ],
-  "properties": {
-    "v": {
-      "description": "Version",
-      "type": "string"
+  "$id": "EOumjoChd0G2TFnWTOpL6yd5eGbQeeentcjBDNXjPqdX",
+  "title": "Verifiable Voice Dossier",
+  "description": "Dossier issued by the accountable party that assembles all evidence required as per the Verifiable Voice Protocol.",
+  "version": "2.0.0",
+  "allOf": [
+    {
+      "description": "Reference to dossier base schema.",
+      "$ref": "EJzCn6uLALHWKDkljAWHjRViG8iFhjtf9lZ7ruRYIbbY"
     },
-    "d": {
-      "description": "Credential SAID",
-      "type": "string"
-    },
-    "i": {
-      "description": "Issuer AID",
-      "type": "string"
-    },
-    "ri": {
-      "description": "Credential status registry",
-      "type": "string"
-    },
-    "s": {
-      "description": "Schema SAID",
-      "type": "string"
-    },
-    "a": {
-      "$id": "EAwY8VfT_6wtHBzpHhK01cbFSJLLd3wLUZwP8wcfHR7M",
-      "description": "Attributes block",
+    {
       "type": "object",
-      "properties": {
-        "d": {
-          "description": "Attributes block SAID",
-          "type": "string"
-        },
-        "dt": {
-          "description": "Issuance datetime, ISO-8601 datetime string",
-          "format": "date-time",
-          "type": "string"
-        },
-        "name": {
-          "description": "A human-readable name for the dossier credential, useful for identification or labeling. This field is optional",
-          "type": "string"
-        }
-      },
-      "additionalProperties": false,
+      "additionalProperties": true,
       "required": [
+        "v",
         "d",
-        "dt"
-      ]
-    },
-    "e": {
-      "oneOf": [
-        {
-          "description": "Edges section SAID",
+        "i",
+        "ri",
+        "s",
+        "a",
+        "e"
+      ],
+      "properties": {
+        "v": {
+          "description": "Version",
           "type": "string"
         },
-        {
-          "$id": "EH8ahNIz4OhynHwrs0L4eUX3ZSeWADEoJS7d_D6hUHQq",
-          "description": "Edges detail",
-          "type": "object",
-          "required": [
-            "d",
-            "vetting",
-            "alloc",
-            "tnalloc",
-            "delsig"
-          ],
-          "properties": {
-            "d": {
-              "description": "Edges section SAID",
-              "type": "string"
+        "d": {
+          "description": "Credential SAID",
+          "type": "string"
+        },
+        "i": {
+          "description": "Issuer AID",
+          "type": "string"
+        },
+        "ri": {
+          "description": "Credential status registry",
+          "type": "string"
+        },
+        "s": {
+          "description": "Schema SAID",
+          "type": "string"
+        },
+        "a": {
+          "description": "Proximate metadata about the dossier itself.",
+          "oneOf": [
+            {
+              "type": "string",
+              "description": "Compact form: SAID of the attributes block."
             },
-            "vetting": {
-              "description": "Chain to a credential proves the identity of the accountable party",
+            {
+              "$id": "EAwY8VfT_6wtHBzpHhK01cbFSJLLd3wLUZwP8wcfHR7M",
+              "description": "Attributes block",
               "type": "object",
+              "additionalProperties": true,
               "required": [
-                "n",
-                "s",
-                "o"
+                "d",
+                "dt",
+                "assembly_dt",
+                "purpose"
               ],
               "properties": {
-                "n": {
-                  "description": "SAID of credential that proves the identity of the issuer",
+                "d": {
+                  "description": "Attributes block SAID",
                   "type": "string"
                 },
-                "s": {
-                  "description": "SAID of the vetting schema",
+                "dt": {
+                  "description": "Issuance datetime, ISO-8601 datetime string",
+                  "format": "date-time",
                   "type": "string"
                 },
-                "o": {
-                  "description": "Operator indicating issuer AID of this ACDC MAY or MAY not be the Issuee AID of this node.",
-                  "type": "string",
-                  "const": "NI2I"
-                }
-              },
-              "additionalProperties": false
-            },
-            "alloc": {
-              "description": "Chain to allocator credential for the committee that manages TN allocations at the accountable party legal entity",
-              "type": "object",
-              "required": [
-                "n",
-                "s",
-                "o"
-              ],
-              "properties": {
-                "n": {
-                  "description": "SAID of allocator auth credential",
-                  "type": "string"
-                },
-                "s": {
-                  "description": "SAID of allocator auth schema",
-                  "type": "string",
-                  "const": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o"
-                },
-                "o": {
-                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
-                  "type": "string",
-                  "const": "I2I"
-                }
-              },
-              "additionalProperties": false
-            },
-            "tnalloc": {
-              "description": "Chain to a TN allocation (RTU) credential that proves with a valid chain back to the regulator",
-              "type": "object",
-              "required": [
-                "n",
-                "s",
-                "o"
-              ],
-              "properties": {
-                "n": {
-                  "description": "SAID of TN allocation credential",
-                  "type": "string"
-                },
-                "s": {
-                  "description": "SAID of TN allocation schema",
-                  "type": "string",
-                  "const": "EFvnoHDY7I-kaBBeKlbDbkjG4BaI0nKLGadxBdjMGgSQ"
-                },
-                "o": {
-                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
-                  "type": "string",
-                  "const": "I2I"
-                }
-              },
-              "additionalProperties": false
-            },
-            "delsig": {
-              "description": "Chain to a delegated signer credential proving that the party that signed is authorized to sign on behalf of the legal entity ",
-              "type": "object",
-              "required": [
-                "n",
-                "s",
-                "o"
-              ],
-              "properties": {
-                "n": {
-                  "description": "SAID of delegated signer credential",
-                  "type": "string"
-                },
-                "s": {
-                  "description": "SAID of delegated signer schema",
-                  "type": "string",
-                  "const": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o"
-                },
-                "o": {
-                  "description": "Operator indicating issuer AID of this ACDC MAY or MAY not be the Issuee AID of this node.",
-                  "type": "string",
-                  "const": "NI2I"
-                }
-              },
-              "additionalProperties": false
-            },
-            "bownr": {
-              "description": "Chain to a brand ownership credential that proves a company has the legal right to use specific brand names, logos, and related brand assets.",
-              "type": "object",
-              "required": [
-                "n",
-                "s",
-                "o"
-              ],
-              "properties": {
-                "n": {
-                  "description": "SAID of brand ownership credential",
-                  "type": "string"
-                },
-                "s": {
-                  "description": "SAID of brand ownership schema",
-                  "type": "string"
-                },
-                "o": {
-                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
-                  "type": "string",
-                  "const": "NI2I"
-                }
-              },
-              "additionalProperties": false
-            },
-            "bproxy": {
-              "description": "Chain to a brand proxy credential that authorizes a call center to represent another company's brand when making calls on their behalf.",
-              "type": "object",
-              "required": [
-                "n",
-                "s"
-              ],
-              "properties": {
-                "n": {
-                  "description": "SAID of brand proxy credential",
-                  "type": "string"
-                },
-                "s": {
-                  "description": "SAID of brand proxy schema",
+                "name": {
+                  "description": "A human-readable name for the dossier, useful for identification or labeling.",
                   "type": "string"
                 }
-              },
-              "additionalProperties": true
+              }
             }
-          },
-          "additionalProperties": false
+          ]
+        },
+        "e": {
+          "description": "Edges \u2014 references to the VVP evidence credentials. Primary evidence MUST enter the dossier through this section.",
+          "oneOf": [
+            {
+              "type": "string",
+              "description": "Compact form: SAID of the edges block."
+            },
+            {
+              "$id": "EH8ahNIz4OhynHwrs0L4eUX3ZSeWADEoJS7d_D6hUHQq",
+              "description": "Edges block",
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "d",
+                "vetting",
+                "tnalloc",
+                "delsig"
+              ],
+              "properties": {
+                "d": {
+                  "description": "Edges block SAID",
+                  "type": "string"
+                },
+                "vetting": {
+                  "description": "Chain to a credential that proves the identity of the accountable party.",
+                  "type": "object",
+                  "required": [
+                    "n",
+                    "s",
+                    "o"
+                  ],
+                  "properties": {
+                    "n": {
+                      "description": "SAID of credential that proves the identity of the issuer",
+                      "type": "string"
+                    },
+                    "s": {
+                      "description": "SAID of the vetting schema",
+                      "type": "string"
+                    },
+                    "o": {
+                      "description": "Edge operator. I2I: issuer AID must be the issuee AID of the far node. NI2I: no such requirement. DI2I: delegated issuer AID must be issuee AID of the far node. NOT: inverts the validity of the edge.",
+                      "type": "string",
+                      "default": "NI2I",
+                      "enum": [
+                        "I2I",
+                        "NI2I",
+                        "DI2I",
+                        "NOT"
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "alloc": {
+                  "description": "Chain to allocator credential for the committee that manages TN allocations at the accountable party legal entity.",
+                  "type": "object",
+                  "required": [
+                    "n",
+                    "s",
+                    "o"
+                  ],
+                  "properties": {
+                    "n": {
+                      "description": "SAID of allocator auth credential",
+                      "type": "string"
+                    },
+                    "s": {
+                      "description": "SAID of allocator auth schema",
+                      "type": "string",
+                      "const": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o"
+                    },
+                    "o": {
+                      "description": "Edge operator. I2I: issuer AID must be the issuee AID of the far node. NI2I: no such requirement. DI2I: delegated issuer AID must be issuee AID of the far node. NOT: inverts the validity of the edge.",
+                      "type": "string",
+                      "default": "I2I",
+                      "enum": [
+                        "I2I",
+                        "NI2I",
+                        "DI2I",
+                        "NOT"
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "tnalloc": {
+                  "description": "Chain to a TN allocation (RTU) credential that proves with a valid chain back to the regulator.",
+                  "type": "object",
+                  "required": [
+                    "n",
+                    "s",
+                    "o"
+                  ],
+                  "properties": {
+                    "n": {
+                      "description": "SAID of TN allocation credential",
+                      "type": "string"
+                    },
+                    "s": {
+                      "description": "SAID of TN allocation schema",
+                      "type": "string",
+                      "const": "EFvnoHDY7I-kaBBeKlbDbkjG4BaI0nKLGadxBdjMGgSQ"
+                    },
+                    "o": {
+                      "description": "Edge operator. I2I: issuer AID must be the issuee AID of the far node. NI2I: no such requirement. DI2I: delegated issuer AID must be issuee AID of the far node. NOT: inverts the validity of the edge.",
+                      "type": "string",
+                      "default": "I2I",
+                      "enum": [
+                        "I2I",
+                        "NI2I",
+                        "DI2I",
+                        "NOT"
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "delsig": {
+                  "description": "Chain to a delegated signer credential proving that the party that signed is authorized to sign on behalf of the legal entity.",
+                  "type": "object",
+                  "required": [
+                    "n",
+                    "s",
+                    "o"
+                  ],
+                  "properties": {
+                    "n": {
+                      "description": "SAID of delegated signer credential",
+                      "type": "string"
+                    },
+                    "s": {
+                      "description": "SAID of delegated signer schema",
+                      "type": "string",
+                      "const": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o"
+                    },
+                    "o": {
+                      "description": "Edge operator. I2I: issuer AID must be the issuee AID of the far node. NI2I: no such requirement. DI2I: delegated issuer AID must be issuee AID of the far node. NOT: inverts the validity of the edge.",
+                      "type": "string",
+                      "default": "NI2I",
+                      "enum": [
+                        "I2I",
+                        "NI2I",
+                        "DI2I",
+                        "NOT"
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "bownr": {
+                  "description": "Chain to a brand ownership credential that proves a company has the legal right to use specific brand names, logos, and related brand assets.",
+                  "type": "object",
+                  "required": [
+                    "n",
+                    "s",
+                    "o"
+                  ],
+                  "properties": {
+                    "n": {
+                      "description": "SAID of brand ownership credential",
+                      "type": "string"
+                    },
+                    "s": {
+                      "description": "SAID of brand ownership schema",
+                      "type": "string"
+                    },
+                    "o": {
+                      "description": "Edge operator. I2I: issuer AID must be the issuee AID of the far node. NI2I: no such requirement. DI2I: delegated issuer AID must be issuee AID of the far node. NOT: inverts the validity of the edge.",
+                      "type": "string",
+                      "default": "NI2I",
+                      "enum": [
+                        "I2I",
+                        "NI2I",
+                        "DI2I",
+                        "NOT"
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "bproxy": {
+                  "description": "Chain to a brand proxy credential that authorizes a call center to represent another company's brand when making calls on their behalf.",
+                  "type": "object",
+                  "required": [
+                    "n",
+                    "s"
+                  ],
+                  "properties": {
+                    "n": {
+                      "description": "SAID of brand proxy credential",
+                      "type": "string"
+                    },
+                    "s": {
+                      "description": "SAID of brand proxy schema",
+                      "type": "string"
+                    },
+                    "o": {
+                      "description": "Edge operator. I2I: issuer AID must be the issuee AID of the far node. NI2I: no such requirement. DI2I: delegated issuer AID must be issuee AID of the far node. NOT: inverts the validity of the edge.",
+                      "type": "string",
+                      "default": "NI2I",
+                      "enum": [
+                        "I2I",
+                        "NI2I",
+                        "DI2I",
+                        "NOT"
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "a2pcamp": {
+                  "description": "Chain to an A2P campaign credential associated with this messaging activity.",
+                  "type": "object",
+                  "required": [
+                    "n",
+                    "s",
+                    "o"
+                  ],
+                  "properties": {
+                    "n": {
+                      "description": "SAID of A2P campaign credential",
+                      "type": "string"
+                    },
+                    "s": {
+                      "description": "SAID of A2P campaign credential schema",
+                      "type": "string"
+                    },
+                    "o": {
+                      "description": "Edge operator. I2I: issuer AID must be the issuee AID of the far node. NI2I: no such requirement. DI2I: delegated issuer AID must be issuee AID of the far node. NOT: inverts the validity of the edge.",
+                      "type": "string",
+                      "default": "NI2I",
+                      "enum": [
+                        "I2I",
+                        "NI2I",
+                        "DI2I",
+                        "NOT"
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          ]
         }
-      ]
+      }
     }
-  },
-  "additionalProperties": false
+  ]
 }

@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "EFf_1uI94VBDwHH7yEkyWUq3jtWy1HXCvG5YYY1DNWfW",
-  "title": "Dossier (Base)",
-  "description": "Base schema for verifiable dossiers \u2014 issuer-curated, ACDC-native collections of evidence with no issuee. Any schema that derives from this one (via an allOf $ref to this schema's SAID) is considered a dossier schema.",
+  "$id": "ECqmlipYuqp8LA_7WdZGt_cKP9eK3hXtHRZGNgJ7NKEx",
+  "title": "Dossier Base Schema",
+  "description": "Base schema defining the canonical structure of a Dossier ACDC. A schema S IS-A dossier iff S's top-level allOf array contains a $ref to this schema's SAID, or recursively to another schema that IS-A dossier. A dossier SHOULD NOT include an issuee; all evidence MUST be carried in e, never in a.",
   "type": "object",
   "additionalProperties": true,
   "required": [
@@ -16,83 +16,96 @@
   "properties": {
     "v": {
       "type": "string",
-      "description": "ACDC version string."
+      "description": "Version string using ACDC conventions."
     },
     "d": {
       "type": "string",
-      "description": "SAID of the dossier ACDC."
-    },
-    "u": {
-      "type": "string",
-      "description": "Optional salt/nonce supporting blinded or graduated disclosure."
+      "description": "SAID of this dossier."
     },
     "i": {
       "type": "string",
-      "description": "AID of the issuer \u2014 the curator who attests to the composition of the evidence collection."
-    },
-    "rd": {
-      "type": "string",
-      "description": "SAID of the issuance/revocation registry, if one is in use."
+      "description": "AID of the issuer."
     },
     "s": {
       "type": "string",
-      "description": "SAID of the schema to which this dossier conforms."
+      "description": "SAID of the schema applied to this dossier."
     },
-    "a": {
-      "description": "Proximate metadata about the dossier itself. MUST NOT carry primary evidence (which belongs in `e`). SHOULD NOT include an `i` (issuee) field.",
+    "u": {
+      "type": "string",
+      "description": "Optional salt for SAID blinding."
+    },
+    "rd": {
+      "type": "string",
+      "description": "Optional registry digest."
+    },
+    "r": {
+      "description": "Optional ACDC rules block. Compact form: SAID string. Expanded form: object.",
       "oneOf": [
         {
-          "type": "string",
-          "description": "Compact form: SAID of the attributes block."
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "additionalProperties": true
+        }
+      ]
+    },
+    "a": {
+      "description": "Proximate metadata block. Compact form: SAID string. Expanded form: object with metadata about the dossier itself. MUST NOT carry primary evidence.",
+      "oneOf": [
+        {
+          "type": "string"
         },
         {
           "type": "object",
           "additionalProperties": true,
           "required": [
-            "d",
-            "dt"
+            "d"
           ],
           "properties": {
             "d": {
               "type": "string",
               "description": "SAID of this attributes block."
             },
-            "dt": {
+            "assembly_dt": {
               "type": "string",
               "format": "date-time",
-              "description": "Issuance date-time of the dossier."
-            },
-            "assemble_dt": {
-              "type": "string",
-              "format": "date-time",
-              "description": "When the evidence collection was assembled (may precede issuance)."
+              "description": "ISO 8601 timestamp recording when the dossier was assembled. Distinct from the envelope issuance date, which may differ if the dossier was finalized and signed later."
             },
             "assembler": {
               "type": "string",
-              "description": "AID or human-readable name of the assembler, if distinct from the issuer."
+              "description": "AID or human-readable name of the entity that curated the evidence collection. Useful when the assembler differs from the issuer."
             },
             "purpose": {
               "type": "string",
-              "description": "Plain-language statement of why the dossier was assembled."
+              "description": "Brief human-readable statement of why the dossier was assembled and what decisions it supports. Not intended for machine interpretation."
             },
             "ref": {
               "type": "string",
-              "description": "External reference identifier (case number, docket, transaction ID, etc.)."
+              "description": "External reference identifier (case number, docket number, transaction ID) linking the dossier to a record in an external system. Intentionally untyped; meaning is governance-context-determined."
             },
             "gov": {
               "type": "string",
-              "description": "SAID or URI of the governance framework under which the dossier was assembled."
+              "description": "SAID or URI of the governance framework, policy document, or rulebook under which the dossier was assembled."
             },
             "evt_dt": {
               "type": "string",
               "format": "date-time",
-              "description": "When the documented event or incident occurred."
+              "description": "ISO 8601 timestamp of the event the dossier documents (e.g., the time of a crash, crime, filing, or transaction). Distinct from assembly_dt, which records when the evidence was curated."
             },
             "evt_loc": {
-              "description": "Where the event or subject matter occurred. Format is domain-dependent."
+              "description": "Description of where the documented event or subject matter occurred. No single format is mandated; precision varies by domain. Implementers SHOULD follow domain standards (e.g., ISO 6709 for geographic coordinates).",
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object"
+                }
+              ]
             },
             "jur": {
-              "description": "The legal or regulatory jurisdiction (not a geographic location) within which the dossier's subject matter falls, or under whose authority the evidence was collected. Expressed as an ISO 3166-1 alpha-2 country code identifying the sovereign jurisdiction, optionally extended with an ISO 3166-2 subdivision code identifying a sub-jurisdiction (e.g., `US-TX`, `FR`, `CA-ON`). MAY be an array where multiple jurisdictions apply.",
+              "description": "Legal or regulatory jurisdiction within which the dossier's subject matter falls, or under whose authority the evidence was collected. This identifies a legal/regulatory jurisdiction, not a geographic location. Expressed as an ISO 3166-1 alpha-2 country code, optionally extended with an ISO 3166-2 region code (e.g., 'US-TX', 'FR', 'CA-ON'). MAY be an array when multiple jurisdictions apply.",
               "oneOf": [
                 {
                   "type": "string"
@@ -101,33 +114,31 @@
                   "type": "array",
                   "items": {
                     "type": "string"
-                  },
-                  "minItems": 1
+                  }
                 }
               ]
             },
-            "class": {
+            "cls": {
               "type": "string",
-              "description": "Domain-dependent category or type identifier (offense code, NTSB event type, case type, etc.)."
+              "description": "Domain-dependent classification of the matter the dossier documents. Examples: a statute reference or offense code (law enforcement); an event type code (NTSB); a case type such as 'civil', 'criminal', or 'appellate' (court). SHOULD reference a controlled vocabulary; MAY be a URI identifying a vocabulary entry."
             },
             "phase": {
               "type": "string",
-              "description": "Procedural maturity at time of issuance (e.g., preliminary, factual, final)."
+              "description": "Procedural maturity of the dossier at issuance, e.g., 'preliminary', 'factual', 'final' (NTSB); 'investigation', 'adjudication', 'closed' (law enforcement). Distinct from revocation or annotation state of individual edges. When phase transitions, a new dossier version SHOULD be issued."
             },
             "gov_rules": {
               "type": "string",
-              "description": "SAID or URI of the procedural ruleset that governed evidence collection."
+              "description": "SAID or URI of the specific protocol, standard, or ruleset that governed the collection of evidence (e.g., a forensic collection protocol, the Federal Rules of Evidence, or NTSB investigation procedures). More specific than gov: gov names the framework overseeing the dossier; gov_rules names the procedural constraints on the underlying investigation."
             }
           }
         }
       ]
     },
     "e": {
-      "description": "Edges \u2014 references to external evidence and (optionally) prior versions, annotations, or joint-issuance operator groups. Primary evidence MUST enter the dossier through this section, not through `a`.",
+      "description": "Edges block linking to evidence. Compact form: SAID string. Expanded form: object whose additional properties each describe one edge. Specific edge shapes (n/s pairs for ACDC-native evidence; M/RM/Q/FIN operator groups for joint issuance) are defined by derived schemas.",
       "oneOf": [
         {
-          "type": "string",
-          "description": "Compact form: SAID of the edges block."
+          "type": "string"
         },
         {
           "type": "object",
@@ -141,18 +152,6 @@
               "description": "SAID of this edges block."
             }
           }
-        }
-      ]
-    },
-    "r": {
-      "description": "Rules block, if any.",
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "object",
-          "additionalProperties": true
         }
       ]
     }

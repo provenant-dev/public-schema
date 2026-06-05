@@ -16,7 +16,7 @@
   "properties": {
     "v": {
       "type": "string",
-      "description": "CESR version string."
+      "description": "Version string using ACDC conventions."
     },
     "d": {
       "type": "string",
@@ -39,7 +39,16 @@
       "description": "Optional registry digest."
     },
     "r": {
-      "description": "Optional ACDC rules block. Compact form: SAID string. Expanded form: object."
+      "description": "Optional ACDC rules block. Compact form: SAID string. Expanded form: object.",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "additionalProperties": true
+        }
+      ]
     },
     "a": {
       "description": "Proximate metadata block. Compact form: SAID string. Expanded form: object with metadata about the dossier itself. MUST NOT carry primary evidence.",

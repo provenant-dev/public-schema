@@ -71,13 +71,13 @@ The `e` (edges) block is optional. When present, it may contain:
 
 ### Rules and governance
 
-The `r` (rules) block uses citation-style rules inherited from the credential design: the listed legal identifiers are citations — they point to external registry records. The rules make explicit that:
+The `r` (rules) block uses citation-style rules inherited from the credential design: the listed legal identifiers are citations — they point to external registry records. When the rules block is expanded (object form), it MUST contain `governance` and MAY include:
 
-- Pointing to an identifier does **not** imply endorsement of or agreement with the cited content (`onlyCommitToPoint`).
-- The credential is not meant to be used in isolation; its semantics are communicated via referencing ACDCs (`useViaEdges`).
-- Verifying the authenticity of the cited external data is the verifier's responsibility (`undefinedVerification`).
-- Revocation of the credential and revocation of the cited data are independent events (`undefinedRevocation`).
-- A `governance` field must identify the governance framework under which the credential was issued.
+- `onlyCommitToPoint` — Pointing to an identifier does **not** imply endorsement of or agreement with the cited content.
+- `useViaEdges` — The credential is not meant to be used in isolation; its semantics are communicated via referencing ACDCs.
+- `undefinedVerification` — Verifying the authenticity of the cited external data is the verifier's responsibility.
+- `undefinedRevocation` — Revocation of the credential and revocation of the cited data are independent events.
+- `governance` — Identifies the governance framework under which the credential was issued.
 
 ### Multichannel readiness
 

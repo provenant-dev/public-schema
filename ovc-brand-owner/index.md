@@ -59,8 +59,8 @@ The `e` (edges) block is optional. When present, it may contain:
 
 | Edge | Required in block? | Purpose |
 |---|---|---|
-| `issuer` | No | Links to an identity credential (e.g., OVC Org Identity, vLEI) proving the identity of the issuer. Uses `I2I` operator. |
-| `brandauth` | No | Links to a credential proving brand authority — e.g., a trademark registration or license agreement. Uses `I2I` operator. |
+| `issuer` | No | Links to an identity credential (e.g., OVC Org Identity, vLEI) proving the identity of the issuer. Defaults to `I2I` operator. |
+| `brandauth` | No | Links to a credential proving brand authority — e.g., a trademark registration or license agreement. Defaults to `I2I` operator. |
 
 ### Multichannel readiness
 

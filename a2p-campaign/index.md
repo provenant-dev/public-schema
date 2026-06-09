@@ -2,7 +2,7 @@
 
 ### Purpose
 
-A credential issued to a brand that represents a registered A2P messaging campaign and the telephone numbers associated with that campaign.
+A credential issued to an organization that represents a registered A2P messaging campaign and the telephone numbers associated with that campaign.
 
 ### Schema
 

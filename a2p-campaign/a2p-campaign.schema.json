@@ -1,8 +1,8 @@
 {
-  "$id": "EOEjCWfZ-zRXj3E7zw0tA2Cgwmr6skydVTBsNZSgx3DX",
+  "$id": "ENjbevI70JxcQJaTrUQxMr4Ylcw0gbjfG2_skJyXy5XQ",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "A2P Campaign Credential",
-  "description": "A credential issued to a brand that represents a registered A2P messaging campaign and the telephone numbers associated with that campaign.",
+  "description": "A credential issued to an organization that represents a registered A2P messaging campaign and the telephone numbers associated with that campaign.",
   "type": "object",
   "version": "2.0.0",
   "required": [
@@ -34,6 +34,7 @@
     "u": {
       "description": "A salty nonce (high-entropy random value) used to prevent rainbow-table attacks on the credential SAID.",
       "type": "string",
+      "pattern": "^0A[A-Za-z0-9_-]{22}$",
       "examples": [
         "0AHcgNghkDaG7ts1Bv8wkv3b"
       ]
@@ -74,7 +75,7 @@
           ]
         },
         {
-          "$id": "EJ5RQYKsSV9FI8O-qDDxCBinDuQfpdmlFeQ6e0lP0XdV",
+          "$id": "EJ1chJIJ5V75UtiTWx4lMspvLrUwGFycJrt7wj_TnyfR",
           "description": "Attributes block",
           "type": "object",
           "required": [
@@ -98,6 +99,7 @@
             "u": {
               "description": "A salty nonce for the attributes block, enabling selective disclosure.",
               "type": "string",
+              "pattern": "^0A[A-Za-z0-9_-]{22}$",
               "examples": [
                 "0AHcgNghkDaG7ts1Bv8wkv3b"
               ]
@@ -175,7 +177,7 @@
               "items": {
                 "type": "string",
                 "description": "A single E164 telephone number or an inclusive range. Single number: '+' followed by 7-15 digits. Range: two E164 numbers separated by a hyphen (e.g., '+15551230000-+15551239999').",
-                "pattern": "^\\+[0-9]{7,15}(-\\+[0-9]{7,15})?$"
+                "pattern": "^\\+[1-9][0-9]{6,14}(-\\+[1-9][0-9]{6,14})?$"
               },
               "examples": [
                 [
@@ -271,7 +273,7 @@
           ]
         },
         {
-          "$id": "EIbjJoN5r0zoAj3Z6-Pv-qHi77lsRb2cf6GDg6lT9gbq",
+          "$id": "ECcoiTmWs6GwR3iIOkBEeG6RpxhtvKylXlMREccxwhtg",
           "description": "Edges block",
           "type": "object",
           "required": [
@@ -287,7 +289,7 @@
               ]
             },
             "issuer": {
-              "description": "Edge credential that proves the identity of the issuer.",
+              "description": "Credential that proves the identity of the issuer.",
               "type": "object",
               "properties": {
                 "n": {
@@ -307,7 +309,7 @@
                   ]
                 },
                 "o": {
-                  "description": "Edge operator. I2I: issuer AID must be the issuee AID of the far node. NI2I: no such requirement. DI2I: delegated issuer AID must be issuee AID of the far node. NOT: inverts the validity of the edge.",
+                  "description": "Edge operator. I2I (default): issuer AID MUST be the issuee AID of the node this edge points to. NI2I: issuer AID MAY or MAY NOT be the issuee AID of that node. DI2I: issuer AID MUST be the issuee AID or a delegated AID of the issuee AID of that node. NOT: inverts the validity of the node this edge points to.",
                   "type": "string",
                   "default": "I2I",
                   "enum": [
@@ -351,7 +353,7 @@
                   ]
                 },
                 "o": {
-                  "description": "Edge operator. I2I: issuer AID must be the issuee AID of the far node. NI2I: no such requirement. DI2I: delegated issuer AID must be issuee AID of the far node. NOT: inverts the validity of the edge.",
+                  "description": "Edge operator. I2I (default): issuer AID MUST be the issuee AID of the node this edge points to. NI2I: issuer AID MAY or MAY NOT be the issuee AID of that node. DI2I: issuer AID MUST be the issuee AID or a delegated AID of the issuee AID of that node. NOT: inverts the validity of the node this edge points to.",
                   "type": "string",
                   "default": "NI2I",
                   "enum": [
@@ -385,7 +387,7 @@
                   ]
                 },
                 "o": {
-                  "description": "Edge operator. I2I: issuer AID must be the issuee AID of the far node. NI2I: no such requirement. DI2I: delegated issuer AID must be issuee AID of the far node. NOT: inverts the validity of the edge.",
+                  "description": "Edge operator. I2I (default): issuer AID MUST be the issuee AID of the node this edge points to. NI2I: issuer AID MAY or MAY NOT be the issuee AID of that node. DI2I: issuer AID MUST be the issuee AID or a delegated AID of the issuee AID of that node. NOT: inverts the validity of the node this edge points to.",
                   "type": "string",
                   "default": "NI2I",
                   "enum": [
@@ -411,15 +413,12 @@
     "r": {
       "oneOf": [
         {
-          "description": "SAID of rules block.",
+          "description": "SAID of rules block (Blake3-256 digest in CESR compact encoding)",
           "type": "string",
-          "pattern": "^E[A-Za-z0-9_-]{43}$",
-          "examples": [
-            "EMS9_VeDinkCdVlMVJKwbeBrsjnVj8VO1OS0walgg05X"
-          ]
+          "pattern": "^E[A-Za-z0-9_-]{43}$"
         },
         {
-          "$id": "EJQM4mXy03inJIDBK-iJEfZWXZkFVrJVsrtFkryYPZH6",
+          "$id": "EKcJyuGHv_e_Ia9aeH_UarSr2GnPZpFUIah47YkaDC-4",
           "description": "Rules detail",
           "type": "object",
           "required": [
@@ -460,10 +459,7 @@
                     "l": {
                       "description": "Associated legal language",
                       "type": "string",
-                      "const": "Verifiers agree that, if they learn the identity of a brand as a sender of SMS messages by verifying this credential, they will not use this information to infer or model relationships between the brand and service providers.",
-                      "examples": [
-                        "Verifiers agree that, if they learn the identity of a brand as a sender of SMS messages by verifying this credential, they will not use this information to infer or model relationships between the brand and service providers."
-                      ]
+                      "const": "Verifiers agree that, if they learn the identity of a brand as a sender of SMS messages by verifying this credential, they will not use this information to infer or model relationships between the brand and service providers."
                     }
                   },
                   "additionalProperties": false
@@ -488,10 +484,7 @@
                     "l": {
                       "description": "Associated legal language",
                       "type": "string",
-                      "const": "Senders of SMS messages agree that their reputation as a sender may be non-repudiably associated with messages that cite this campaign, exactly and only to the extent that the messages are signed by an entity cryptographically authorized to represent the brand.",
-                      "examples": [
-                        "Senders of SMS messages agree that their reputation as a sender may be non-repudiably associated with messages that cite this campaign, exactly and only to the extent that the messages are signed by an entity cryptographically authorized to represent the brand."
-                      ]
+                      "const": "Senders of SMS messages agree that their reputation as a sender may be non-repudiably associated with messages that cite this campaign, exactly and only to the extent that the messages are signed by an entity cryptographically authorized to represent the brand."
                     }
                   },
                   "additionalProperties": false

@@ -1,35 +1,68 @@
 {
-  "$id": "EBpGNZSWwj-btOJMJSMLCVoXbtKdJTcggO-zMevr4vH_",
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "EGNmJbfqUrgIi75YnTnyfZWJ15zRSvnStaxKZKH4_t4j",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Brand Owner Credential",
   "description": "Issued to a legal entity that has the right to use a brand because it is the direct owner or a licensee of that brand.",
   "type": "object",
-  "credentialType": "BrandOwnerCredential",
-  "version": "1.0.0",
+  "version": "2.0.0",
+  "required": [
+    "v",
+    "d",
+    "i",
+    "ri",
+    "s",
+    "a",
+    "r"
+  ],
   "properties": {
     "v": {
-      "description": "Version",
-      "type": "string"
+      "description": "Version string using ACDC conventions, encoding protocol, serialization, and size.",
+      "type": "string",
+      "pattern": "^ACDC[0-9]{2}[A-Z]{4}[0-9a-f]{6}_$",
+      "examples": [
+        "ACDC10JSON000345_"
+      ]
     },
     "d": {
-      "description": "Credential SAID",
-      "type": "string"
+      "description": "SAID of the credential (Blake3-256 digest in CESR compact encoding).",
+      "type": "string",
+      "pattern": "^E[A-Za-z0-9_-]{43}$",
+      "examples": [
+        "EBwNam2e0mYdTx0i9xv78AIm16g1XCkQO8f8yJXaxmJC"
+      ]
     },
     "u": {
-      "description": "One time use nonce",
-      "type": "string"
+      "description": "A salty nonce (high-entropy random value) used to prevent rainbow-table attacks on the credential SAID.",
+      "type": "string",
+      "pattern": "^0A[A-Za-z0-9_-]{22}$",
+      "examples": [
+        "0AHcgNghkDaG7ts1Bv8wkv3b"
+      ]
     },
     "i": {
-      "description": "Issuer AID",
-      "type": "string"
+      "description": "AID of the issuer (the party certifying the brand ownership right).",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{44}$",
+      "examples": [
+        "EDC0Sj0CPYd70zUSY2ehvm7Z4kwZigugiA84wuS7lK2H",
+        "BCmx-dBiozRlK5MfRnznAHl9kmXjB3t-zxrE3hIIYkeS"
+      ]
     },
     "ri": {
-      "description": "Credential status registry",
-      "type": "string"
+      "description": "SAID of the issuer's ACDC credential status registry.",
+      "type": "string",
+      "pattern": "^E[A-Za-z0-9_-]{43}$",
+      "examples": [
+        "EOkdwKgeEF-Ww2d61uhHjAo13rjJROdbdIaxORQJRV2G"
+      ]
     },
     "s": {
-      "description": "Schema SAID",
-      "type": "string"
+      "description": "SAID of this schema (Blake3-256 digest in CESR compact encoding).",
+      "type": "string",
+      "pattern": "^E[A-Za-z0-9_-]{43}$",
+      "examples": [
+        "EAoRVmgPyacjhUxaV0nPwiuUuHMjKDpNZrj7ClofZ-3Z"
+      ]
     },
     "a": {
       "oneOf": [
@@ -38,22 +71,46 @@
           "type": "string"
         },
         {
-          "$id": "EIDYFHkBOgNVWGFRcN1cEXNvRV47-nrNJGx6mKHBA7ia",
+          "$id": "EFdxGA7Kcx-1IfGZKd4pi8eUEKCp3by6MI7txirQpXOY",
           "description": "Attributes block",
           "type": "object",
+          "required": [
+            "d",
+            "i",
+            "dt"
+          ],
           "properties": {
             "d": {
-              "description": "Attributes block SAID",
-              "type": "string"
+              "description": "SAID of the attributes block (Blake3-256 digest in CESR compact encoding).",
+              "type": "string",
+              "pattern": "^E[A-Za-z0-9_-]{43}$",
+              "examples": [
+                "EIDYFHkBOgNVWGFRcN1cEXNvRV47-nrNJGx6mKHBA7ia"
+              ]
+            },
+            "u": {
+              "description": "A salty nonce for the attributes block, enabling selective disclosure.",
+              "type": "string",
+              "pattern": "^0A[A-Za-z0-9_-]{22}$",
+              "examples": [
+                "0AHcgNghkDaG7ts1Bv8wkv3b"
+              ]
             },
             "i": {
-              "description": "AID of the legal entity that is the direct owner or a licensee of the brand",
-              "type": "string"
+              "description": "AID of the legal entity that is the direct owner or licensee of the brand.",
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{44}$",
+              "examples": [
+                "EAZz0-cvLBLfqw3TRo-J0kBzM1TEwQ6a_v_892uH3Yjz"
+              ]
             },
             "dt": {
-              "description": "Issuance date time",
+              "description": "Issuance date-time (when the ACDC was signed), as an ISO-8601 datetime string with timezone.",
+              "type": "string",
               "format": "date-time",
-              "type": "string"
+              "examples": [
+                "2024-01-15T10:30:00.000000+00:00"
+              ]
             },
             "vcard": {
               "description": "An ordered list of unfolded, VCard content lines (properties) per RFC 6350, where property and parameter names are upper case, and parameter names appear in lexicographic order. Values that are telephone numbers MUST be in strict E164 format with a leading + but no other spaces or punctuation. The CHATBOT property is standard and is of type URI. If the type of a particular value is URI and refers to static media files (as, for example, with LOGO), the HASH parameter SHOULD be included and MUST be the CESR-encoded value of the content at the URI. Alternatively, data URIs MAY be used. A URI that refers to mutable content SHOULD NOT be used, as it is insecure; if present, the credential is asserting only the location, not the content of the logo.",
@@ -89,11 +146,7 @@
               }
             }
           },
-          "additionalProperties": true,
-          "required": [
-            "i",
-            "dt"
-          ]
+          "additionalProperties": true
         }
       ]
     },
@@ -101,37 +154,55 @@
       "oneOf": [
         {
           "description": "Edges block SAID",
-          "type": "string"
+          "type": "string",
+          "pattern": "^E[A-Za-z0-9_-]{43}$"
         },
         {
-          "$id": "EGt3Q1rQJweeryWfJGBYlKCFsYbNrYGYc6AaTRBzwzHG",
+          "$id": "EDQSHGWWUalHkh57IL-w05ie0JHefeij84T_hUkLDQLp",
           "description": "Edges detail",
           "type": "object",
           "required": [
-            "d",
-            "issuer"
+            "d"
           ],
           "properties": {
             "d": {
-              "description": "Edges block SAID",
-              "type": "string"
+              "description": "SAID of the edges block (Blake3-256 digest in CESR compact encoding).",
+              "type": "string",
+              "pattern": "^E[A-Za-z0-9_-]{43}$",
+              "examples": [
+                "EGt3Q1rQJweeryWfJGBYlKCFsYbNrYGYc6AaTRBzwzHG"
+              ]
             },
             "issuer": {
-              "description": "Edge credential that proves the identity of the issuer.",
+              "description": "Credential that proves the identity of the issuer.",
               "type": "object",
               "properties": {
                 "n": {
-                  "description": "SAID of a credential that proves the identity of the issuer",
-                  "type": "string"
+                  "description": "SAID of a credential that proves the identity of the issuer.",
+                  "type": "string",
+                  "pattern": "^E[A-Za-z0-9_-]{43}$",
+                  "examples": [
+                    "EBwNam2e0mYdTx0i9xv78AIm16g1XCkQO8f8yJXaxmJC"
+                  ]
                 },
                 "s": {
-                  "description": "SAID of credential schema that proves the identity of the issuer",
-                  "type": "string"
+                  "description": "SAID of the schema that the issuer identity credential must satisfy.",
+                  "type": "string",
+                  "pattern": "^E[A-Za-z0-9_-]{43}$",
+                  "examples": [
+                    "ENPE4hUQ8Peu84tEcCni3koOQFOnBrDB0rg_at2NRhV9"
+                  ]
                 },
                 "o": {
-                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "description": "Edge operator. I2I (default): issuer AID MUST be the issuee AID of the node this edge points to. NI2I: issuer AID MAY or MAY NOT be the issuee AID of that node. DI2I: issuer AID MUST be the issuee AID or a delegated AID of the issuee AID of that node. NOT: inverts the validity of the node this edge points to.",
                   "type": "string",
-                  "const": "I2I"
+                  "default": "I2I",
+                  "enum": [
+                    "I2I",
+                    "NI2I",
+                    "DI2I",
+                    "NOT"
+                  ]
                 }
               },
               "additionalProperties": false,
@@ -142,21 +213,35 @@
               ]
             },
             "brandauth": {
-              "description": "Edge credential that proves the brand authority.",
+              "description": "Credential that proves the brand authority (e.g., a trademark registration or license agreement).",
               "type": "object",
               "properties": {
                 "n": {
-                  "description": "SAID of a credential that proves the brand authority",
-                  "type": "string"
+                  "description": "SAID of a credential that proves the brand authority.",
+                  "type": "string",
+                  "pattern": "^E[A-Za-z0-9_-]{43}$",
+                  "examples": [
+                    "EBwNam2e0mYdTx0i9xv78AIm16g1XCkQO8f8yJXaxmJC"
+                  ]
                 },
                 "s": {
-                  "description": "SAID of credential schema that proves the brand authority",
-                  "type": "string"
+                  "description": "SAID of the schema that the brand authority credential must satisfy.",
+                  "type": "string",
+                  "pattern": "^E[A-Za-z0-9_-]{43}$",
+                  "examples": [
+                    "EAoRVmgPyacjhUxaV0nPwiuUuHMjKDpNZrj7ClofZ-3Z"
+                  ]
                 },
                 "o": {
-                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "description": "Edge operator. I2I (default): issuer AID MUST be the issuee AID of the node this edge points to. NI2I: issuer AID MAY or MAY NOT be the issuee AID of that node. DI2I: issuer AID MUST be the issuee AID or a delegated AID of the issuee AID of that node. NOT: inverts the validity of the node this edge points to.",
                   "type": "string",
-                  "const": "I2I"
+                  "default": "I2I",
+                  "enum": [
+                    "I2I",
+                    "NI2I",
+                    "DI2I",
+                    "NOT"
+                  ]
                 }
               },
               "additionalProperties": false,
@@ -167,40 +252,43 @@
               ]
             }
           },
-          "additionalProperties": false
+          "additionalProperties": true
         }
       ]
     },
     "r": {
       "oneOf": [
         {
-          "description": "Rules section SAID",
-          "type": "string"
+          "description": "SAID of rules block (Blake3-256 digest in CESR compact encoding)",
+          "type": "string",
+          "pattern": "^E[A-Za-z0-9_-]{43}$"
         },
         {
-          "$id": "EGFgHT7Xrzy9YLdQNXnNTYVBu9_Q0O7K5A2VCWjg93t3",
+          "$id": "EEr9mTJM4_VYvwg7rFql37vu5Y3Sb5kr346uzC6nesO7",
           "description": "Rules detail",
           "type": "object",
           "properties": {
             "d": {
-              "description": "Rule section SAID",
-              "type": "string"
+              "description": "SAID of the rules block (Blake3-256 digest in CESR compact encoding).",
+              "type": "string",
+              "pattern": "^E[A-Za-z0-9_-]{43}$"
+            },
+            "governance": {
+              "description": "Statement identifying the governance framework under which this credential was issued.",
+              "type": "string",
+              "examples": [
+                "Issued under governance published at https://provenant.net/governance/brand-owner/"
+              ]
             }
           },
           "additionalProperties": true,
           "required": [
-            "d"
+            "d",
+            "governance"
           ]
         }
       ]
     }
   },
-  "additionalProperties": false,
-  "required": [
-    "i",
-    "ri",
-    "s",
-    "d",
-    "r"
-  ]
+  "additionalProperties": false
 }

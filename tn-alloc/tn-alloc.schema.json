@@ -1,5 +1,5 @@
 {
-  "$id": "EJ9YoTJ81TcQ_pS9GmU2UbVURRm3ylnx_Wr1GbKjg0QP",
+  "$id": "EMLnoJHFmFojtF1u-0hL4Eo8Ox2uTmxhrYEDOW_AhiID",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Telephone Number Allocation Credential",
   "description": "Telephone Number Allocation credential proves an enterprise has the right to use (RTU) specific telephone numbers, either directly from a regulator or through a telephone number provider.",
@@ -8,7 +8,6 @@
   "required": [
     "v",
     "d",
-    "u",
     "i",
     "ri",
     "s",
@@ -35,6 +34,7 @@
     "u": {
       "description": "A salty nonce (high-entropy random value) used to prevent rainbow-table attacks on the credential SAID.",
       "type": "string",
+      "pattern": "^0A[A-Za-z0-9_-]{22}$",
       "examples": [
         "0AHcgNghkDaG7ts1Bv8wkv3b"
       ]
@@ -71,12 +71,11 @@
           "type": "string"
         },
         {
-          "$id": "EFC0ZCw01iPYBFdHHK3EaR_YZYOewvcf3GASJHd5MFBp",
+          "$id": "EBt9-R0JnIzJETIOsm9Lv2mbrGugADiSc9NF12mwyi44",
           "description": "Attributes block",
           "type": "object",
           "required": [
             "d",
-            "u",
             "i",
             "dt",
             "numbers"
@@ -93,6 +92,7 @@
             "u": {
               "description": "A salty nonce for the attributes block, enabling selective disclosure.",
               "type": "string",
+              "pattern": "^0A[A-Za-z0-9_-]{22}$",
               "examples": [
                 "0AHcgNghkDaG7ts1Bv8wkv3b"
               ]
@@ -121,7 +121,7 @@
               "items": {
                 "type": "string",
                 "description": "A single E164 telephone number or an inclusive range. Single number: '+' followed by 7-15 digits. Range: two E164 numbers separated by a hyphen (e.g., '+15551230000-+15551239999').",
-                "pattern": "^\\+[0-9]{7,15}(-\\+[0-9]{7,15})?$"
+                "pattern": "^\\+[1-9][0-9]{6,14}(-\\+[1-9][0-9]{6,14})?$"
               },
               "examples": [
                 [
@@ -196,10 +196,11 @@
       "oneOf": [
         {
           "description": "Edges block SAID",
-          "type": "string"
+          "type": "string",
+          "pattern": "^E[A-Za-z0-9_-]{43}$"
         },
         {
-          "$id": "EAEskU02OaJCo5mJ43PaxSkl7WmDmMimvT5PiDUVkQe-",
+          "$id": "EO1vSj06OYTPF-qtTWEYFqgPPNhETasX3DQ0oEBc4uKM",
           "description": "Edges block",
           "type": "object",
           "properties": {
@@ -245,11 +246,11 @@
               "additionalProperties": false
             },
             "issuer": {
-              "description": "Edge credential that proves the identity of the issuer.",
+              "description": "Credential that proves the identity of the issuer.",
               "type": "object",
               "properties": {
                 "n": {
-                  "description": "SAID of a credential that proves the identity of the issuer (e.g., an OVC Org Identity or vLEI credential).",
+                  "description": "SAID of a credential that proves the identity of the issuer (e.g., an Org Identity or vLEI credential).",
                   "type": "string",
                   "pattern": "^E[A-Za-z0-9_-]{43}$",
                   "examples": [
@@ -265,7 +266,7 @@
                   ]
                 },
                 "o": {
-                  "description": "Edge operator. I2I: issuer AID must be the issuee AID of the far node. NI2I: no such requirement. DI2I: delegated issuer AID must be issuee AID of the far node. NOT: inverts the validity of the edge.",
+                  "description": "Edge operator. I2I (default): issuer AID MUST be the issuee AID of the node this edge points to. NI2I: issuer AID MAY or MAY NOT be the issuee AID of that node. DI2I: issuer AID MUST be the issuee AID or a delegated AID of the issuee AID of that node. NOT: inverts the validity of the node this edge points to.",
                   "type": "string",
                   "enum": [
                     "I2I",
@@ -294,8 +295,9 @@
     "r": {
       "oneOf": [
         {
-          "description": "Rules section SAID",
-          "type": "string"
+          "description": "SAID of rules block (Blake3-256 digest in CESR compact encoding)",
+          "type": "string",
+          "pattern": "^E[A-Za-z0-9_-]{43}$"
         },
         {
           "$id": "EAmHGceHi6XHAXzbT1jwkgxd8_2k8QzlOE-VePPPFRal",

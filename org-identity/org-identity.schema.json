@@ -1,7 +1,7 @@
 {
-  "$id": "EBO8BH1epA3PnVEotSgU2bn2eAY2AI9jXFQZ6mr5P5rA",
+  "$id": "EBCa5bot0IhTiuSD_jK4hjS4j9WsD2cocu8UXrG67Odi",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "OVC Org Identity Credential",
+  "title": "Org Identity Credential",
   "description": "Connects different identifiers for the same organization, binding legal entity identity to a cryptographic identifier.",
   "type": "object",
   "version": "2.0.0",
@@ -34,6 +34,7 @@
     "u": {
       "description": "A salty nonce (high-entropy random value) used to prevent rainbow-table attacks on the credential SAID.",
       "type": "string",
+      "pattern": "^0A[A-Za-z0-9_-]{22}$",
       "examples": [
         "0AHcgNghkDaG7ts1Bv8wkv3b"
       ]
@@ -70,7 +71,7 @@
           "type": "string"
         },
         {
-          "$id": "EOabMjwOpHWrJ5vJU0QNLoIfTKHpAviw547Cbl947swq",
+          "$id": "EGq0lw7-4-wkz5m3ZvOgHMm1HLuKIo7NcUZM93FYsLFK",
           "description": "Attributes block",
           "type": "object",
           "required": [
@@ -90,6 +91,7 @@
             "u": {
               "description": "A salty nonce for the attributes block, enabling selective disclosure.",
               "type": "string",
+              "pattern": "^0A[A-Za-z0-9_-]{22}$",
               "examples": [
                 "0AHcgNghkDaG7ts1Bv8wkv3b"
               ]
@@ -113,7 +115,6 @@
             "LOA": {
               "description": "Level of Assurance \u2014 a positive number where larger values denote higher assurance (1=bronze, 2=silver, 3=gold). Integer values represent defined tiers; decimal sub-values (e.g., 2.1) allow nuance within a tier. Verifiers should accept any credential where LOA is >= their required threshold.",
               "type": "number",
-              "minimum": 0,
               "exclusiveMinimum": 0,
               "examples": [
                 1,
@@ -138,7 +139,7 @@
                 "type": "object",
                 "properties": {
                   "type": {
-                    "description": "Category or source of the identifier (e.g., lei, gleif, gb, che, duns, edgar, domain, linkedin, etc.)",
+                    "description": "Category or source of the identifier (e.g., lei, us-ein, uk-crn, che, duns, edgar, etc.)",
                     "type": "string"
                   },
                   "value": {
@@ -181,11 +182,10 @@
         {
           "description": "SAID of rules block (Blake3-256 digest in CESR compact encoding)",
           "type": "string",
-          "format": "cesr",
           "pattern": "^E[A-Za-z0-9_-]{43}$"
         },
         {
-          "$id": "EM45oGHaEdd_YIyGIFtNy5RVXRtsDSyj4SaOokXW6Qrr",
+          "$id": "EJ6JvJ5LprzI_WdtyZ1BUlk7GmL1tRw538a5MZzpiwnK",
           "description": "Rules detail",
           "type": "object",
           "required": [
@@ -202,7 +202,7 @@
               "description": "Statement identifying the governance framework under which this credential was issued.",
               "type": "string",
               "examples": [
-                "Issued under governance published at https://provenant.net/governance/ovc-org-identity/"
+                "Issued under governance published at https://provenant.net/governance/org-identity/"
               ]
             },
             "onlyCommitToPoint": {
@@ -230,10 +230,11 @@
       "oneOf": [
         {
           "description": "Edges block SAID",
-          "type": "string"
+          "type": "string",
+          "pattern": "^E[A-Za-z0-9_-]{43}$"
         },
         {
-          "$id": "EJh-O6xFidE8dcOakW95WVIC0n5oqVVkuwXDNr5PZcPU",
+          "$id": "EJ3MEBe2jXRjw0IFI71APybcd-Apufu7TRZYE9bFLM-Q",
           "description": "Edges detail",
           "type": "object",
           "required": [
@@ -249,7 +250,7 @@
               ]
             },
             "issuer": {
-              "description": "Edge credential that proves the identity of the issuer.",
+              "description": "Credential that proves the identity of the issuer.",
               "type": "object",
               "properties": {
                 "n": {
@@ -269,7 +270,7 @@
                   ]
                 },
                 "o": {
-                  "description": "Edge operator. I2I: issuer AID must be the issuee AID of the far node. NI2I: no such requirement. DI2I: delegated issuer AID must be issuee AID of the far node. NOT: inverts the validity of the edge.",
+                  "description": "Edge operator. I2I (default): issuer AID MUST be the issuee AID of the node this edge points to. NI2I: issuer AID MAY or MAY NOT be the issuee AID of that node. DI2I: issuer AID MUST be the issuee AID or a delegated AID of the issuee AID of that node. NOT: inverts the validity of the node this edge points to.",
                   "type": "string",
                   "default": "I2I",
                   "enum": [

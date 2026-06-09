@@ -58,7 +58,7 @@ The `e` (edges) block is optional to accommodate **regulators** who originate nu
 | Edge | Required in block? | Purpose |
 |---|---|---|
 | `tnalloc` | No | Chain to a parent Telephone Number Allocation Credential, proving sub-allocation authority all the way back to the regulator. |
-| `issuer` | No | Links to an identity credential (e.g., OVC Org Identity, vLEI) that proves who the issuer is. Intentionally generic — does not constrain the schema of the identity credential. |
+| `issuer` | No | Links to an identity credential (e.g., Org Identity, vLEI) that proves who the issuer is. Intentionally generic — does not constrain the schema of the identity credential. |
 
 ### Rules and governance
 

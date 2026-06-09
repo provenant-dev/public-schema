@@ -1,4 +1,4 @@
-## OVC Org Identity Credential
+## Org Identity Credential
 
 ### Purpose
 
@@ -6,16 +6,16 @@ This credential **connects different identifiers for the same organization**, bi
 
 This is the foundational trust anchor for the OVC ecosystem. Brand owner credentials, telephone number allocation credentials, and campaign credentials all trace back to an org identity credential as proof that the parties involved are real, accountable legal entities — not anonymous actors.
 
-The OVC Org Identity Credential is analogous in intent to the [LE vLEI](https://docs.origincloud.net/start/concepts/creds/vleis) defined by GLEIF (which maps to LoA 3), but its schema is designed to be simpler and to accommodate a wider range of national registry sources.
+The Org Identity Credential is analogous in intent to the [LE vLEI](https://docs.origincloud.net/start/concepts/creds/vleis) defined by GLEIF (which maps to LoA 3), but its schema is designed to be simpler and to accommodate a wider range of national registry sources.
 
-![suggested org vet visual](org-vet-256.png)<br>
-Suggested visual: [svg](org-vet.svg) | [256 px](org-vet-256.png) | [128 px](org-vet-128.png) | [64 px](org-vet-64.png) | [32 px](org-vet-32.png)
+![suggested org identity visual](org-identity-256.png)<br>
+Suggested visual: [svg](org-identity.svg) | [256 px](org-identity-256.png) | [128 px](org-identity-128.png) | [64 px](org-identity-64.png) | [32 px](org-identity-32.png)
 
 ### Levels of assurance
 
 Levels of assurance (LoAs) are well known and often referenced for individual identity; they are less adopted in organizational identity. In the United States, the FBCA [defines](https://www.idmanagement.gov/docs/fbca-cp.pdf) *basic*, *medium*, and *high* assurance for certificates issued to federal agencies, but these LoAs are not typically referenced in other contexts. In the EU, eIDAS ([EU regulation 910/2014](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32014R0910), article 28) defines "nonqualified" and "qualified/QSeal" assurance for certificate issuance &mdash; but its rollout is young, and its application for non-certificate-based technologies is unclear.
 
-Org vet credentials convey a level of assurance with a positive number, where larger numbers map to higher levels of assurance (1 &lt; 2 &lt; 3). Normally, these numbers are expected to be integers, but nuances within a given integer can be modeled by using a floating point value instead (2.1 &lt; 2.2). This allows verifiers to decide what level of assurance will satisfy them, and accept any credential having an LoA >= their threshhold. The meaning of the integer values are defined as follows:
+Org identity credentials convey a level of assurance with a positive number, where larger numbers map to higher levels of assurance (1 &lt; 2 &lt; 3). Normally, these numbers are expected to be integers, but nuances within a given integer can be modeled by using a floating point value instead (2.1 &lt; 2.2). This allows verifiers to decide what level of assurance will satisfy them, and accept any credential having an LoA >= their threshhold. The meaning of the integer values are defined as follows:
 
 LoA | intended meaning | verification procedures | mappings
 --- | --- | --- | ---
@@ -29,13 +29,13 @@ LoA | intended meaning | verification procedures | mappings
 
 ### Schema
 
-See [ovc-org-vet.schema.json](ovc-org-vet.schema.json).
+See [org-identity.schema.json](org-identity.schema.json).
 
 ### Legal identifiers (`legalIdentifiers`)
 
 The `legalIdentifiers` field lists the external identifiers the vetter used to confirm the organization's existence and attributes at the time of issuance. Each entry has a `type` (the registry or source) and a `value` (the identifier within that registry).
 
-**At least one identifier should be globally unambiguous and portable across jurisdictions** — typically an LEI. National registry IDs (like UK Companies House `gb` or Swiss `che` numbers) are also valid and can coexist with the LEI.
+**At least one identifier should be globally unambiguous and portable across jurisdictions** — typically an LEI. National registry IDs (like UK Companies House `uk-crn` or Swiss `che` numbers) are also valid and can coexist with the LEI.
 
 Domain names and social media handles are intentionally excluded: they do not unambiguously identify a legal entity across jurisdictions.
 
@@ -67,7 +67,7 @@ The `e` (edges) block is optional. When present, it may contain:
 
 | Edge | Required in block? | Purpose |
 |---|---|---|
-| `issuer` | No | Links to an identity credential proving the identity of the issuing vetter (OVC). Uses `I2I` operator — the issuer AID of this credential must be the issuee AID of the referenced credential. |
+| `issuer` | No | Links to an identity credential proving the identity of the issuing vetter. Uses `I2I` operator — the issuer AID of this credential must be the issuee AID of the referenced credential. |
 
 ### Rules and governance
 

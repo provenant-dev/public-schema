@@ -1,8 +1,8 @@
 {
-  "$id": "EGNmJbfqUrgIi75YnTnyfZWJ15zRSvnStaxKZKH4_t4j",
+  "$id": "EBCa5bot0IhTiuSD_jK4hjS4j9WsD2cocu8UXrG67Odi",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Brand Owner Credential",
-  "description": "Issued to a legal entity that has the right to use a brand because it is the direct owner or a licensee of that brand.",
+  "title": "Org Identity Credential",
+  "description": "Connects different identifiers for the same organization, binding legal entity identity to a cryptographic identifier.",
   "type": "object",
   "version": "2.0.0",
   "required": [
@@ -40,7 +40,7 @@
       ]
     },
     "i": {
-      "description": "AID of the issuer (the party certifying the brand ownership right).",
+      "description": "AID of the issuer (the party asserting the org identity vetting).",
       "type": "string",
       "pattern": "^[A-Za-z0-9_-]{44}$",
       "examples": [
@@ -61,7 +61,7 @@
       "type": "string",
       "pattern": "^E[A-Za-z0-9_-]{43}$",
       "examples": [
-        "EAoRVmgPyacjhUxaV0nPwiuUuHMjKDpNZrj7ClofZ-3Z"
+        "ENPE4hUQ8Peu84tEcCni3koOQFOnBrDB0rg_at2NRhV9"
       ]
     },
     "a": {
@@ -71,7 +71,7 @@
           "type": "string"
         },
         {
-          "$id": "EFdxGA7Kcx-1IfGZKd4pi8eUEKCp3by6MI7txirQpXOY",
+          "$id": "EGq0lw7-4-wkz5m3ZvOgHMm1HLuKIo7NcUZM93FYsLFK",
           "description": "Attributes block",
           "type": "object",
           "required": [
@@ -85,7 +85,7 @@
               "type": "string",
               "pattern": "^E[A-Za-z0-9_-]{43}$",
               "examples": [
-                "EIDYFHkBOgNVWGFRcN1cEXNvRV47-nrNJGx6mKHBA7ia"
+                "ELtdYgSHM9VElQtjd4P19IB24HH8PQZGbEctOjmP69QE"
               ]
             },
             "u": {
@@ -97,7 +97,7 @@
               ]
             },
             "i": {
-              "description": "AID of the legal entity that is the direct owner or licensee of the brand.",
+              "description": "AID of the legal entity (issuee) whose identity was vetted.",
               "type": "string",
               "pattern": "^[A-Za-z0-9_-]{44}$",
               "examples": [
@@ -112,38 +112,114 @@
                 "2024-01-15T10:30:00.000000+00:00"
               ]
             },
-            "vcard": {
-              "description": "An ordered list of unfolded, VCard content lines (properties) per RFC 6350, where property and parameter names are upper case, and parameter names appear in lexicographic order. Values that are telephone numbers MUST be in strict E164 format with a leading + but no other spaces or punctuation. The CHATBOT property is standard and is of type URI. If the type of a particular value is URI and refers to static media files (as, for example, with LOGO), the HASH parameter SHOULD be included and MUST be the CESR-encoded value of the content at the URI. Alternatively, data URIs MAY be used. A URI that refers to mutable content SHOULD NOT be used, as it is insecure; if present, the credential is asserting only the location, not the content of the logo.",
-              "type": "array",
-              "uniqueItems": true,
-              "minItems": 1,
-              "items": {
-                "format": "cesr",
-                "type": "string"
-              },
+            "LOA": {
+              "description": "Level of Assurance \u2014 a positive number where larger values denote higher assurance (1=bronze, 2=silver, 3=gold). Integer values represent defined tiers; decimal sub-values (e.g., 2.1) allow nuance within a tier. Verifiers should accept any credential where LOA is >= their required threshold.",
+              "type": "number",
+              "exclusiveMinimum": 0,
               "examples": [
-                "ORG:Example Company UK, Ltd",
-                "NICKNAME:Examples-R-Us",
-                "CHATBOT:https://example.com/chatwithus",
-                "LOGO;HASH=EK2r6EnDXre2pecTBO8s99j4OtNaaDIhVyr7uGugDhmp;VALUE=URI:https://example.com/logo64x48.png",
-                "TEL;TYPE=support:+445555555555",
-                "EMAIL:support@example.com",
-                "URL:https://www.example.com",
-                "ADR;TYPE=work:;;123 Example Street;London;;SW1A 1AA;United Kingdom",
-                "GEO:51.5074;-0.1278",
-                "TZ:Europe/London",
-                "LANG:en-GB"
+                1,
+                2,
+                3
               ]
             },
-            "goals": {
-              "description": "Goal codes (see https://bit.ly/49V8YqV) that enumerate formally-defined activities in which the brand's owner might engage using the asserted brand attributes. If specified, activities not covered by these goal codes are considered contexts in which the legitimate use of the brand is not asserted by this credential.",
+            "LEI": {
+              "description": "Legal Entity Identifier (LEI) \u2014 a globally unique 20-character alphanumeric code conforming to ISO 17442.",
+              "type": "string",
+              "pattern": "^[A-Z0-9]{20}$",
+              "examples": [
+                "5493001KJTIIGC8Y1R12"
+              ]
+            },
+            "legalIdentifiers": {
+              "description": "Array of legal identifiers associated with this organization, as referenced during vetting. Each item has a type and value, making the identity source explicit. Sources may include national registries, OpenCorporates, EDGAR, Dun & Bradstreet, or a stock exchange. At least one identifier should be globally unambiguous and portable across jurisdictions.",
               "type": "array",
               "uniqueItems": true,
               "minItems": 1,
               "items": {
-                "format": "cesr",
-                "type": "string"
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "description": "Category or source of the identifier (e.g., lei, us-ein, uk-crn, che, duns, edgar, etc.)",
+                    "type": "string"
+                  },
+                  "value": {
+                    "description": "The identifier value",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "value"
+                ],
+                "additionalProperties": true,
+                "examples": [
+                  {
+                    "type": "lei",
+                    "value": "5493001KJTIIGC8Y1R12"
+                  },
+                  {
+                    "type": "uk-crn",
+                    "value": "01234567"
+                  },
+                  {
+                    "type": "che",
+                    "value": "CHE-123.456.789"
+                  },
+                  {
+                    "type": "us-ein",
+                    "value": "12-3456789"
+                  }
+                ]
               }
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "r": {
+      "oneOf": [
+        {
+          "description": "SAID of rules block (Blake3-256 digest in CESR compact encoding)",
+          "type": "string",
+          "pattern": "^E[A-Za-z0-9_-]{43}$"
+        },
+        {
+          "$id": "EJ6JvJ5LprzI_WdtyZ1BUlk7GmL1tRw538a5MZzpiwnK",
+          "description": "Rules detail",
+          "type": "object",
+          "required": [
+            "d",
+            "governance"
+          ],
+          "properties": {
+            "d": {
+              "description": "SAID of the rules block (Blake3-256 digest in CESR compact encoding).",
+              "type": "string",
+              "pattern": "^E[A-Za-z0-9_-]{43}$"
+            },
+            "governance": {
+              "description": "Statement identifying the governance framework under which this credential was issued.",
+              "type": "string",
+              "examples": [
+                "Issued under governance published at https://provenant.net/governance/org-identity/"
+              ]
+            },
+            "onlyCommitToPoint": {
+              "description": "All parties agree that the citation, in and of itself, only commits the issuer to point at content in a way that makes the issuer and the target verifiable. Unless or until context, governance, or other actions prove intent, the citation does NOT imply that the issuer owns, endorses, or agrees with the content.",
+              "type": "string"
+            },
+            "useViaEdges": {
+              "description": "All parties acknowledge that the citation is not intended to be used in isolation. Rather, the intended semantics for the citation should be communicated via a referencing ACDC that clarifies its issuer's intention.",
+              "type": "string"
+            },
+            "undefinedVerification": {
+              "description": "All parties agree that procedures for evaluating the authenticity and/or veracity of the referenced content are beyond the scope of standard ACDC verification, and that the verifier is responsible for evaluating in whatever way satisfies their requirements.",
+              "type": "string"
+            },
+            "undefinedRevocation": {
+              "description": "Unless or until governance specifies otherwise, all parties agree that there is no defined relationship between the revocation status of a citation and that of cited data. Cited data may be disavowed or revoked by its creator without a citation being revoked, and vice versa.",
+              "type": "string"
             }
           },
           "additionalProperties": true
@@ -158,7 +234,7 @@
           "pattern": "^E[A-Za-z0-9_-]{43}$"
         },
         {
-          "$id": "EDQSHGWWUalHkh57IL-w05ie0JHefeij84T_hUkLDQLp",
+          "$id": "EJ3MEBe2jXRjw0IFI71APybcd-Apufu7TRZYE9bFLM-Q",
           "description": "Edges detail",
           "type": "object",
           "required": [
@@ -170,7 +246,7 @@
               "type": "string",
               "pattern": "^E[A-Za-z0-9_-]{43}$",
               "examples": [
-                "EGt3Q1rQJweeryWfJGBYlKCFsYbNrYGYc6AaTRBzwzHG"
+                "EKk5ejftEjNwjRhw2lYQAwKwvRWapqCNEOx3gUR7WW7n"
               ]
             },
             "issuer": {
@@ -211,81 +287,9 @@
                 "s",
                 "o"
               ]
-            },
-            "brandauth": {
-              "description": "Credential that proves the brand authority (e.g., a trademark registration or license agreement).",
-              "type": "object",
-              "properties": {
-                "n": {
-                  "description": "SAID of a credential that proves the brand authority.",
-                  "type": "string",
-                  "pattern": "^E[A-Za-z0-9_-]{43}$",
-                  "examples": [
-                    "EBwNam2e0mYdTx0i9xv78AIm16g1XCkQO8f8yJXaxmJC"
-                  ]
-                },
-                "s": {
-                  "description": "SAID of the schema that the brand authority credential must satisfy.",
-                  "type": "string",
-                  "pattern": "^E[A-Za-z0-9_-]{43}$",
-                  "examples": [
-                    "EAoRVmgPyacjhUxaV0nPwiuUuHMjKDpNZrj7ClofZ-3Z"
-                  ]
-                },
-                "o": {
-                  "description": "Edge operator. I2I (default): issuer AID MUST be the issuee AID of the node this edge points to. NI2I: issuer AID MAY or MAY NOT be the issuee AID of that node. DI2I: issuer AID MUST be the issuee AID or a delegated AID of the issuee AID of that node. NOT: inverts the validity of the node this edge points to.",
-                  "type": "string",
-                  "default": "I2I",
-                  "enum": [
-                    "I2I",
-                    "NI2I",
-                    "DI2I",
-                    "NOT"
-                  ]
-                }
-              },
-              "additionalProperties": false,
-              "required": [
-                "n",
-                "s",
-                "o"
-              ]
             }
           },
           "additionalProperties": true
-        }
-      ]
-    },
-    "r": {
-      "oneOf": [
-        {
-          "description": "SAID of rules block (Blake3-256 digest in CESR compact encoding)",
-          "type": "string",
-          "pattern": "^E[A-Za-z0-9_-]{43}$"
-        },
-        {
-          "$id": "EEr9mTJM4_VYvwg7rFql37vu5Y3Sb5kr346uzC6nesO7",
-          "description": "Rules detail",
-          "type": "object",
-          "properties": {
-            "d": {
-              "description": "SAID of the rules block (Blake3-256 digest in CESR compact encoding).",
-              "type": "string",
-              "pattern": "^E[A-Za-z0-9_-]{43}$"
-            },
-            "governance": {
-              "description": "Statement identifying the governance framework under which this credential was issued.",
-              "type": "string",
-              "examples": [
-                "Issued under governance published at https://provenant.net/governance/brand-owner/"
-              ]
-            }
-          },
-          "additionalProperties": true,
-          "required": [
-            "d",
-            "governance"
-          ]
         }
       ]
     }

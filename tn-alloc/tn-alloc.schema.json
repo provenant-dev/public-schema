@@ -1,15 +1,13 @@
 {
-  "$id": "EFvnoHDY7I-kaBBeKlbDbkjG4BaI0nKLGadxBdjMGgSQ",
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "TN Allocation Credential",
-  "description": "TN Allocation credential proves an enterpise has the right to use(RTU) specific telephone numbers, either directly from a regulator or through a telephone number provider.",
+  "$id": "EMLnoJHFmFojtF1u-0hL4Eo8Ox2uTmxhrYEDOW_AhiID",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Telephone Number Allocation Credential",
+  "description": "Telephone Number Allocation credential proves an enterprise has the right to use (RTU) specific telephone numbers, either directly from a regulator or through a telephone number provider.",
   "type": "object",
-  "credentialType": "TNAllocationCredential",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "required": [
     "v",
     "d",
-    "u",
     "i",
     "ri",
     "s",
@@ -18,28 +16,53 @@
   ],
   "properties": {
     "v": {
-      "description": "Version",
-      "type": "string"
+      "description": "Version string using ACDC conventions, encoding protocol, serialization, and size.",
+      "type": "string",
+      "pattern": "^ACDC[0-9]{2}[A-Z]{4}[0-9a-f]{6}_$",
+      "examples": [
+        "ACDC10JSON000345_"
+      ]
     },
     "d": {
-      "description": "Credential SAID",
-      "type": "string"
+      "description": "SAID of the credential (Blake3-256 digest in CESR compact encoding).",
+      "type": "string",
+      "pattern": "^E[A-Za-z0-9_-]{43}$",
+      "examples": [
+        "EBwNam2e0mYdTx0i9xv78AIm16g1XCkQO8f8yJXaxmJC"
+      ]
     },
     "u": {
-      "description": "A salty nonce",
-      "type": "string"
+      "description": "A salty nonce (high-entropy random value) used to prevent rainbow-table attacks on the credential SAID.",
+      "type": "string",
+      "pattern": "^0A[A-Za-z0-9_-]{22}$",
+      "examples": [
+        "0AHcgNghkDaG7ts1Bv8wkv3b"
+      ]
     },
     "i": {
-      "description": "Issuer AID",
-      "type": "string"
+      "description": "AID of the issuer (the party asserting the telephone number allocation right).",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{44}$",
+      "examples": [
+        "EDC0Sj0CPYd70zUSY2ehvm7Z4kwZigugiA84wuS7lK2H",
+        "BCmx-dBiozRlK5MfRnznAHl9kmXjB3t-zxrE3hIIYkeS"
+      ]
     },
     "ri": {
-      "description": "Credential status registry",
-      "type": "string"
+      "description": "SAID of the issuer's ACDC credential status registry.",
+      "type": "string",
+      "pattern": "^E[A-Za-z0-9_-]{43}$",
+      "examples": [
+        "EOkdwKgeEF-Ww2d61uhHjAo13rjJROdbdIaxORQJRV2G"
+      ]
     },
     "s": {
-      "description": "Schema SAID",
-      "type": "string"
+      "description": "SAID of this schema (Blake3-256 digest in CESR compact encoding).",
+      "type": "string",
+      "pattern": "^E[A-Za-z0-9_-]{43}$",
+      "examples": [
+        "EI8g4_JZ0zA50yihhsb-RXvOEcsI8TSN7PJrNgIbAUH1"
+      ]
     },
     "a": {
       "oneOf": [
@@ -48,83 +71,124 @@
           "type": "string"
         },
         {
-          "$id": "EGgYbtyoE0qGfYfZWZ1lAd-UoWu_2OjqMcms_75s4atv",
+          "$id": "EBt9-R0JnIzJETIOsm9Lv2mbrGugADiSc9NF12mwyi44",
           "description": "Attributes block",
           "type": "object",
           "required": [
             "d",
-            "u",
             "i",
             "dt",
-            "numbers",
-            "channel",
-            "doNotOriginate"
+            "numbers"
           ],
           "properties": {
             "d": {
-              "description": "Attributes block SAID",
-              "type": "string"
+              "description": "SAID of the attributes block (Blake3-256 digest in CESR compact encoding).",
+              "type": "string",
+              "pattern": "^E[A-Za-z0-9_-]{43}$",
+              "examples": [
+                "EGgYbtyoE0qGfYfZWZ1lAd-UoWu_2OjqMcms_75s4atv"
+              ]
             },
             "u": {
-              "description": "A salty nonce",
-              "type": "string"
+              "description": "A salty nonce for the attributes block, enabling selective disclosure.",
+              "type": "string",
+              "pattern": "^0A[A-Za-z0-9_-]{22}$",
+              "examples": [
+                "0AHcgNghkDaG7ts1Bv8wkv3b"
+              ]
             },
             "i": {
-              "description": "Recipient Brand AID",
-              "type": "string"
+              "description": "AID of the credential recipient \u2014 the enterprise or individual that holds the right to use the allocated telephone numbers.",
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{44}$",
+              "examples": [
+                "EAZz0-cvLBLfqw3TRo-J0kBzM1TEwQ6a_v_892uH3Yjz"
+              ]
             },
             "dt": {
-              "description": "Issuance date time",
+              "description": "Issuance date-time (when the ACDC was signed), as an ISO-8601 datetime string with timezone.",
+              "type": "string",
               "format": "date-time",
-              "type": "string"
+              "examples": [
+                "2024-01-15T10:30:00.000000+00:00"
+              ]
             },
             "numbers": {
-              "description": "Telephone Numbers allocated to enterpise either as a list of specific numbers or a range of numbers",
-              "type": "object",
-              "properties": {
-                "tn": {
-                  "description": "Specific telephone numbers list",
-                  "type": "array",
-                  "uniqueItems": true,
-                  "minItems": 1,
-                  "items": {
-                    "type": "string",
-                    "description": "Telephone number in E164 format",
-                    "pattern": "[+][0-9]{7,15}"
-                  }
-                },
-                "rangeStart": {
-                  "description": "Range start number in E164 format, inclusive of this number. If provided, rangeEnd must also be provided",
-                  "type": "string"
-                },
-                "rangeEnd": {
-                  "description": "Range end number in E164 format, inclusive of this number. If provided, rangeStart must also be provided",
-                  "type": "string"
-                }
+              "description": "Array of number expressions representing telephone numbers allocated to the enterprise. Each expression is either a single E164 number (e.g., '+15551234567') or an inclusive range denoted by a hyphen between two E164 numbers (e.g., '+15551230000-+15551239999'). All numbers in a single credential must share the same granting authority.",
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "description": "A single E164 telephone number or an inclusive range. Single number: '+' followed by 7-15 digits. Range: two E164 numbers separated by a hyphen (e.g., '+15551230000-+15551239999').",
+                "pattern": "^\\+[1-9][0-9]{6,14}(-\\+[1-9][0-9]{6,14})?$"
               },
-              "additionalProperties": false
+              "examples": [
+                [
+                  "+15551234567"
+                ],
+                [
+                  "+15551230000-+15551239999"
+                ],
+                [
+                  "+15551234567",
+                  "+442071234567"
+                ],
+                [
+                  "+15551230000-+15551239999",
+                  "+15558880000-+15558889999"
+                ],
+                [
+                  "+15551234567",
+                  "+15559876543",
+                  "+442071234567",
+                  "+81312345678"
+                ]
+              ]
             },
             "channel": {
-              "description": "Communication channel for which number will be used (e.g., sms, voice, etc.)",
-              "type": "string",
-              "pattern": "sms|voice"
-            },
-            "doNotOriginate": {
-              "description": "True or False based on condition if telephone number is a 'do not originate' number (inbound only)",
-              "type": "boolean"
+              "description": "Optional list of communication channels for which these numbers are allocated. If omitted, no channel restriction is implied. Use 'sms' for A2P/P2P messaging, 'voice' for voice calls, or both to indicate dual-channel use.",
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "sms",
+                  "voice"
+                ]
+              },
+              "examples": [
+                [
+                  "voice"
+                ],
+                [
+                  "sms"
+                ],
+                [
+                  "sms",
+                  "voice"
+                ]
+              ]
             },
             "startDate": {
-              "description": "Start date",
+              "description": "Optional start date from which the telephone number allocation is valid (ISO-8601). Useful for proving long-term continuous ownership of a number.",
+              "type": "string",
               "format": "date-time",
-              "type": "string"
+              "examples": [
+                "2020-06-01T00:00:00.000000+00:00"
+              ]
             },
             "endDate": {
-              "description": "Expiration date",
+              "description": "Optional expiration date of the telephone number allocation (ISO-8601). If omitted, the allocation is considered open-ended and subject only to credential revocation.",
+              "type": "string",
               "format": "date-time",
-              "type": "string"
+              "examples": [
+                "2026-06-01T00:00:00.000000+00:00"
+              ]
             }
           },
-          "additionalProperties": false
+          "additionalProperties": true
         }
       ]
     },
@@ -132,19 +196,24 @@
       "oneOf": [
         {
           "description": "Edges block SAID",
-          "type": "string"
+          "type": "string",
+          "pattern": "^E[A-Za-z0-9_-]{43}$"
         },
         {
-          "$id": "ED-ETRO9FOiEgvK8P66Rut-Cun-0aZ5FbgTlngPf9yVT",
+          "$id": "EO1vSj06OYTPF-qtTWEYFqgPPNhETasX3DQ0oEBc4uKM",
           "description": "Edges block",
           "type": "object",
           "properties": {
             "d": {
-              "description": "Edges block SAID",
-              "type": "string"
+              "description": "SAID of the edges block.",
+              "type": "string",
+              "pattern": "^E[A-Za-z0-9_-]{43}$",
+              "examples": [
+                "ED-ETRO9FOiEgvK8P66Rut-Cun-0aZ5FbgTlngPf9yVT"
+              ]
             },
             "tnalloc": {
-              "description": "Chain to a TN allocation (RTU) credential that proves with a valid chain back to the regulator",
+              "description": "Chain to a telephone number allocation (RTU) credential that proves with a valid chain back to the regulator",
               "type": "object",
               "required": [
                 "n",
@@ -153,15 +222,23 @@
               ],
               "properties": {
                 "n": {
-                  "description": "SAID of TN allocation credential",
-                  "type": "string"
+                  "description": "SAID of a parent telephone number allocation credential that grants the issuer the right to sub-allocate.",
+                  "type": "string",
+                  "pattern": "^E[A-Za-z0-9_-]{43}$",
+                  "examples": [
+                    "EBwNam2e0mYdTx0i9xv78AIm16g1XCkQO8f8yJXaxmJC"
+                  ]
                 },
                 "s": {
-                  "description": "SAID of TN allocation schema",
-                  "type": "string"
+                  "description": "SAID of the telephone number allocation schema that the chained credential must satisfy.",
+                  "type": "string",
+                  "pattern": "^E[A-Za-z0-9_-]{43}$",
+                  "examples": [
+                    "EI8g4_JZ0zA50yihhsb-RXvOEcsI8TSN7PJrNgIbAUH1"
+                  ]
                 },
                 "o": {
-                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "description": "Issuer-To-Issuee, operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
                   "type": "string",
                   "const": "I2I"
                 }
@@ -169,21 +246,35 @@
               "additionalProperties": false
             },
             "issuer": {
-              "description": "Edge credential that proves the identity of the issuer.",
+              "description": "Credential that proves the identity of the issuer.",
               "type": "object",
               "properties": {
                 "n": {
-                  "description": "SAID of a credential that proves the identity of the issuer",
-                  "type": "string"
+                  "description": "SAID of a credential that proves the identity of the issuer (e.g., an Org Identity or vLEI credential).",
+                  "type": "string",
+                  "pattern": "^E[A-Za-z0-9_-]{43}$",
+                  "examples": [
+                    "EG_rp79RWfT97mfVCiptp73PVKr26QHa-kAbMkTPqAno"
+                  ]
                 },
                 "s": {
-                  "description": "SAID of credential schema that proves the identity of the issuer",
-                  "type": "string"
+                  "description": "SAID of the schema that the issuer identity credential must satisfy.",
+                  "type": "string",
+                  "pattern": "^E[A-Za-z0-9_-]{43}$",
+                  "examples": [
+                    "ENPE4hUQ8Peu84tEcCni3koOQFOnBrDB0rg_at2NRhV9"
+                  ]
                 },
                 "o": {
-                  "description": "Operator indicating issuer AID of this ACDC MUST be the Issuee AID of the node this Edge points to.",
+                  "description": "Edge operator. I2I (default): issuer AID MUST be the issuee AID of the node this edge points to. NI2I: issuer AID MAY or MAY NOT be the issuee AID of that node. DI2I: issuer AID MUST be the issuee AID or a delegated AID of the issuee AID of that node. NOT: inverts the validity of the node this edge points to.",
                   "type": "string",
-                  "const": "NI2I"
+                  "enum": [
+                    "I2I",
+                    "NI2I",
+                    "DI2I",
+                    "NOT"
+                  ],
+                  "default": "NI2I"
                 }
               },
               "additionalProperties": false,
@@ -194,10 +285,9 @@
               ]
             }
           },
-          "additionalProperties": false,
+          "additionalProperties": true,
           "required": [
-            "d",
-            "tnalloc"
+            "d"
           ]
         }
       ]
@@ -205,29 +295,39 @@
     "r": {
       "oneOf": [
         {
-          "description": "Rules section SAID",
-          "type": "string"
+          "description": "SAID of rules block (Blake3-256 digest in CESR compact encoding)",
+          "type": "string",
+          "pattern": "^E[A-Za-z0-9_-]{43}$"
         },
         {
-          "$id": "EHIN5MfIpe7_by-Rl7oVK6dDg1o096wds_gwtcsZInzj",
+          "$id": "EAmHGceHi6XHAXzbT1jwkgxd8_2k8QzlOE-VePPPFRal",
           "description": "Rules detail",
           "type": "object",
           "required": [
             "d",
-            "perBrand"
+            "noSharing",
+            "governance"
           ],
           "properties": {
             "d": {
-              "description": "Rule section SAID",
-              "type": "string"
+              "description": "SAID of the rules block.",
+              "type": "string",
+              "pattern": "^E[A-Za-z0-9_-]{43}$"
             },
-            "perBrand": {
-              "description": "perBrand Disclaimer",
+            "governance": {
+              "description": "Statement identifying the governance framework under which this credential was issued.",
+              "type": "string",
+              "examples": [
+                "Issued under governance published at https://provenant.net/governance/tn-alloc/"
+              ]
+            },
+            "noSharing": {
+              "description": "No Sharing Disclaimer",
               "oneOf": [
                 {
                   "description": "simple compact rule form",
                   "type": "string",
-                  "const": "Issuees agree not to share the phone number with other brands which may have a common owner but which will make it difficult to consistently identify the originator of traffic."
+                  "default": "Issuees agree not to share or lend the allocated telephone number(s) to other parties in a way that would make it difficult to consistently identify the originator of traffic."
                 },
                 {
                   "description": "Rule detail",
@@ -236,7 +336,7 @@
                     "l": {
                       "description": "Associated legal language",
                       "type": "string",
-                      "const": "Issuees agree not to share the phone number with other brands which may have a common owner but which will make it difficult to consistently identify the originator of traffic."
+                      "default": "Issuees agree not to share or lend the allocated telephone number(s) to other parties in a way that would make it difficult to consistently identify the originator of traffic."
                     }
                   },
                   "required": [
@@ -247,7 +347,7 @@
               ]
             }
           },
-          "additionalProperties": false
+          "additionalProperties": true
         }
       ]
     }

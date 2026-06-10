@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "ECqmlipYuqp8LA_7WdZGt_cKP9eK3hXtHRZGNgJ7NKEx",
+  "$id": "EHxI61CGs7FRuStz8P6QWJyMK4u2bGH1LQqIXsA4bT7q",
   "title": "Dossier Base Schema",
   "description": "Base schema defining the canonical structure of a Dossier ACDC. A schema S IS-A dossier iff S's top-level allOf array contains a $ref to this schema's SAID, or recursively to another schema that IS-A dossier. A dossier SHOULD NOT include an issuee; all evidence MUST be carried in e, never in a.",
   "type": "object",

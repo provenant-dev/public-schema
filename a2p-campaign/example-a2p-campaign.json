@@ -1,23 +1,27 @@
 {
   "v": "ACDC10JSON0005c8_",
   "d": "Ez6QKIKLzrGqpq4v9Bj908pQanoRKwOgBXjPW-w-P_8Q",
-  "i": "Ez6QKIKLzrGqpq4v9Bj908pQanoRKwOgBXjPW-w-P_8Q",
+  "u": "0AHcgNghkDaG7ts1Bv8wkv3b",
+  "i": "EDC0Sj0CPYd70zUSY2ehvm7Z4kwZigugiA84wuS7lK2H",
   "ri": "EiySMSMLRrpt9AD_b34VEtUD6tDO0yaGoWCwB1iyJOgY",
-  "s": "ELtCd1s8TXGNYC2VUVzBtFcY73ec9pBMZg1LCfGP6LJQ",
+  "s": "EN-GIMlGnS188KLQS26IH11b3J7uw6TTK2p5Uuy0CCy0",
   "a": {
     "d": "EAS6jFIgA_WqWEIX6bQTi6Hvdox3GuyRbDKY8JCEfyZG",
+    "u": "0AHcgNghkDaG7ts1Bv8wkv3b",
     "i": "EK2r6EnDXre2pecTBO8s99j4OtNaaDIhVyr7uGugDhmp",
+    "dt": "2024-11-13T20:20:39.000000+00:00",
+    "brandId": "5493001KJTIIGC8Y1R12",
     "campaignId": "CVN1LXI",
-    "campaignType": "Fraud Alert",
-    "startDate": "2024-11-13T20:20:39+00:00",
-    "endDate": "2024-12-13T20:20:39+00:00",
-    "telephoneNumbers": [
+    "usecase": "Fraud Alert",
+    "startDate": "2024-11-13T20:20:39.000000+00:00",
+    "endDate": "2025-11-13T20:20:39.000000+00:00",
+    "numbers": [
       "+18013612446"
     ],
     "authorizedServiceProvider": "Twilio",
     "campaignAttributes": {
       "subscriberOptIn": true,
-      "subscriberOptOut": false,
+      "subscriberOptOut": true,
       "subscriberHelp": true,
       "embeddedLink": false,
       "affiliateMarketing": false
@@ -25,13 +29,25 @@
   },
   "e": {
     "d": "EOS9BUu6iHS6QaTADgHWcWG36tsKYY3g_z3nCkrnbBMr",
-    "le": {
-      "n": "EOy_g1RrcQW_uh63l9SH7TGflNefu3Pe2C3asw_H2CFv",
-      "s": "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY"
+    "issuer": {
+      "n": "EBwNam2e0mYdTx0i9xv78AIm16g1XCkQO8f8yJXaxmJC",
+      "s": "ENPE4hUQ8Peu84tEcCni3koOQFOnBrDB0rg_at2NRhV9",
+      "o": "I2I"
+    },
+    "tnalloc": {
+      "n": "EBwNam2e0mYdTx0i9xv78AIm16g1XCkQO8f8yJXaxmJC",
+      "s": "EJ9YoTJ81TcQ_pS9GmU2UbVURRm3ylnx_Wr1GbKjg0QP",
+      "o": "NI2I"
+    },
+    "brandid": {
+      "n": "EAZz0-cvLBLfqw3TRo-J0kBzM1TEwQ6a_v_892uH3Yjz",
+      "s": "EAoRVmgPyacjhUxaV0nPwiuUuHMjKDpNZrj7ClofZ-3Z",
+      "o": "NI2I"
     }
   },
   "r": {
     "d": "EMS9_VeDinkCdVlMVJKwbeBrsjnVj8VO1OS0walgg05X",
+    "governance": "Issued under governance published at https://provenant.net/governance/a2p-campaign/",
     "brandPrivacy": "Verifiers agree that, if they learn the identity of a brand as a sender of SMS messages by verifying this credential, they will not use this information to infer or model relationships between the brand and service providers.",
     "nonrepudiableBySig": "Senders of SMS messages agree that their reputation as a sender may be non-repudiably associated with messages that cite this campaign, exactly and only to the extent that the messages are signed by an entity cryptographically authorized to represent the brand."
   }

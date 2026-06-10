@@ -1,226 +1,445 @@
 {
-  "$id": "EK3YbEFp3zUuHPsGrLRzwr6zWBXcOFJNTTBqezXd_2yf",
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "ENjbevI70JxcQJaTrUQxMr4Ylcw0gbjfG2_skJyXy5XQ",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "A2P Campaign Credential",
-  "description": "A credential issued to a brand for A2P 10DLC messaging campaigns",
+  "description": "A credential issued to an organization that represents a registered A2P messaging campaign and the telephone numbers associated with that campaign.",
   "type": "object",
-  "credentialType": "a2p-campaign-credential",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "required": [
     "v",
     "d",
-    "u",
     "i",
     "ri",
     "s",
     "a",
-    "e",
     "r"
   ],
   "properties": {
     "v": {
-      "description": "Version",
-      "type": "string"
+      "description": "Version string using ACDC conventions, encoding protocol, serialization, and size.",
+      "type": "string",
+      "pattern": "^ACDC[0-9]{2}[A-Z]{4}[0-9a-f]{6}_$",
+      "examples": [
+        "ACDC10JSON0005c8_"
+      ]
     },
     "d": {
-      "description": "Credential SAID",
-      "type": "string"
+      "description": "SAID of the credential (Blake3-256 digest in CESR compact encoding).",
+      "type": "string",
+      "pattern": "^E[A-Za-z0-9_-]{43}$",
+      "examples": [
+        "EBwNam2e0mYdTx0i9xv78AIm16g1XCkQO8f8yJXaxmJC"
+      ]
     },
     "u": {
-      "description": "A salty nonce",
-      "type": "string"
+      "description": "A salty nonce (high-entropy random value) used to prevent rainbow-table attacks on the credential SAID.",
+      "type": "string",
+      "pattern": "^0A[A-Za-z0-9_-]{22}$",
+      "examples": [
+        "0AHcgNghkDaG7ts1Bv8wkv3b"
+      ]
     },
     "i": {
-      "description": "Issuer AID",
-      "type": "string"
+      "description": "AID of the issuer (the party asserting the campaign).",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{44}$",
+      "examples": [
+        "EDC0Sj0CPYd70zUSY2ehvm7Z4kwZigugiA84wuS7lK2H",
+        "BCmx-dBiozRlK5MfRnznAHl9kmXjB3t-zxrE3hIIYkeS"
+      ]
     },
     "ri": {
-      "description": "Credential status registry",
-      "type": "string"
+      "description": "SAID of the issuer's ACDC credential status registry.",
+      "type": "string",
+      "pattern": "^E[A-Za-z0-9_-]{43}$",
+      "examples": [
+        "EiySMSMLRrpt9AD_b34VEtUD6tDO0yaGoWCwB1iyJOgY"
+      ]
     },
     "s": {
-      "description": "Schema SAID",
-      "type": "string"
+      "description": "SAID of this schema (Blake3-256 digest in CESR compact encoding).",
+      "type": "string",
+      "pattern": "^E[A-Za-z0-9_-]{43}$",
+      "examples": [
+        "EFtg-VSIdmBRAH2bNMIkfuAyNShqN8volGPsl5ZQZbTp"
+      ]
     },
     "a": {
       "oneOf": [
         {
-          "description": "Attributes block SAID",
-          "type": "string"
+          "description": "SAID of attributes block.",
+          "type": "string",
+          "pattern": "^E[A-Za-z0-9_-]{43}$",
+          "examples": [
+            "EAS6jFIgA_WqWEIX6bQTi6Hvdox3GuyRbDKY8JCEfyZG"
+          ]
         },
         {
-          "$id": "ENaGw3QznDw6OuygdexMzSmC-jVGoxSkrdJd76xthUqL",
+          "$id": "EJ1chJIJ5V75UtiTWx4lMspvLrUwGFycJrt7wj_TnyfR",
           "description": "Attributes block",
           "type": "object",
+          "required": [
+            "d",
+            "i",
+            "dt",
+            "brandId",
+            "campaignId",
+            "usecase",
+            "authorizedServiceProvider"
+          ],
           "properties": {
             "d": {
-              "description": "Attributes block SAID",
-              "type": "string"
+              "description": "SAID of the attributes block (Blake3-256 digest in CESR compact encoding).",
+              "type": "string",
+              "pattern": "^E[A-Za-z0-9_-]{43}$",
+              "examples": [
+                "EAS6jFIgA_WqWEIX6bQTi6Hvdox3GuyRbDKY8JCEfyZG"
+              ]
             },
             "u": {
-              "description": "A salty nonce",
-              "type": "string"
+              "description": "A salty nonce for the attributes block, enabling selective disclosure.",
+              "type": "string",
+              "pattern": "^0A[A-Za-z0-9_-]{22}$",
+              "examples": [
+                "0AHcgNghkDaG7ts1Bv8wkv3b"
+              ]
             },
             "i": {
-              "description": "AID of issuee (org that will send messages in this campaign)",
-              "type": "string"
+              "description": "AID of the organization approved to originate traffic for this campaign.",
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{44}$",
+              "examples": [
+                "EK2r6EnDXre2pecTBO8s99j4OtNaaDIhVyr7uGugDhmp"
+              ]
             },
             "dt": {
-              "description": "Issuance datetime, ISO-8601 datetime string",
+              "description": "Issuance date-time (when the ACDC was signed), as an ISO-8601 datetime string with timezone.",
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "examples": [
+                "2024-11-13T20:20:39.000000+00:00"
+              ]
             },
             "brandId": {
-              "description": "A non-verifiable, non-cryptographic identifier for the org that will send messages in this campaign -- e.g., an LEI, ISIN code, S&P company ID, DUNS number, etc.",
-              "type": "string"
+              "description": "Legal identifier for the organization approved for the campaign -- e.g., an LEI, ISIN code, S&P company ID, DUNS number, etc.",
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 64,
+              "examples": [
+                "5493001KJTIIGC8Y1R12"
+              ]
             },
             "campaignId": {
-              "description": "Unique campaign identifier",
+              "description": "Unique campaign identifier assigned by the campaign approval authority or registry.",
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 32,
               "examples": [
                 "CVN1LXI"
-              ],
-              "type": "string"
+              ]
             },
-            "campaignType": {
-              "description": "Campaign type; see strings that identify standard use cases on page 7 of https://www.10dlc.org/tcr_quick_reference_guide.pdf",
+            "usecase": {
+              "description": "Campaign use case category. Values should align with the applicable campaign registry or governance framework.",
+              "type": "string",
               "examples": [
                 "2FA",
+                "Account Notification",
+                "Customer Care",
+                "Delivery Notification",
+                "Fraud Alert",
+                "Higher Education",
+                "Marketing",
                 "Public Service Announcement",
-                "Low Volume Mixed"
-              ],
-              "type": "string"
+                "Security Alert"
+              ]
             },
             "startDate": {
-              "description": "Campaign start date",
+              "description": "Campaign start date-time, as an ISO-8601 datetime string with timezone.",
+              "type": "string",
               "format": "date-time",
-              "type": "string"
+              "examples": [
+                "2024-11-13T20:20:39.000000+00:00"
+              ]
             },
             "endDate": {
-              "description": "Date when campaign expires",
+              "description": "Campaign expiration date-time, as an ISO-8601 datetime string with timezone.",
+              "type": "string",
               "format": "date-time",
-              "type": "string"
+              "examples": [
+                "2025-11-13T20:20:39.000000+00:00"
+              ]
             },
-            "telephoneNumbers": {
-              "description": "Telephone Numbers for the campaign",
+            "numbers": {
+              "description": "Array of number expressions representing telephone numbers allocated to the brand. Each expression is either a single E164 number (e.g., '+15551234567') or an inclusive range denoted by a hyphen between two E164 numbers (e.g., '+15551230000-+15551239999').",
               "type": "array",
               "uniqueItems": true,
               "minItems": 1,
               "items": {
                 "type": "string",
-                "description": "Telephone number in E164 format"
-              }
+                "description": "A single E164 telephone number or an inclusive range. Single number: '+' followed by 7-15 digits. Range: two E164 numbers separated by a hyphen (e.g., '+15551230000-+15551239999').",
+                "pattern": "^\\+[1-9][0-9]{6,14}(-\\+[1-9][0-9]{6,14})?$"
+              },
+              "examples": [
+                [
+                  "+15551234567"
+                ],
+                [
+                  "+15551230000-+15551239999"
+                ],
+                [
+                  "+15551234567",
+                  "+442071234567"
+                ],
+                [
+                  "+15551230000-+15551239999",
+                  "+15558880000-+15558889999"
+                ],
+                [
+                  "+15551234567",
+                  "+15559876543",
+                  "+442071234567",
+                  "+81312345678"
+                ]
+              ]
             },
             "authorizedServiceProvider": {
-              "description": "Authorized service provider",
-              "type": "string"
+              "description": "Service provider authorized to originate or manage traffic for this campaign.",
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 64,
+              "examples": [
+                "Twilio"
+              ]
             },
             "campaignAttributes": {
-              "description": "The Campaign and content attributes object contains a series of Yes or No questions related to the particular features of the campaign",
+              "description": "Campaign and content attributes used to evaluate the campaign under the applicable governance framework.",
               "type": "object",
-              "properties": {
-                "subscriberOptIn": {
-                  "description": "Indicate whether campaign collect and process customer opt-ins",
-                  "type": "boolean"
-                },
-                "subscriberOptOut": {
-                  "description": "Indicate whether campaign collect and process customer opt-outs",
-                  "type": "boolean"
-                },
-                "subscriberHelp": {
-                  "description": "Indicate whether subscribers can contact the message sender after sending the HELP keyword",
-                  "type": "boolean"
-                },
-                "embeddedLink": {
-                  "description": "Indicate whether campaign messages will use an embedded link",
-                  "type": "boolean"
-                },
-                "affiliateMarketing": {
-                  "description": "Indicate whether the campaign involves affiliate marketing",
-                  "type": "string"
-                }
-              },
-              "additionalProperties": true,
               "required": [
                 "subscriberOptIn",
-                "subscriberOptOut",
-                "subscriberHelp"
-              ]
+                "subscriberOptOut"
+              ],
+              "properties": {
+                "subscriberOptIn": {
+                  "description": "Whether the campaign collects and processes subscriber opt-ins.",
+                  "type": "boolean",
+                  "examples": [
+                    true
+                  ]
+                },
+                "subscriberOptOut": {
+                  "description": "Whether the campaign collects and processes subscriber opt-outs.",
+                  "type": "boolean",
+                  "examples": [
+                    true
+                  ]
+                },
+                "subscriberHelp": {
+                  "description": "Whether subscribers can contact the sender after sending the HELP keyword or equivalent support request.",
+                  "type": "boolean",
+                  "examples": [
+                    true
+                  ]
+                },
+                "embeddedLink": {
+                  "description": "Whether campaign messages may contain embedded links.",
+                  "type": "boolean",
+                  "examples": [
+                    false
+                  ]
+                },
+                "affiliateMarketing": {
+                  "description": "Whether the campaign involves affiliate marketing.",
+                  "type": "boolean",
+                  "examples": [
+                    false
+                  ]
+                }
+              },
+              "additionalProperties": true
             }
           },
-          "additionalProperties": false,
-          "required": [
-            "i",
-            "dt",
-            "brandId",
-            "campaignId",
-            "campaignType",
-            "startDate",
-            "endDate",
-            "telephoneNumbers",
-            "authorizedServiceProvider",
-            "campaignAttributes"
-          ]
+          "additionalProperties": true
         }
       ]
     },
     "e": {
       "oneOf": [
         {
-          "description": "Edges block SAID",
-          "type": "string"
+          "description": "SAID of edges block.",
+          "type": "string",
+          "pattern": "^E[A-Za-z0-9_-]{43}$",
+          "examples": [
+            "EOS9BUu6iHS6QaTADgHWcWG36tsKYY3g_z3nCkrnbBMr"
+          ]
         },
         {
-          "$id": "EJrEovSBvm4odgfVI9zldtlju8_lD2m1gDiryDqvB8Lt",
+          "$id": "ECcoiTmWs6GwR3iIOkBEeG6RpxhtvKylXlMREccxwhtg",
           "description": "Edges block",
           "type": "object",
+          "required": [
+            "d"
+          ],
           "properties": {
             "d": {
-              "description": "Edges block SAID",
-              "type": "string"
+              "description": "SAID of the edges block (Blake3-256 digest in CESR compact encoding).",
+              "type": "string",
+              "pattern": "^E[A-Za-z0-9_-]{43}$",
+              "examples": [
+                "EOS9BUu6iHS6QaTADgHWcWG36tsKYY3g_z3nCkrnbBMr"
+              ]
             },
-            "le": {
-              "description": "Chain to legal entity vLEI credential",
+            "issuer": {
+              "description": "Credential that proves the identity of the issuer.",
               "type": "object",
               "properties": {
                 "n": {
-                  "description": "SAID of Legal Entity vLEI Credential issued by a Qualified vLEI issuer to a Legal Entity",
-                  "type": "string"
+                  "description": "SAID of a credential that proves the identity of the issuer.",
+                  "type": "string",
+                  "pattern": "^E[A-Za-z0-9_-]{43}$",
+                  "examples": [
+                    "EBwNam2e0mYdTx0i9xv78AIm16g1XCkQO8f8yJXaxmJC"
+                  ]
                 },
                 "s": {
-                  "description": "SAID of Legal Entity vLEI Credential schema",
+                  "description": "SAID of the schema that the issuer identity credential must satisfy.",
                   "type": "string",
-                  "const": "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY"
+                  "pattern": "^E[A-Za-z0-9_-]{43}$",
+                  "examples": [
+                    "ENPE4hUQ8Peu84tEcCni3koOQFOnBrDB0rg_at2NRhV9"
+                  ]
+                },
+                "o": {
+                  "description": "Edge operator. I2I (default): issuer AID MUST be the issuee AID of the node this edge points to. NI2I: issuer AID MAY or MAY NOT be the issuee AID of that node. DI2I: issuer AID MUST be the issuee AID or a delegated AID of the issuee AID of that node. NOT: inverts the validity of the node this edge points to.",
+                  "type": "string",
+                  "default": "I2I",
+                  "enum": [
+                    "I2I",
+                    "NI2I",
+                    "DI2I",
+                    "NOT"
+                  ]
                 }
               },
               "additionalProperties": false,
               "required": [
                 "n",
-                "s"
+                "s",
+                "o"
+              ]
+            },
+            "tnalloc": {
+              "description": "Chain to a Telephone Number Allocation credential proving right to use the campaign telephone numbers.",
+              "type": "object",
+              "required": [
+                "n",
+                "s",
+                "o"
+              ],
+              "properties": {
+                "n": {
+                  "description": "SAID of the Telephone Number Allocation credential.",
+                  "type": "string",
+                  "pattern": "^E[A-Za-z0-9_-]{43}$",
+                  "examples": [
+                    "EBwNam2e0mYdTx0i9xv78AIm16g1XCkQO8f8yJXaxmJC"
+                  ]
+                },
+                "s": {
+                  "description": "SAID of the Telephone Number Allocation schema.",
+                  "type": "string",
+                  "pattern": "^E[A-Za-z0-9_-]{43}$",
+                  "examples": [
+                    "EJ9YoTJ81TcQ_pS9GmU2UbVURRm3ylnx_Wr1GbKjg0QP"
+                  ]
+                },
+                "o": {
+                  "description": "Edge operator. I2I (default): issuer AID MUST be the issuee AID of the node this edge points to. NI2I: issuer AID MAY or MAY NOT be the issuee AID of that node. DI2I: issuer AID MUST be the issuee AID or a delegated AID of the issuee AID of that node. NOT: inverts the validity of the node this edge points to.",
+                  "type": "string",
+                  "default": "NI2I",
+                  "enum": [
+                    "I2I",
+                    "NI2I",
+                    "DI2I",
+                    "NOT"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "brandid": {
+              "description": "Chain to a credential that identifies the brand or organization associated with this campaign.",
+              "type": "object",
+              "properties": {
+                "n": {
+                  "description": "SAID of a credential that proves the brand identity.",
+                  "type": "string",
+                  "pattern": "^E[A-Za-z0-9_-]{43}$",
+                  "examples": [
+                    "EBwNam2e0mYdTx0i9xv78AIm16g1XCkQO8f8yJXaxmJC"
+                  ]
+                },
+                "s": {
+                  "description": "SAID of the schema that the brand identity credential must satisfy.",
+                  "type": "string",
+                  "pattern": "^E[A-Za-z0-9_-]{43}$",
+                  "examples": [
+                    "EAoRVmgPyacjhUxaV0nPwiuUuHMjKDpNZrj7ClofZ-3Z"
+                  ]
+                },
+                "o": {
+                  "description": "Edge operator. I2I (default): issuer AID MUST be the issuee AID of the node this edge points to. NI2I: issuer AID MAY or MAY NOT be the issuee AID of that node. DI2I: issuer AID MUST be the issuee AID or a delegated AID of the issuee AID of that node. NOT: inverts the validity of the node this edge points to.",
+                  "type": "string",
+                  "default": "NI2I",
+                  "enum": [
+                    "I2I",
+                    "NI2I",
+                    "DI2I",
+                    "NOT"
+                  ]
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "n",
+                "s",
+                "o"
               ]
             }
           },
-          "additionalProperties": false,
-          "required": [
-            "d",
-            "le"
-          ]
+          "additionalProperties": true
         }
       ]
     },
     "r": {
       "oneOf": [
         {
-          "description": "Rules section SAID",
-          "type": "string"
+          "description": "SAID of rules block (Blake3-256 digest in CESR compact encoding)",
+          "type": "string",
+          "pattern": "^E[A-Za-z0-9_-]{43}$"
         },
         {
-          "$id": "EIR5KMj9Z1Qj6gxn8O_93boQs4ApN1RPX3blcz6WzEB2",
+          "$id": "EKcJyuGHv_e_Ia9aeH_UarSr2GnPZpFUIah47YkaDC-4",
           "description": "Rules detail",
           "type": "object",
+          "required": [
+            "d",
+            "governance"
+          ],
           "properties": {
             "d": {
-              "description": "Rule section SAID",
-              "type": "string"
+              "description": "SAID of the rules block (Blake3-256 digest in CESR compact encoding).",
+              "type": "string",
+              "pattern": "^E[A-Za-z0-9_-]{43}$",
+              "examples": [
+                "EMS9_VeDinkCdVlMVJKwbeBrsjnVj8VO1OS0walgg05X"
+              ]
+            },
+            "governance": {
+              "description": "Statement identifying the governance framework under which this credential was issued.",
+              "type": "string",
+              "examples": [
+                "Issued under governance published at https://provenant.net/governance/a2p-campaign/"
+              ]
             },
             "brandPrivacy": {
               "description": "Brand Privacy Disclaimer",
@@ -233,6 +452,9 @@
                 {
                   "description": "Rule detail",
                   "type": "object",
+                  "required": [
+                    "l"
+                  ],
                   "properties": {
                     "l": {
                       "description": "Associated legal language",
@@ -240,9 +462,6 @@
                       "const": "Verifiers agree that, if they learn the identity of a brand as a sender of SMS messages by verifying this credential, they will not use this information to infer or model relationships between the brand and service providers."
                     }
                   },
-                  "required": [
-                    "l"
-                  ],
                   "additionalProperties": false
                 }
               ]
@@ -256,8 +475,11 @@
                   "const": "Senders of SMS messages agree that their reputation as a sender may be non-repudiably associated with messages that cite this campaign, exactly and only to the extent that the messages are signed by an entity cryptographically authorized to represent the brand."
                 },
                 {
-                  "description": "rule detail",
+                  "description": "Rule detail",
                   "type": "object",
+                  "required": [
+                    "l"
+                  ],
                   "properties": {
                     "l": {
                       "description": "Associated legal language",
@@ -265,20 +487,12 @@
                       "const": "Senders of SMS messages agree that their reputation as a sender may be non-repudiably associated with messages that cite this campaign, exactly and only to the extent that the messages are signed by an entity cryptographically authorized to represent the brand."
                     }
                   },
-                  "required": [
-                    "l"
-                  ],
                   "additionalProperties": false
                 }
               ]
             }
           },
-          "additionalProperties": false,
-          "required": [
-            "d",
-            "brandPrivacy",
-            "nonrepudiableBySig"
-          ]
+          "additionalProperties": true
         }
       ]
     }

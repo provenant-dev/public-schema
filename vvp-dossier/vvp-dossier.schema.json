@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "EBiw7q5Q6WbFzGBbGfFXdn8_7zXTsvKOF8iEQV5C3dFn",
+  "$id": "EPSJkKq9TnvfWvyODRY5GH_27TUl61fBjJBmaH72uqeC",
   "title": "Verifiable Voice Dossier",
   "description": "Dossier issued by the accountable party that assembles all evidence required as per the Verifiable Voice Protocol.",
   "version": "2.0.0",
@@ -147,8 +147,7 @@
                     },
                     "s": {
                       "description": "SAID of allocator auth schema",
-                      "type": "string",
-                      "const": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o"
+                      "type": "string"
                     },
                     "o": {
                       "description": "Edge operator. I2I (default): issuer AID MUST be the issuee AID of the node this edge points to. NI2I: issuer AID MAY or MAY NOT be the issuee AID of that node. DI2I: issuer AID MUST be the issuee AID or a delegated AID of the issuee AID of that node. NOT: inverts the validity of the node this edge points to.",
@@ -179,8 +178,7 @@
                     },
                     "s": {
                       "description": "SAID of TN allocation schema",
-                      "type": "string",
-                      "const": "EFvnoHDY7I-kaBBeKlbDbkjG4BaI0nKLGadxBdjMGgSQ"
+                      "type": "string"
                     },
                     "o": {
                       "description": "Edge operator. I2I (default): issuer AID MUST be the issuee AID of the node this edge points to. NI2I: issuer AID MAY or MAY NOT be the issuee AID of that node. DI2I: issuer AID MUST be the issuee AID or a delegated AID of the issuee AID of that node. NOT: inverts the validity of the node this edge points to.",
@@ -211,8 +209,7 @@
                     },
                     "s": {
                       "description": "SAID of delegated signer schema",
-                      "type": "string",
-                      "const": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o"
+                      "type": "string"
                     },
                     "o": {
                       "description": "Edge operator. I2I (default): issuer AID MUST be the issuee AID of the node this edge points to. NI2I: issuer AID MAY or MAY NOT be the issuee AID of that node. DI2I: issuer AID MUST be the issuee AID or a delegated AID of the issuee AID of that node. NOT: inverts the validity of the node this edge points to.",

@@ -32,22 +32,12 @@ This schema supports both **voice** and **SMS** use cases without modification:
 - For **voice**, the holder uses the credential to assert origin identity when initiating a call.
 - For **SMS / A2P campaigns**, the holder presents this credential to a campaign registry (e.g., The Campaign Registry) as proof of number ownership before campaign provisioning. The credential does not carry a campaign ID — campaign-level attributes belong in a separate campaign credential that references this one.
 
-The optional `channel` field can narrow the scope of the credential to a specific channel or set of channels. If omitted, no channel restriction is implied — the credential is valid for any use of the allocated numbers. If present, it is an array of one or both of `"sms"` and `"voice"`.
-
-| `channel` value | Meaning |
-|---|---|
-| `["voice"]` | Numbers are allocated for voice use only. |
-| `["sms"]` | Numbers are allocated for SMS use only. |
-| `["sms", "voice"]` | Numbers are allocated for both channels. |
-| *(omitted)* | No channel restriction; allocation is channel-agnostic. |
-
-This design keeps number ownership and campaign intent cleanly separated, avoiding schema proliferation and making it easy to reuse the same number credential across multiple campaigns or channels over time.
+The credential is channel-agnostic: it is valid for any use of the allocated numbers and does not restrict to a specific channel. This design keeps number ownership and campaign intent cleanly separated, avoiding schema proliferation and making it easy to reuse the same number credential across multiple campaigns or channels over time.
 
 ### Optional fields
 
 | Field | Type | Purpose |
 |---|---|---|
-| `channel` | array of `"sms"` / `"voice"` | Restricts the credential to specific channels. Omit for channel-agnostic allocation. |
 | `startDate` | ISO-8601 datetime | Earliest date from which the allocation is valid. Useful for proving long-term continuous ownership. |
 | `endDate` | ISO-8601 datetime | Expiry date of the allocation. If absent, the allocation is open-ended and governed solely by credential revocation. |
 

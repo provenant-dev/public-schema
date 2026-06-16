@@ -1,6 +1,6 @@
 {
-  "v": "ACDC10JSON00040b_",
-  "d": "EEPb0h9ClyxqrgiLt6hzhEmfEjv7FpVC4utFO09ZHsR9",
+  "v": "ACDC10JSON000453_",
+  "d": "EDUuuiM31svtBbgRuIk_3Ts0k7S23Iz9wD9voCSyoqOL",
   "u": "0AC8kpfo-uHQvxkuGZdlSjGy",
   "i": "EANghOmfYKURt3rufd9JNzQDw_7sQFxnDlIew4C3YCnM",
   "ri": "EDoSO5PEPLsstDr_XXa8aHAf0YKfPlJQcxZvkpMSzQDB",
@@ -14,9 +14,8 @@
       "+1801361001-+1801361002",
       "+1801361005"
     ],
-    "channel": [
-      "voice"
-    ]
+    "startDate": "2026-06-16T12:47:35.256840+00:00",
+    "endDate": "2026-09-14T12:47:35.256840+00:00"
   },
   "e": {
     "d": "EHVafjATXqFvLkccHwmvjgNh-Yf-CoXoBCV35XVfa-EF",

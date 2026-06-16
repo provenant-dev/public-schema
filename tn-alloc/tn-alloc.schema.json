@@ -1,5 +1,5 @@
 {
-  "$id": "EMLnoJHFmFojtF1u-0hL4Eo8Ox2uTmxhrYEDOW_AhiID",
+  "$id": "EEz8aCRKtR7CRJ60loysjkeARH4klDCtjOQBJmKk3her",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Telephone Number Allocation Credential",
   "description": "Telephone Number Allocation credential proves an enterprise has the right to use (RTU) specific telephone numbers, either directly from a regulator or through a telephone number provider.",
@@ -71,7 +71,7 @@
           "type": "string"
         },
         {
-          "$id": "EBt9-R0JnIzJETIOsm9Lv2mbrGugADiSc9NF12mwyi44",
+          "$id": "EL6P2nWZszImEo0CkpP40fWNNo3VUBFPaIko2e6HJ2zv",
           "description": "Attributes block",
           "type": "object",
           "required": [
@@ -143,31 +143,6 @@
                   "+15559876543",
                   "+442071234567",
                   "+81312345678"
-                ]
-              ]
-            },
-            "channel": {
-              "description": "Optional list of communication channels for which these numbers are allocated. If omitted, no channel restriction is implied. Use 'sms' for A2P/P2P messaging, 'voice' for voice calls, or both to indicate dual-channel use.",
-              "type": "array",
-              "uniqueItems": true,
-              "minItems": 1,
-              "items": {
-                "type": "string",
-                "enum": [
-                  "sms",
-                  "voice"
-                ]
-              },
-              "examples": [
-                [
-                  "voice"
-                ],
-                [
-                  "sms"
-                ],
-                [
-                  "sms",
-                  "voice"
                 ]
               ]
             },
